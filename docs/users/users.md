@@ -5,4 +5,4 @@
 1. [이병곤](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/이병곤.md)
 1. [홍길똥](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/홍길똥.md)
 1. [염근철](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/염근철.md)
-1. [전의정](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/전의정.md)
+2. [전의정](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/전의정.md)
