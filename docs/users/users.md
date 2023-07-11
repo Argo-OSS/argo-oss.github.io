@@ -9,3 +9,4 @@
 1. [유윤우](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/유윤우.md)
 1. [염근철](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/염근철.md)
 2. [전의정](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/전의정.md)
+1. [김학준](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/김학준.md)
