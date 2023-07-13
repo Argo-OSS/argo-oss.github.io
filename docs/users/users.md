@@ -10,6 +10,6 @@
 1. [염근철](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/염근철.md)
 1. [전의정](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/전의정.md)
 1. [이의주](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/이의주.md)
-1. [전의정](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/전의정.md)
 1. [최수녕](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/최수녕.md)
 1. [서청운](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/서청운.md)
+1. [안다혜](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/안다혜.md)
