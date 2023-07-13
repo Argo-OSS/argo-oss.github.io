@@ -14,3 +14,4 @@
 1. [서청운](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/서청운.md)
 1. [안다혜](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/안다혜.md)
 1. [김원식](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/김원식.md)
+1. [김학준](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/김학준.md)
