@@ -19,3 +19,4 @@
 1. [권영길](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/권영길.md)
 1. [안지완](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/안지완.md)
 1. [강시온](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/강시온.md)
+1. [박진수](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/blob/main/docs/users/박진수.md)
