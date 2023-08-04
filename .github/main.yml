@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - feat/*
+      - feat/add-docs-framework-for-github-site
 
 jobs:
   build-and-deploy:
