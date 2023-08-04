@@ -1,10 +1,8 @@
-name: GitHub Pages Deploy
-
+name: Build Pages to gh-pages Branch
 on:
   push:
     branches:
       - main
-      - feat/add-docs-framework-for-github-site
 
 jobs:
   build-and-deploy:
