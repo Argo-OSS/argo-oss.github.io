@@ -2,6 +2,8 @@
 
 > [2023 오픈소스 컨트리뷰션 아카데미](https://www.oss.kr/ossca_23_projects/show/f0db6627-fba2-40e3-ac42-9e9acd00340f)의 ArgoWorkflows 프로젝트를 위한 BaseCamp
 
+- 팀페이지 : https://argoworkflows-oss.github.io
+
 ## 활동 개요
 - 공식 프로젝트 기간 : 2023-07-08 ~ 2023-10-07
 - 활동 목표 : [ArgoWorkflows](https://github.com/argoproj/argo-workflows) 오픈소스 기여 및 생태계 이해
