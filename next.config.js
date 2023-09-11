@@ -3,9 +3,12 @@ const withNextra = require('nextra')({
     themeConfig: './theme.config.jsx'
 })
    
-module.exports = {
-...withNextra(),
-images: {
-    unoptimized: true,
-},
-};
+module.exports = withNextra({
+    images: {
+        unoptimized: true,
+    },
+    i18n: {
+        locales: ['en', 'ko'],
+        defaultLocale: 'en'
+    }
+});
