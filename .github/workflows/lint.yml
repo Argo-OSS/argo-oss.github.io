@@ -10,4 +10,5 @@ jobs:
 
       - name: Test Lint 🔧
         run: |
+          npm install
           npm run lint
