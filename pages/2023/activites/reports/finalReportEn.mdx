@@ -122,13 +122,133 @@ abcd
 <details>
 <summary>Collapse/Expand</summary>
 
-abcd
+---
+
+> ** Contribution Activities **
+
+---
+
+** Mutex check happens after memoization cache check and lock info missing from UI `Bug Fix` **
+
+[Issue #11219](https://github.com/argoproj/argo-workflows/issues/11219)  
+[PR #11456 - Merged/Included in 3.4.10 release](https://github.com/argoproj/argo-workflows/pull/11456)
+
+I managed to modify Argo Workflow to simultaneously utilize the Synchronization and Cache functionalities.
+
+This bug manifested when using both the Synchronization and Memoize keywords in Argo Workflow, causing it not to operate correctly.
+
+The expected behavior was for the Mutex Synchronization to function first followed by the cache, however, after Synchronization occurred, the cache failed to operate.
+
+For instance, when there are `job-1` and `job-2`, if `job-1` operates first due to Mutex Synchronization and writes to the cache, `job-2` ** should pass without operating, courtesy of the shared cache.**
+
+![slack11](./images/HaeMinSong/song_pr1_img.png)
+
+I was able to fix this by adjusting the sequence of Synchronization and Cache.
+
+While the fix was not complicated, modifying the `operation.go`, one of the intricate files, allowed me to explore various features of Argo Workflow with many reviews.
+
+---
+
+** Parent level memoization is broken `Bug Fix` **
+
+[Issue #11612](https://github.com/argoproj/argo-workflows/issues/11612)  
+[PR #11623 - Merged/Included in 3.4.11 release](https://github.com/argoproj/argo-workflows/pull/11623)
+
+A new bug arose from the above fix. When using the Memo function in child components rather than at the Template level in Argo Workflow, a bug was reported that caused infinite pending.
+
+![slack11](./images/HaeMinSong/song_pr2_img.png)
+
+I realized that there were unaddressed cases in the tests added in the previous PR. After identifying the cause of the error, I quickly patched it. I included four tests in the PR to detect such exceptions in the future.
+
+---
+
+** UI: workflowDrawer's information link is not correctly working `Bug Fix` **
+
+[Issue #11494](https://github.com/argoproj/argo-workflows/issues/11494)  
+[PR #11495 - Merged/Included in 3.4.10 release](https://github.com/argoproj/argo-workflows/pull/11495)
+
+I fixed an issue where the Information icon link was broken when expanding a workflow on the Argo Workflow dashboard.
+
+![slack11](./images/HaeMinSong/song_pr3_img.png)
+
+I introduced code to prevent incorrect event propagation caused by nested `<a>` tags. This correction ensured that clicking on the icon now directs users to the correct documentation.
+
+---
+
+** Search by name for WorkflowTemplates in UI `Feature Enhancement` **
+
+[Issue #11004](https://github.com/argoproj/argo-workflows/issues/11004)  
+[PR #11684 - Merged/Included in 3.4.10 release](https://github.com/argoproj/argo-workflows/pull/11684)
+
+This was a collaborative effort with two other contributors.
+
+A helpful feature that allows templates in Argo Workflow to function through name patterns was missing.
+
+![slack11](./images/HaeMinSong/song_pr4_img.png)
+
+We developed an additional feature that lets users search for templates not just by Yaml labels, but also by names.
+`The LIKE search, not just precise naming, will prove useful in the future.` Plans are underway to extend this search and pagination functionality to other pages, making this a particularly meaningful PR.
+
+---
+
+** Add more readable Argo CLI installation guide into github documentation `Documentation Contribution` **
+
+[Issue #11750](https://github.com/argoproj/argo-workflows/issues/11750)  
+[PR #11751 - Merged](https://github.com/argoproj/argo-workflows/pull/11751)
+
+This contribution pertains to the documentation of the Argo CLI, the command-line interface used with Argo Workflows.
+
+![slack11](./images/HaeMinSong/song_pr5_img.png)
+
+The current Argo CLI GitHub documentation lacked installation procedures, making it challenging for first-time users to determine how to install the Argo CLI.   Initially, users had to directly navigate to the Release Note or the Quick Start page.  
+By adding an Installation section to the Argo CLI page alongside the existing Usage details, I aimed to enhance user convenience.
+
+---
+
+** Workflow templating is skipped when whitespace is added to template parameters `Bug Fix` **
+
+[Issue #11767](https://github.com/argoproj/argo-workflows/issues/11767)  
+[PR #11781 - Merged](https://github.com/argoproj/argo-workflows/pull/11781)
+
+In Argo Workflow, when authoring a workflow template, the placeholder in the form `{{parameter}}` did not undergo validation when spaces were added, such as `{{ parameter }}`.  
+The root cause was the internal validation code not trimming spaces before and after the parameter. By adding the trim function to remove spaces, I resolved this issue. This contribution also rectified other placeholder content that previously bypassed validation.
+
+---
+
+> ** Development Activities **
+
+---
+
+** Contributing to the Argo Workflow OSS Common Repo **
+
+[PR #22 - Merged](https://github.com/ArgoWorkflows-OSS/argoworkflows-oss.github.io/pull/22)
+
+I undertook a preliminary exercise for multiple people to contribute to the Argo Workflow. We simultaneously modified new and existing documents with other participants, learning the importance of Git commands and the process of rebasing.
+
+---
+
+** Creating a Web Server with Dockerfile **
+
+[PR #6 - Merged](https://github.com/ArgoWorkflows-OSS/container-playground/pull/6)
+
+This exercise was about creating a Dockerfile that communicates with a local 8080 server and makes it accessible via localhost:8080.  
+We simply crafted a Python server using Flask, and through the Dockerfile, we set up the environment, initiated the server, and connected the port, making the server accessible externally via Docker commands.
+
+---
 
 </details>
 
 #### **🌵 Participation Review**
 
-abcd
+- Post-Participation Review
+  - While I had participated in the open-source contribution academy before, I was especially satisfied with the program, members, and content of this academy.
+  - It's not easy to understand the source code and start contributing in a short time, but it was an astonishing experience to be able to start contributing, even if it was a minor contribution.
+  - I deeply felt that the concentrated care from the mentor and the passion of other participants were genuinely helpful.
+  - Starting alone, I might have quickly given up and forgotten the content, but the experience was so different when progressing with others.
+- Future Plans
+  - I plan to continue contributing to Argo Workflow and may even start contributing to other open-source projects.
+  - Especially now that I have learned how to approach and start with an open source I am interested in, I believe it will be a bit smoother as long as I have the passion.
+  - I will actively promote the fun of contributing to open source to others and confidently recommend it.
 
 ### 9. 안다혜
 
