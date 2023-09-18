@@ -221,14 +221,282 @@
 
 <details>
 <summary>접기/펼치기</summary>
+**1. Git 사용법 & Commit & PR 규칙 숙지**
 
-ㄱㄴㄷㄹ
+    - 컨트리 뷰션을 하기 위해 엄격한 Commit 과 Pull Request를 보내기 위한 기초적인 Git 사용법 숙지 및 Mission 수행
+    - 공식 Argo Workflow 프로젝트에서도 컨트리뷰션 하고 싶은 Issue에 대해 **Issue Template** 를 이용하고 PR 을 날리는 방식을 사용하고 있어 도움이 되었고 Issue Template 의 존재도 알게된 계기가 되었음.
+    - 향후 컨트리뷰션 부분에 꼭 필요한 요소들을 간접적으로 체험할 수 있는 기회
+        - [PR 의 네이밍 컨벤션](https://flank.github.io/flank/pr_titles/)
+        - [DCO 봇 Check](https://github.com/apps/dco)
+        - [GPG Commit](https://www.44bits.io/ko/post/add-signing-key-to-git-commit-by-gpg)
+        - [Commit Message 컨벤션](https://www.conventionalcommits.org/en/v1.0.0/)
+        - [이슈와 PR을 연결](https://docs.github.com/ko/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword)
+     - Issue 생성 - 멤버 프로필 업데이트 - PR - Review - Merge 의 과정
 
+         ![menberprofile1](./images/EuiJooLee/memberprofile1.png)
+
+**2. 왕초보 특별반 참여 (Mentor 가 생성한 초보자들을 위한 과정)**
+    - **[왕초보 특별반 미션을 위한 Repo(container-playground)](https://github.com/ArgoWorkflows-OSS/container-playground)**
+    - Docker 혹은 Kubernetes 에 익숙하지 않은 인원 혹은 처음인 인원에 도움을 주는데 목적
+
+         ![class1](./images/EuiJooLee/class1.png) 
+    - 멘토가 제시한 과제를 수행하면서 Docker Image 최적화의 필요성에 대해 학습
+        - From 절 부터 Layer(층)별로 어떤 패키지, Static file 들을 쌓아가는 과정이기 때문에 Docker 이미지가 무거워져 성능 향상에 악영향을 미칠 수 있기 때문에 최적화는 필수임을 깨달음.
+    
+    - Mission
+        ```
+       ❗️목표❗️ 
+
+        나만의 웹서비스를 제작하고, 컨테이너화 할 수 있는 도커파일을 작성해 봅니다.
+
+        과제 통과를 위해서 반드시 아래 사항을 준수해 주세요.
+
+        • 디렉터리 및 파일 배치
+            • 나만의 서비스를 반드시 본인 github 계정 디렉터리를 생성하고, 그 아래 작성해주세요.
+            • 본인 디렉터리의 최상단에는 반드시 `Dockerfile` 이 위치해야 합니다.(이 조건을 달성하지 못하면 CI가 실패합니다.)
+            • 본인 디렉터리 아래에 한해서, `Dockerfile`의 위치를 제외한 나머지 파일들은 자유롭게 작성해도 됩니다.
+            • 단, 본인 디렉터리 최상단에서 `docker build -t [이미지명] .` 명령을 수행 했을때 성공적으로 이미지가 빌드 되어야 합니다.
+        • 빌드 된 이미지의 동작
+            • 나만의 웹서비스는 반드시 8080포트에서 동작해야 합니다.
+            • 빌드 된 이미지는 별도의 파라미터 없이 `docker run -d -p [포워딩 포트번호]:8080 [이미지명]` 으로 실행 했을 때 문제 없이 서비스 되도록 만들어야 합니다.
+        • 웹서비스 개발언어 및 서비스 구조
+            • 본인이 선호하는 어떤 언어, 어떤 프레임워크를 활용해도 상관 없습니다.
+            • UI, 디자인이 존재하지 않는 단순 api서비스를 제작해도 상관 없습니다.
+            • 단, 필수 api를 두개 만들어야 합니다. (응답값은 신경쓰지 않습니다.)
+                1. /api/v1/[본인 github계정]
+                2. /healthcheck
+        • (Optional) 도커 이미지 최적화를 하면 더 좋습니다. ([참고](https://thearchivelog.dev/article/optimize-docker-image/))
+        • [키워드를 활용한 PR과 이슈 연결 방법](https://docs.github.com/ko/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword)을 참고하여 이슈와 PR을 연결해주세요. (수동연결 x)
+
+       ❗️ 참고사항❗️
+
+        •도커의 개념과 Dockerfile을 작성하기 위해 아래 문서를 참고 하면 좋아요.
+
+            • [Dockerfile 작성 공식 문서](https://docs.docker.com/engine/reference/builder/)
+            • [왕초보를 위한 도커 사용법](https://mysetting.io/slides/xxj85vnvey) (Docker Toolbox관련 내용은 deprecate된 내용)
+
+        PR을 올리고 머지하기 위해 아래 사항들을 참고하면 좋아요.
+
+            • Repo에 브랜치등을 생성하거나 Push할 수 있는 권한이 없으므로 fork 후 작업해야 해요.
+            • [PR의 네이밍 컨벤션](https://flank.github.io/flank/pr_titles/)을 참고해주세요.
+            • [DCO](https://github.com/apps/dco) 봇의 체크를 통과하기 위한 조건을 참고하여 커밋해주세요.
+            • [GPG](https://www.44bits.io/ko/post/add-signing-key-to-git-commit-by-gpg)를 이용해 커밋하는 방법을 이해하여 서명된 커밋을 작성해주세요.
+            • [커밋 메시지 컨벤션](https://www.conventionalcommits.org/en/v1.0.0/)도 적용할 수 있으면 좋아요. 꼭 따르지 않더라도, 너무 의미없는 커밋 메시지는 지양해주세요.(Optional)```
+
+    - 기존에 Python 기반의 Django 프레임워크를 다뤄본 경험이 있어 Django REST API를 생성하는 Docker FIle을 작성.
+    - PR을 날렸지만, **보안이슈** 혹은 **불필요한 패키지 import 구문** 의 오류를 지적받음.
+    
+        ![review1](./images/EuiJooLee/review1.png) 
+        ![review1](./images/EuiJooLee/review2.png)
+
+    - Django 프로젝트의 **[settings.py](http://settings.py)** 코드에서는 **SECRET_KEY 가 노출** 된다는 것을 처음 알았으며 어떻게 이러한 보안 이슈를 해결할 수 있을까에 대해 고민해보는 시간을 가질 수 있었음.
+        - Secret key 가 담긴 .json 파일을 생성하고 [settings.py](http://settings.py) 에서 json 파일을 참조하는 방향으로 진행하였다.
+        - secret.json 파일은 Commit 에 올리지 못하므로 **.gitignore** 를 통해 json 파일을 무시하는 방법을 알게되었으며, dbsqlite3 같은 어떤 명령어 수행 후에 생성되는 불필요한 파일들도 무시할 수 있었음.
+        - 로컬에서 개발한 결과물을 Git 프로젝트에 올리기 위해서는 여러 고려사항이 필요하다는 것을 깨달은 경험이었음.
+    - 몇가지 Review를 통과하고 PR이 **Merge** 될 수 있었음.
+
+**3. Argo Workflow Contributor**
+    - Argo Workflow 를 이것저것 살펴보던 도중, **Argo Workflow - Contact - Help** 필드에서 **Deprecated** 된 Argo Workflow Slack 채널을 보게되었음. 사소한 **UI Issue** 라고 생각했지만, UI가 어떤 언어로 보여주며, 어떤 방식으로 개발되었는지 확인할 수 있는 기회라고 생각하여 Issue 를 올리고 PR을 제출.
+
+        ![slack11](./images/EuiJooLee/slack1.png)
+
+    - 생성한 **Issue**
+
+        **[UI: non-existent Slack Workspace link on help page Issue](https://github.com/argoproj/argo-workflows/issues/11615)**
+        
+        ![issue1](./images/EuiJooLee/issue1.png)
+        - 이슈를 생성하니 Argo 프로젝트의 Maintainer 분이 금방 코멘트를 남겨주셨음.
+
+        - 임의로 CNCF Argo Channel 링크로 Fix 하려 하였으나, 메인테이너분이 다른 링크로 Update 해달라는 코멘트를 받음.
+
+    - 생성한 **PR**
+
+        **[fix: deprecated Link(Help-Contact) Issue](https://github.com/argoproj/argo-workflows/pull/11627)**
+
+        ![issue2](./images/EuiJooLee/issue2.png)
+        - Argo Workflow 는 React 기반으로 UI가 구성되어 있었고, 컴포넌트별로 디렉토리가 정렬되어 있어 쉽게 코드를 분석할 수 있었음.
+        - Issue 가 있던 [Code 부분](https://github.com/argoproj/argo-workflows/blob/e46202a4c00f5c685a02eca9392ddfc1305ac9a0/ui/src/app/help/components/help.tsx#L28C12-L28C12)
+
+
+    - 실수로 Commit 중에 Signed-off 옵션을 생략해서 DCO 봇 TEST에 통과 못했지만, GIt 에서 이전 커밋을 되돌리거나(**Rebase**), 여러 불필요한 커밋을 하나로 합치는(**Squash**) 기능을 알게되었고 이전 커밋을 돌려 `git commit -S -s -m "Commit Message"` 커밋하였음.
+        - ‘**LGTM**’ 코멘트가 무슨뜻인가 찾아보았는데 구글에서는 LGTM이라는 태그를 달아 의사를 표현하는데 **Looks Good To Me**. 즉, 좋아 보인다는 뜻이라고 하여 뿌듯한 경험이었음.
+        - 버그를 찾아내거나 UI를 수정하는 등의 과정도 중요하지만, 가장 중요한 것은 Argo Workflow 생태계가 정한 규칙대로 컨트리뷰션을 수행하는 과정도 중요하다고 생각한다.
+
+**4. Argo Workflow Hackerton 참여 (Argo workflow - OSSCA 팀내에서 개최한 해커톤)**
+    - **Pull Request(Merged) :** **[feat: Search by name for WorkflowTemplates in UI](https://github.com/argoproj/argo-workflows/pull/11684)**
+    - **Issue :** **[Search by name for WorkflowTemplates in UI](https://github.com/argoproj/argo-workflows/issues/11004)**
+    - 이슈 해커톤 활동 기간
+        - 1차 해커톤 (해커톤 C조) : 23.08.16 - 23.08.20
+        - 2차 해커톤 (해커톤 C조) : 23.08.20 - 23.08.27
+
+        ![hack1](./images/EuiJooLee/hack1.png)
+        ![hack2](./images/EuiJooLee/hack2.png)
+
+    - 이슈 내용
+        - 클러스터에 많은 수의 템플릿이 있는 경우 이름으로 검색하는 것이 좋지만, 검색기능이 없어 모든 템플릿을 스크롤하는 것은 항상 불편하다는 이슈
+        - Argo Workflow UI 에서 워크플로우 템플릿의 결과를 이름별로 필터링하는 기능이 필요하다고 생각되어서 조끼리 회의한 결과로 이슈를 채택.
+    
+    
+    -  역할
+        - Front-End 담당
+            - Argo workflow Template UI 의 검색 필드(Bar) 생성
+            - .get 로직을 분석하여 Name Pattern(Like 검색)을 어디로 넘겨주는지 분석
+            - workflow-template 컴포넌트 디렉토리의 workflow-template-filter.tsx, workflow-template-list.tsx 수정
+
+    - 회의 내용
+        - 회의는 Slack 해커톤 채널을 통해 조끼리 매일 의견과 정보를 공유
+        - 1차 논의 내용
+        ```
+        1. name 검색 기능 (backend)
+
+            • WorkflowTemplate 페이지
+            • name 검색 추가(LIKE 검색)
+            • ClusterWorkflowTemplate 페이지
+            • name 검색 추가(LIKE 검색)
+            • CronWorkflow 페이지
+            • name 검색 추가(LIKE 검색)
+
+
+
+        2. name 검색 기능 (frontend)
+
+            • WorkflowTemplate 페이지
+            • name 검색 ui 추가
+            • ClusterWorkflowTemplate 페이지
+            • 검색 사이드 바 추가 (name, label)
+            • CronWorkflow 페이지
+            • name 검색 ui 추가
+
+        3. 페이지네이션 (frontend)
+
+            • WorkflowTemplate 페이지
+            • name 기준 pagination
+            • ClusterWorkflowTemplate 페이지
+            • pagination 추가
+            • CronWorkflow 페이지
+            • pagination 추가
+
+        4. 테스트 코드 작성
+
+            - name 검색 (LIKE 검색)
+            - 어떤 테스트 코드 작성해야하는지 더 분석 필요
+        ```
+
+        - 2차 논의 내용
+            - 1차 오프라인 회의
+
+                ![hack3](./images/EuiJooLee/hack3.png)
+
+        ```
+        1. 공동 커밋 방법
+
+            • https://github.com/ArgoWorkflows-OSS/argo-workflows 레파지토리를 로컬에 클론받는다.
+            • 해당 레파지토리에 우리 팀이 작업할 브랜치를 생성한다. (`master` vs `release-3.4.10`)
+            • 해당 레파지토리의 해당 브랜치에서 각자 담당한 기능을 작업한다. (PR올리기 위한 커밋 규칙을 잘 지켜서 커밋한다.)
+            • 모두의 작업이 완료되면 3명중 1명이 PR 템플릿에 맞게 PR을 날리기
+            • 3명 모두가 컨트리뷰터가 될 수 있음
+
+        2. 해커톤이고 정해진 기간이 있기 때문에 일단 workflow-template, cluster-workflow, cron-workflow 중 먼저 메인이라고 생각되는 workflow-template name filter 를 먼저 구현해보고 PR을 날려 메인테이너가 Merge 해주면 다음으로 넘어가기로 결정
+        
+            • 파트별 임무
+        
+            • 백엔드 
+        
+                • workflow_template_server.go
+                    • 이름 필터링 및 페이지네이션 재계산
+        
+            • 프론트 : 
+        
+                • workfflow-template-filter.tsx
+                    • Name 검색 UI 추가
+                    • Name 인자 수신 및 필터링
+                • workflow-template-list.tsx
+                    • Name state 추가
+                    • userEffect list 에 name 전달
+                • workflow-template.tsx, Utils.tsx
+                    • Name 인자 전달
+        ```
+       - 3차 논의 내용 
+         - 2차 오프라인 회의
+
+            ![hack4](./images/EuiJooLee/hack4.png)
+         
+         ``` 
+            1. 오프라인 미팅 회의 내용
+
+                • namespace 없는 경우도 필터 시 포함해야 할 것 같다는 의견. (namespace 없애자고 말 할 근거 부족 - 타 사이트(쿠버네티스 대시보드, 오픈시프트, 아르고씨디 등)들도 namespace 없는 경우 제공)
+                • continue에서 사용하고 있는 로직을 가져와 적용가능한지와 커스텀한 결과에서도 continue를 그대로 유지할 수 있는지에 대한 생각
+                • 수요일 밤까지 continue 로직 분석 후, continue를 사용하여 페이지네이션이 불가능 하다고 결론이 날 경우 이슈 코멘트에 질문 업로드
+                • 프론트단 페이지네이션(데이터 리로드 안됨, argocd에서 사용중인 방식) vs 서버단 페이지네이션(매번 전체 리스트 조회 후 페이지네이션, 부하 괜찮을지)
+                • 서버사이드 캐싱 구현할 경우 저장할 곳이 있는지
+
+
+
+            2. 페이지 넘길때마다 매번 네임스페이스, 라벨만 적용해서 k8s 전체검색 하는걸로 결정
+
+            3. offset 기반 페이지네이션 방법**에서 로직 추가로 구현
+                • 안됐던 부분
+                    • next page 버튼 클릭 후 필터링 검색했을 경우, 있는 검색 결과더라도 아무 데이터도 나오지 않는다.
+                    • next page 버튼 클릭 후 페이지네이션 갯수 늘리면, 검색결과가 제대로 보이지 않는다.
+                • 변경된 부분
+                    • continue 값을 서버에서 갱신해주다보니, 페이지 갯수를 늘리거나/필터링을 걸었을 때 서버에 이미 세팅된 continue값을 기준으로 페이지네이션을 해서 문제 존재, continue 값을 프론트에서 넘겨주도록 변경하는 방식을 채택(페이지 갯수 늘리거나/필터링을 걸었을 때 continue를 다시 0으로 세팅)
+
+
+
+            4. 페이지네이션 테스트
+                • workflow_template_server_test.go 통과
+                • (workflow template 14개 등록)
+                • UI workflow template 첫 페이지 정상
+                • workflow template 페이지 limit 5, 10, 50 일 때 정상
+                • workflow template 페이지 1 페이지에서 workflow template 추가 후 2페이지 이동
+                • workflow template 페이지 1 페이지에서 workflow template 삭제 후 2페이지 이동
+                • 위 내용을 `name pattern` 필터링 검색으로 테스트
+                • name pattern 없이 검색 후 name pattern 추가하여 재검색
+                • name pattern 포함 검색 후 name pattern 삭제 후 재검색
+
+            5. PR 생성
+         ```
+        - Like 필터(Name Pattern) 구현
+            - 예) sp로 시작하는 workflow-template 검색가능
+
+                ![filter1](./images/EuiJooLee/filter1.png)
+
+       - 결과
+
+               ![filter2](./images/EuiJooLee/filter2.png) 
+            - 구현은 성공이였으며, 이후에는 이전에 논의했던 cluster-template, cron-template 컴포넌트들을 수정할 예정
+           
+**5. 컨트리뷰션 활동 외 학습**
+    - Google Kubernetes Study Jam 교육 수료
+        - **[Badge](https://www.cloudskillsboost.google/public_profiles/7f855d64-3f2e-432a-9763-fde644b6af4b)**
+        - Architecting with Google Kubernetes Engine: Foundations
+        Earned 7월 18, 2023 EDT
+        - Architecting with Google Kubernetes Engine: Workloads
+        Earned 7월 26, 2023 EDT
+        - Architecting with Google Kubernetes Engine: Production
+        Earned 8월 4, 2023 EDT
+
+    - 정리한 내용은 개인 블로그(velog)에 기록
+        **[euijoo's Velog GCP Series](https://velog.io/@euijoo3233/series/GCP)**
 </details>
 
 #### **🌵 참가 후기**
 
-ㄱㄴㄷㄹ
+- **참가후기**
+
+    - 아카데미 이전에는 Argo CD에 대한 지식만 가졌지만, 이후에는  Argo Workflow 프로젝트에 대해 조사하고 분석하며 강력한 기능들을 어떻게 활용하면 좋을지 생각해볼 수 있는 레벨까지 도달할 수 있었음.
+    - 처음 컨트리뷰션을 진행하면서 이슈를 생성하고 메인테이너들과 소통하며 부탁받은 사항에 대해 수정하고 PR을 생성하는 방식으로 진행하니 금방 코멘트가 달렸고 Merge 되는 성과를 달성.
+    - 사소한 이슈일 수도 있지만, 기여하고자 하는 부분에대해 전체적인 분석이 필요하다고 느낀 경험이었음.
+    - 이 뿐만이 아니라, 팀 내에서 자체적으로 이슈 해커톤을 진행하면서 UI 즉, 프론트 부분만이 아니라 백엔드 부분의 로직을 분석하며 Argo workflow가 내부에서 어떻게 상호작용하는지 분석할 수 있는 기회였음.
+    - 우리조는 몸체가 큰 이슈여서 이에 맞춰 온라인 뿐만 아니라 오프라인 회의도 병행하며 진행한 결과 목표에 도달할 수 있었고, 두명의 인원은 현업에 종사하는 분들이여서 어려운 부분에 대해서는 친절히 설명해주셔서 유익한 경험이었음.
+    - 계속해서 해커톤 팀원 혹은 전체 팀원들과 함께 소통하고 싶은 소망이 있음.
+
+- **앞으로의 계획**
+
+    - 아직 OSSCA 기간이 끝나지 않았기 때문에 지속적으로 이슈를 탐색(Cluster-workflow-template, Cron-workflow 등)하거나, Argo Workflow 문서의 오타나 번역 오류를 발견하고 지속적으로 PR을 제출할 생각임
+    - 또한, OSSCA 기간이 끝난 이후에는 지금까지 정리해왔던 내용을 포트폴리오화 할 예정.
+    - 토이프로젝트로 현재 진행중인 Argo Workflow를 활용한Data ETL 작업을 완료해볼 예정임.
+    - 만약, 취업이 된다면 Argo Workflow의 많은 기능들을 현업에 도입하여 많은 인사이트를 창출하고 싶은 소망이 있음.
 
 ### 14. 전의정
 
