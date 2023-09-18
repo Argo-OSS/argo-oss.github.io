@@ -2,7 +2,7 @@ name: Test Lint On PR
 on: [pull_request]
 
 jobs:
-  build-and-deploy:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
