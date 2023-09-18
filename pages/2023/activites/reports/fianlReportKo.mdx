@@ -335,12 +335,12 @@ Argo Workflows의 3.5버전 릴리즈 이후에도, 계속하여 컨트리뷰터
 
         • 디렉터리 및 파일 배치
             • 나만의 서비스를 반드시 본인 github 계정 디렉터리를 생성하고, 그 아래 작성해주세요.
-            • 본인 디렉터리의 최상단에는 반드시 `Dockerfile` 이 위치해야 합니다.(이 조건을 달성하지 못하면 CI가 실패합니다.)
-            • 본인 디렉터리 아래에 한해서, `Dockerfile`의 위치를 제외한 나머지 파일들은 자유롭게 작성해도 됩니다.
-            • 단, 본인 디렉터리 최상단에서 `docker build -t [이미지명] .` 명령을 수행 했을때 성공적으로 이미지가 빌드 되어야 합니다.
+            • 본인 디렉터리의 최상단에는 반드시 `Dockerfile` 이 위치해야 합니다.(이 조건을 달성하지 못하면 CI가 실패합니다.)
+            • 본인 디렉터리 아래에 한해서, `Dockerfile`의 위치를 제외한 나머지 파일들은 자유롭게 작성해도 됩니다.
+            • 단, 본인 디렉터리 최상단에서 `docker build -t [이미지명] .` 명령을 수행 했을때 성공적으로 이미지가 빌드 되어야 합니다.
         • 빌드 된 이미지의 동작
             • 나만의 웹서비스는 반드시 8080포트에서 동작해야 합니다.
-            • 빌드 된 이미지는 별도의 파라미터 없이 `docker run -d -p [포워딩 포트번호]:8080 [이미지명]` 으로 실행 했을 때 문제 없이 서비스 되도록 만들어야 합니다.
+            • 빌드 된 이미지는 별도의 파라미터 없이 `docker run -d -p [포워딩 포트번호]:8080 [이미지명]` 으로 실행 했을 때 문제 없이 서비스 되도록 만들어야 합니다.
         • 웹서비스 개발언어 및 서비스 구조
             • 본인이 선호하는 어떤 언어, 어떤 프레임워크를 활용해도 상관 없습니다.
             • UI, 디자인이 존재하지 않는 단순 api서비스를 제작해도 상관 없습니다.
@@ -355,13 +355,13 @@ Argo Workflows의 3.5버전 릴리즈 이후에도, 계속하여 컨트리뷰터
         •도커의 개념과 Dockerfile을 작성하기 위해 아래 문서를 참고 하면 좋아요.
 
             • [Dockerfile 작성 공식 문서](https://docs.docker.com/engine/reference/builder/)
-            • [왕초보를 위한 도커 사용법](https://mysetting.io/slides/xxj85vnvey) (Docker Toolbox관련 내용은 deprecate된 내용)
+            • [왕초보를 위한 도커 사용법](https://mysetting.io/slides/xxj85vnvey) (Docker Toolbox관련 내용은 deprecate된 내용)
 
         PR을 올리고 머지하기 위해 아래 사항들을 참고하면 좋아요.
 
             • Repo에 브랜치등을 생성하거나 Push할 수 있는 권한이 없으므로 fork 후 작업해야 해요.
             • [PR의 네이밍 컨벤션](https://flank.github.io/flank/pr_titles/)을 참고해주세요.
-            • [DCO](https://github.com/apps/dco) 봇의 체크를 통과하기 위한 조건을 참고하여 커밋해주세요.
+            • [DCO](https://github.com/apps/dco) 봇의 체크를 통과하기 위한 조건을 참고하여 커밋해주세요.
             • [GPG](https://www.44bits.io/ko/post/add-signing-key-to-git-commit-by-gpg)를 이용해 커밋하는 방법을 이해하여 서명된 커밋을 작성해주세요.
             • [커밋 메시지 컨벤션](https://www.conventionalcommits.org/en/v1.0.0/)도 적용할 수 있으면 좋아요. 꼭 따르지 않더라도, 너무 의미없는 커밋 메시지는 지양해주세요.(Optional)```
 
@@ -401,7 +401,7 @@ Argo Workflows의 3.5버전 릴리즈 이후에도, 계속하여 컨트리뷰터
 
 
     - 실수로 Commit 중에 Signed-off 옵션을 생략해서 DCO 봇 TEST에 통과 못했지만, GIt 에서 이전 커밋을 되돌리거나(**Rebase**), 여러 불필요한 커밋을 하나로 합치는(**Squash**) 기능을 알게되었고 이전 커밋을 돌려 `git commit -S -s -m "Commit Message"` 커밋하였음.
-        - ‘**LGTM**’ 코멘트가 무슨뜻인가 찾아보았는데 구글에서는 LGTM이라는 태그를 달아 의사를 표현하는데 **Looks Good To Me**. 즉, 좋아 보인다는 뜻이라고 하여 뿌듯한 경험이었음.
+        - ‘**LGTM**’ 코멘트가 무슨뜻인가 찾아보았는데 구글에서는 LGTM이라는 태그를 달아 의사를 표현하는데 **Looks Good To Me**. 즉, 좋아 보인다는 뜻이라고 하여 뿌듯한 경험이었음.
         - 버그를 찾아내거나 UI를 수정하는 등의 과정도 중요하지만, 가장 중요한 것은 Argo Workflow 생태계가 정한 규칙대로 컨트리뷰션을 수행하는 과정도 중요하다고 생각한다.
 
 **4. Argo Workflow Hackerton 참여 (Argo workflow - OSSCA 팀내에서 개최한 해커톤)**
@@ -472,8 +472,8 @@ Argo Workflows의 3.5버전 릴리즈 이후에도, 계속하여 컨트리뷰터
         ```
         1. 공동 커밋 방법
 
-            • https://github.com/ArgoWorkflows-OSS/argo-workflows 레파지토리를 로컬에 클론받는다.
-            • 해당 레파지토리에 우리 팀이 작업할 브랜치를 생성한다. (`master` vs `release-3.4.10`)
+            • https://github.com/ArgoWorkflows-OSS/argo-workflows 레파지토리를 로컬에 클론받는다.
+            • 해당 레파지토리에 우리 팀이 작업할 브랜치를 생성한다. (`master` vs `release-3.4.10`)
             • 해당 레파지토리의 해당 브랜치에서 각자 담당한 기능을 작업한다. (PR올리기 위한 커밋 규칙을 잘 지켜서 커밋한다.)
             • 모두의 작업이 완료되면 3명중 1명이 PR 템플릿에 맞게 PR을 날리기
             • 3명 모두가 컨트리뷰터가 될 수 있음
@@ -532,9 +532,9 @@ Argo Workflows의 3.5버전 릴리즈 이후에도, 계속하여 컨트리뷰터
                 • workflow template 페이지 limit 5, 10, 50 일 때 정상
                 • workflow template 페이지 1 페이지에서 workflow template 추가 후 2페이지 이동
                 • workflow template 페이지 1 페이지에서 workflow template 삭제 후 2페이지 이동
-                • 위 내용을 `name pattern` 필터링 검색으로 테스트
-                • name pattern 없이 검색 후 name pattern 추가하여 재검색
-                • name pattern 포함 검색 후 name pattern 삭제 후 재검색
+                • 위 내용을 `name pattern` 필터링 검색으로 테스트
+                • name pattern 없이 검색 후 name pattern 추가하여 재검색
+                • name pattern 포함 검색 후 name pattern 삭제 후 재검색
 
             5. PR 생성
          ```
