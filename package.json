@@ -3,9 +3,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "next build && next export"
+    "export": "next build && next export",
+    "lint": "eslint --ext md,mdx ."
   },
   "dependencies": {
+    "eslint-plugin-mdx": "^2.2.0",
     "next": "^13.4.12",
     "nextra": "^2.10.0",
     "nextra-theme-docs": "^2.10.0",
