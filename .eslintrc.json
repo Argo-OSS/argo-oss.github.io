@@ -1,16 +1,42 @@
 {
   "parserOptions": {
-    "ecmaVersion": "latest"
+    "ecmaVersion": "latest",
+    "ecmaFeatures": {
+      "arrowFunctions": true,
+      "binaryLiterals": true,
+      "blockBindings": true,
+      "classes": true,
+      "defaultParams": true,
+      "destructuring": true,
+      "forOf": true,
+      "generators": true,
+      "modules": true,
+      "objectLiteralComputedProperties": true,
+      "objectLiteralDuplicateProperties": true,
+      "objectLiteralShorthandMethods": true,
+      "objectLiteralShorthandProperties": true,
+      "octalLiterals": true,
+      "regexUFlag": true,
+      "regexYFlag": true,
+      "spread": true,
+      "superInFunctions": true,
+      "templateStrings": true,
+      "unicodeCodePointEscapes": true,
+      "globalReturn": true,
+      "jsx": true
+    }
   },
   "env": {
     "browser": true,
     "node": true,
     "commonjs": true,
-    "es2022": true
+    "es2022": true,
+    "es6": true
   },
+
   "globals": { "_": true },
-  "plugins": ["import", "html", "markdown", "mdx"],
-  "extends": ["airbnb-base", "plugin:prettier/recommended"],
+  "plugins": ["import", "html", "markdown", "mdx", "react"],
+  "extends": ["eslint:recommended", "airbnb-base", "plugin:prettier/recommended", "plugin:react/recommended", "plugin:react/jsx-runtime"],
   "rules": {
     // "off" or 0 - turn the rule off
     // "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
@@ -60,6 +86,16 @@
     {
       "files": ["**/*.mdx"],
       "extends": "plugin:mdx/recommended"
+    },
+    {
+      "files": ["**/*.{js,jsx,mjs,cjs,ts,tsx}"],
+      "plugins": ["react"]
     }
-  ]
+  ],
+
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }
