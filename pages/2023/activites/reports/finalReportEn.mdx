@@ -42,7 +42,6 @@ Argo Workflows is a Kubernetes-native engine that makes it easy to orchestrate c
 
 Also, because Argo Workflows runs each workflow step as an independent container, it can perform a variety of tasks, such as CI/CD as well as data pipelines. This is possible by leveraging the power of Docker and Kubernetes, which allows you to run anything without restrictions.
 
-
 ## ☑️ Key Accomplishments
 
 ### UI/UX improvements
@@ -284,7 +283,7 @@ This contribution pertains to the documentation of the Argo CLI, the command-lin
 
 ![slack11](./images/HaeMinSong/song_pr5_img.png)
 
-The current Argo CLI GitHub documentation lacked installation procedures, making it challenging for first-time users to determine how to install the Argo CLI.   Initially, users had to directly navigate to the Release Note or the Quick Start page.  
+The current Argo CLI GitHub documentation lacked installation procedures, making it challenging for first-time users to determine how to install the Argo CLI. Initially, users had to directly navigate to the Release Note or the Quick Start page.  
 By adding an Installation section to the Argo CLI page alongside the existing Usage details, I aimed to enhance user convenience.
 
 ---
@@ -472,7 +471,7 @@ To understand this issue, I first needed to grasp what [Default Workflows](https
 
 I learned that the `workflowDefaults` field in the `argo workflows controller configmap` allows you to set default values for workflows. Additionally, I discovered that if a workflow already has values for this field, those values take precedence.
 
-For example, after configuring the `configmap` as follows, when you create a Workflow, 
+For example, after configuring the `configmap` as follows, when you create a Workflow,
 
 ```yaml
 # This file describes the config settings available in the workflow controller configmap
@@ -493,7 +492,9 @@ data:
         secondsAfterSuccess: 5
       parallelism: 3
 ```
+
 it will be automatically created with the values set in the `workflowDefaults` field, like this:
+
 ```yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
@@ -505,7 +506,7 @@ metadata:
     foo: bar
 spec:
   ttlStrategy:
-    secondsAfterSuccess: 5     # Time to live after workflow is successful
+    secondsAfterSuccess: 5 # Time to live after workflow is successful
   parallelism: 3
 ```
 
@@ -554,7 +555,6 @@ Since this issue is related to policies, it indeed requires further discussion.
 
 This was my first PR to the ArgoWorkflows project, and it's great that i was able to identify the cause of an issue that was causing inconvenience for many people.
 
-
 **2. Search by name for WorkflowTemplates in UI**
 
 [Issue #11004](https://github.com/argoproj/argo-workflows/issues/11004)  
@@ -586,7 +586,6 @@ It was so fun to be able to discuss it with others instead of alone.
 
 I also felt good about providing some really needed functionality to the ArgoWorkflows project.
 
-
 **3. A problem that is not initialized when changing the number of page limits**
 
 [Issue #11702](https://github.com/argoproj/argo-workflows/issues/11702)  
@@ -603,7 +602,6 @@ When changing the number of pages, the `continue` value used for pagination was 
 I was able to solve the problem by simply modifying the logic to initialize `offset` when a change in page number is detected in the UI code.
 
 It was only a one-line code change, but this one line solved a problem that was quite inconvenient.
-
 
 **4. Pagination may not work correctly for archived workflows**
 

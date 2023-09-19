@@ -507,9 +507,7 @@ Argo Workflow PR 전 여러 사람이 기여하기 위한 사전 연습을 진�
 
          ![menberprofile1](./images/EuiJooLee/memberprofile1.png)
 
-**2. 왕초보 특별반 참여 (Mentor 가 생성한 초보자들을 위한 과정)**
-    - **[왕초보 특별반 미션을 위한 Repo(container-playground)](https://github.com/ArgoWorkflows-OSS/container-playground)**
-    - Docker 혹은 Kubernetes 에 익숙하지 않은 인원 혹은 처음인 인원에 도움을 주는데 목적
+**2. 왕초보 특별반 참여 (Mentor 가 생성한 초보자들을 위한 과정)** - **[왕초보 특별반 미션을 위한 Repo(container-playground)](https://github.com/ArgoWorkflows-OSS/container-playground)** - Docker 혹은 Kubernetes 에 익숙하지 않은 인원 혹은 처음인 인원에 도움을 주는데 목적
 
          ![class1](./images/EuiJooLee/class1.png)
     - 멘토가 제시한 과제를 수행하면서 Docker Image 최적화의 필요성에 대해 학습
@@ -732,10 +730,13 @@ Argo Workflow PR 전 여러 사람이 기여하기 위한 사전 연습을 진�
                ![filter2](./images/EuiJooLee/filter2.png)
             - 구현은 성공이였으며, 이후에는 이전에 논의했던 cluster-template, cron-template 컴포넌트들을 수정할 예정
 
-**5. 컨트리뷰션 활동 외 학습** - Google Kubernetes Study Jam 교육 수료 - **[Badge](https://www.cloudskillsboost.google/public_profiles/7f855d64-3f2e-432a-9763-fde644b6af4b)** - Architecting with Google Kubernetes Engine: Foundations
-Earned 7월 18, 2023 EDT - Architecting with Google Kubernetes Engine: Workloads
-Earned 7월 26, 2023 EDT - Architecting with Google Kubernetes Engine: Production
-Earned 8월 4, 2023 EDT
+# <<<<<<< HEAD
+
+> > > > > > > 6ae8cbe (etc: lint 추가)
+> > > > > > > **5. 컨트리뷰션 활동 외 학습** - Google Kubernetes Study Jam 교육 수료 - **[Badge](https://www.cloudskillsboost.google/public_profiles/7f855d64-3f2e-432a-9763-fde644b6af4b)** - Architecting with Google Kubernetes Engine: Foundations
+> > > > > > > Earned 7월 18, 2023 EDT - Architecting with Google Kubernetes Engine: Workloads
+> > > > > > > Earned 7월 26, 2023 EDT - Architecting with Google Kubernetes Engine: Production
+> > > > > > > Earned 8월 4, 2023 EDT
 
     - 정리한 내용은 개인 블로그(velog)에 기록
         **[euijoo's Velog GCP Series](https://velog.io/@euijoo3233/series/GCP)**
@@ -824,6 +825,7 @@ Earned 8월 4, 2023 EDT
 `argo workflows controller configmap`에 `workflowDefaults` 라는 필드는 넣어 워크플로에 대한 기본값을 설정할 수 있으며, 워크플로에 이미 해당 필드값이 있을 경우에는 워크플로 값이 우선된다는 것을 알게되었습니다.
 
 예를 들어 `configmap`을 다음과 같이 설정한 뒤에 `Workflows`를 생성하면
+
 ```yaml
 # This file describes the config settings available in the workflow controller configmap
 apiVersion: v1
@@ -843,7 +845,9 @@ data:
         secondsAfterSuccess: 5
       parallelism: 3
 ```
+
 자동으로 `workflowDefaults` 필드에 설정해준 대로 Workflows가 아래와 같이 생성됩니다.
+
 ```yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
@@ -855,7 +859,7 @@ metadata:
     foo: bar
 spec:
   ttlStrategy:
-    secondsAfterSuccess: 5     # Time to live after workflow is successful
+    secondsAfterSuccess: 5 # Time to live after workflow is successful
   parallelism: 3
 ```
 
@@ -865,10 +869,10 @@ spec:
 
 코드를 확인해보니 `StrategicMergePatch` 함수에서 에러가 발생했고 이는 쿠버네티스의 `patch` 전략과 관계가 있었습니다.
 
-
 ```go
 VolumeClaimTemplates []apiv1.PersistentVolumeClaim `json:"volumeClaimTemplates,omitempty" patchStrategy:"merge" patchMergeKey:"name" protobuf:"bytes,6,opt,name=volumeClaimTemplates"`
 ```
+
 `Workflows`에서 정의되어있는 타입인 `VolumeClaimTemplates`는 `patchMergeKey`로 name을 사용하도록 정의되어있었습니다.
 
 그러나 아래 `PersistentVolumeClaim`타입을 확인해보면 `name`은 존재하지 않습니다. 즉, 구조체에 정의되어있지 않은 값을 `patchMergeKey`로 정의해두어서 발생하는 문제였습니다.
@@ -894,7 +898,7 @@ type PersistentVolumeClaim struct {
 }
 ```
 
-> 이슈 해결 
+> 이슈 해결
 
 `VolumeClaimTemplates`에서 `patchMergeKey`를 제거하도록 해당 이슈를 수정하였습니다.
 
@@ -904,14 +908,12 @@ type PersistentVolumeClaim struct {
 
 ArgoWorkflows 프로젝트에 처음으로 올린 PR이었고 꽤나 많은 사람들이 불편해하고 있는 이슈의 원인을 찾아낼 수 있어서 기뻤습니다.
 
-
-
 **2. Search by name for WorkflowTemplates in UI**
 
 [Issue #11004](https://github.com/argoproj/argo-workflows/issues/11004)  
 [PR #11684](https://github.com/argoproj/argo-workflows/pull/11684)
 
-> 이슈 분석 
+> 이슈 분석
 
 이번 이슈는 3명으로 팀을 짜서 작업을 진행했습니다.
 
@@ -921,7 +923,7 @@ ArgoWorkflows 프로젝트에 처음으로 올린 PR이었고 꽤나 많은 사�
 
 그래서 많은 사용자들은 불편함을 느끼고 있었으며 '이름'을 기준으로 찾을 수 있는 기능을 제공해줬으면 좋겠다는 '기능 개선' 관련 이슈였습니다.
 
-> 이슈 해결 
+> 이슈 해결
 
 ![namePattern](./images/sunyeongchoi/namePattern.png)
 
@@ -937,31 +939,26 @@ ArgoWorkflows 프로젝트에 처음으로 올린 PR이었고 꽤나 많은 사�
 
 또한 ArgoWorkflows 프로젝트에 정말 필요한 기능을 제공했다고 생각하여 기분이 좋았습니다.
 
-
-
 **3. A problem that is not initialized when changing the number of page limits**
 
 [Issue #11702](https://github.com/argoproj/argo-workflows/issues/11702)  
 [PR #11703](https://github.com/argoproj/argo-workflows/pull/11703)
 
-> 이슈 분석 
+> 이슈 분석
 
 `Search by name for WorkflowTemplates in UI` 이슈를 해결하면서 새로운 페이지네이션 버그를 발견하였습니다.
 
 페이지 갯수를 변경할 때 페이지네이션을 위해 사용하는 `continue` 값을 UI에서 초기화 시켜주지 않아서 데이터가 제대로 보이지 않는 문제였습니다.
 
-
-> 이슈 해결 
+> 이슈 해결
 
 UI 코드에서 페이지 갯수 변경이 감지될 때 `offset`을 초기화 하도록 간단하게 로직을 수정하여 문제를 해결할 수 있었습니다.
 
 단 한줄의 코드 수정이었으나 이 한 줄로 인해 꽤나 불편함을 주었던 문제를 해결할 수 있었습니다.
 
-
-
 **4. Pagination may not work correctly for archived workflows**
 
-> 이슈 분석 
+> 이슈 분석
 
 [Issue #11715](https://github.com/argoproj/argo-workflows/issues/11715)  
 [PR #11761](https://github.com/argoproj/argo-workflows/pull/11761)
@@ -981,7 +978,7 @@ Maintainer @terrytangyuan 님께서 직접 Slack으로 연락을 주신 이슈�
 
 그러나 `ArchivedWorkflows`에 `Workflows`에서 사용하는 `continue`값을 그대로 전달하면서 `ArchivedWorkflows`가 아예 조회되지 않는 문제가 발생했습니다.
 
-> 이슈 해결 
+> 이슈 해결
 
 `Search by name for WorkflowTemplates in UI` 이슈를 해결하면서 구현했던 페이지네이션 로직을 참고하여 해당 이슈를 해결할 수 있었습니다.
 
@@ -993,13 +990,12 @@ Maintainer @terrytangyuan 님께서 직접 Slack으로 연락을 주신 이슈�
 
 크리티컬한 이슈를 해결할 수 있어서 너무 좋았고 ArgoWorkflows 프로젝트에 컨트리뷰터로써 제대로 기여를 하고 있다는 생각이 들어 뿌듯하고 재밌었습니다.
 
-
 **5. Relocation of Commit Guidelines Information in the Documentation**
 
 [Issue #11700](https://github.com/argoproj/argo-workflows/issues/11700)  
 [PR #11701](https://github.com/argoproj/argo-workflows/pull/11701)
 
-> 이슈 분석 
+> 이슈 분석
 
 ArgoWorkflows 프로젝트에는 컨트리뷰션을 시도하는 개발자들을 위한 리드미 문서가 있습니다.
 
@@ -1007,13 +1003,14 @@ ArgoWorkflows 프로젝트에는 컨트리뷰션을 시도하는 개발자들을
 
 GeunSam2 멘토님께서 본인이 처음 기여를 시도하려고 했을 때 커밋에 대한 가이드라인을 찾는데 너무 오래 걸려서 불편했다고 말해주셨습니다.
 
-> 이슈 해결 
+> 이슈 해결
 
 ![ContributingDocs](./images/sunyeongchoi/ContributingDocs.png)
 
 이 불편사항을 들은 후 컨트리뷰션 리드미에 커밋에 대한 가이드라인의 링크를 걸어주도록 수정함으로써 ArgoWorkflows에 기여하고자 하는 개발자들이 편하게 기여할 수 있도록 하였습니다.
 
 이 PR에서는 메인테이너가 코드 제안을 해주었는데 코드 제안 기능을 처음 접해보아서 흥미롭고 재밌었습니다.
+
 </details>
 
 #### **🌵 참가 후기**
