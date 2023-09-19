@@ -754,10 +754,224 @@ Argo Workflow PR 전 여러 사람이 기여하기 위한 사전 연습을 진�
 <details>
 <summary>접기/펼치기</summary>
 
-ㄱㄴㄷㄹ
+**1. Cron workflow can not apply volumeClaimTemplates config from argo controller config map (workflowDefaults)**
 
+[Issue #11344](https://github.com/argoproj/argo-workflows/issues/11344)  
+[PR #11662](https://github.com/argoproj/argo-workflows/pull/11662)
+
+> 이슈 분석
+
+이 이슈를 이해하기 위해서는 먼저 [Default Workflows](https://argoproj.github.io/argo-workflows/default-workflow-specs)가 무엇인지를 알아야 했습니다.
+
+`argo workflows controller configmap`에 `workflowDefaults` 라는 필드는 넣어 워크플로에 대한 기본값을 설정할 수 있으며, 워크플로에 이미 해당 필드값이 있을 경우에는 워크플로 값이 우선된다는 것을 알게되었습니다.
+
+예를 들어 `configmap`을 다음과 같이 설정한 뒤에 `Workflows`를 생성하면
+```yaml
+# This file describes the config settings available in the workflow controller configmap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: workflow-controller-configmap
+data:
+  # Default values that will apply to all Workflows from this controller, unless overridden on the Workflow-level
+  workflowDefaults: |
+    metadata:
+      annotations:
+        argo: workflows
+      labels:
+        foo: bar
+    spec:
+      ttlStrategy:
+        secondsAfterSuccess: 5
+      parallelism: 3
+```
+자동으로 `workflowDefaults` 필드에 설정해준 대로 Workflows가 아래와 같이 생성됩니다.
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: gc-ttl-
+  annotations:
+    argo: workflows
+  labels:
+    foo: bar
+spec:
+  ttlStrategy:
+    secondsAfterSuccess: 5     # Time to live after workflow is successful
+  parallelism: 3
+```
+
+해당 이슈는 `workflowDefaults`에 `volumeClaimTemplates` 값을 넣으면, `CronWorflows/Workflows` 생성 시 에러가 발생한다는 이슈였습니다.
+
+`does not contain declared merge key: name` 라는 에러메세지가 발생하는 것을 확인했습니다.
+
+코드를 확인해보니 `StrategicMergePatch` 함수에서 에러가 발생했고 이는 쿠버네티스의 `patch` 전략과 관계가 있었습니다.
+
+
+```go
+VolumeClaimTemplates []apiv1.PersistentVolumeClaim `json:"volumeClaimTemplates,omitempty" patchStrategy:"merge" patchMergeKey:"name" protobuf:"bytes,6,opt,name=volumeClaimTemplates"`
+```
+`Workflows`에서 정의되어있는 타입인 `VolumeClaimTemplates`는 `patchMergeKey`로 name을 사용하도록 정의되어있었습니다.
+
+그러나 아래 `PersistentVolumeClaim`타입을 확인해보면 `name`은 존재하지 않습니다. 즉, 구조체에 정의되어있지 않은 값을 `patchMergeKey`로 정의해두어서 발생하는 문제였습니다.
+
+```go
+type PersistentVolumeClaim struct {
+	metav1.TypeMeta `json:",inline"`
+	// Standard object's metadata.
+	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+	// +optional
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+
+	// spec defines the desired characteristics of a volume requested by a pod author.
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
+	// +optional
+	Spec PersistentVolumeClaimSpec `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	// status represents the current information/status of a persistent volume claim.
+	// Read-only.
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
+	// +optional
+	Status PersistentVolumeClaimStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
+}
+```
+
+> 이슈 해결 
+
+`VolumeClaimTemplates`에서 `patchMergeKey`를 제거하도록 해당 이슈를 수정하였습니다.
+
+그러나 `VolumeClaimTemplates`에 `patchMergeKey`가 붙은 이유는 Volume과 같은 컨벤션을 사용하고 있어서 였습니다.
+
+해당 이슈는 이처럼 정책과 관련되어있기 때문에 더 많은 의논이 필요한 상황입니다.
+
+ArgoWorkflows 프로젝트에 처음으로 올린 PR이었고 꽤나 많은 사람들이 불편해하고 있는 이슈의 원인을 찾아낼 수 있어서 기뻤습니다.
+
+
+
+**2. Search by name for WorkflowTemplates in UI**
+
+[Issue #11004](https://github.com/argoproj/argo-workflows/issues/11004)  
+[PR #11684](https://github.com/argoproj/argo-workflows/pull/11684)
+
+> 이슈 분석 
+
+이번 이슈는 3명으로 팀을 짜서 작업을 진행했습니다.
+
+![HackertonC](./images/sunyeongchoi/HackertonC.png)
+
+`WorkflowTemplates`는 '이름'을 기준으로 검색하는 기능이 존재하지 않아 특정 `WorkflowTemplates`을 찾기 위해서는 `label`을 기준으로만 찾을 수 있었습니다.
+
+그래서 많은 사용자들은 불편함을 느끼고 있었으며 '이름'을 기준으로 찾을 수 있는 기능을 제공해줬으면 좋겠다는 '기능 개선' 관련 이슈였습니다.
+
+> 이슈 해결 
+
+![namePattern](./images/sunyeongchoi/namePattern.png)
+
+쿠버네티스 API를 통해 조회된 `WorkflowTemplates`의 결과를 '이름'을 기준으로 필터링하는 로직을 추가적으로 넣어 해당 기능을 구현하였습니다.
+
+그러나 한가지 이슈가 존재했습니다.
+
+기존 페이지네이션은 쿠버네티스 자체 continue 값을 이용해 구현되어있어서 쿠버네티스 결과를 이처럼 커스텀하게 조작할 경우 쿠버네티스 페이지네이션을 사용할 수 없었습니다.
+
+이를 어떻게 해결해야 할까 고민이 많았지만 쿠버네티스의 `resourceVersion`을 이용하여 커서 페이지네이션을 하도록 구현하는 로직을 적용함으로써 해당 문제를 해결하였습니다.
+
+혼자가 아니라 여럿이 의논하며 할 수 있어서 너무 재미있었습니다.
+
+또한 ArgoWorkflows 프로젝트에 정말 필요한 기능을 제공했다고 생각하여 기분이 좋았습니다.
+
+
+
+**3. A problem that is not initialized when changing the number of page limits**
+
+[Issue #11702](https://github.com/argoproj/argo-workflows/issues/11702)  
+[PR #11703](https://github.com/argoproj/argo-workflows/pull/11703)
+
+> 이슈 분석 
+
+`Search by name for WorkflowTemplates in UI` 이슈를 해결하면서 새로운 페이지네이션 버그를 발견하였습니다.
+
+페이지 갯수를 변경할 때 페이지네이션을 위해 사용하는 `continue` 값을 UI에서 초기화 시켜주지 않아서 데이터가 제대로 보이지 않는 문제였습니다.
+
+
+> 이슈 해결 
+
+UI 코드에서 페이지 갯수 변경이 감지될 때 `offset`을 초기화 하도록 간단하게 로직을 수정하여 문제를 해결할 수 있었습니다.
+
+단 한줄의 코드 수정이었으나 이 한 줄로 인해 꽤나 불편함을 주었던 문제를 해결할 수 있었습니다.
+
+
+
+**4. Pagination may not work correctly for archived workflows**
+
+> 이슈 분석 
+
+[Issue #11715](https://github.com/argoproj/argo-workflows/issues/11715)  
+[PR #11761](https://github.com/argoproj/argo-workflows/pull/11761)
+
+Maintainer @terrytangyuan 님께서 직접 Slack으로 연락을 주신 이슈입니다.
+
+![Slack](./images/sunyeongchoi/Slack.png)
+![Github](./images/sunyeongchoi/Github.png)
+
+좋아하는 연예인에게 연락받은 기분이라 너무 기분이 좋아서 날아갈 뻔 했습니다. 기쁘고 들뜨는 마음을 누르고 이슈를 분석해보았습니다.
+
+`Workflows`와 `ArchivedWorkflows`가 이전에는 다른 페이지로 분리되어있었지만 `master` 버전부터 `Workflows`와 `ArchivedWorkflows`를 하나의 페이지로 합치고 `ArchivedWorkflows`가 존재한다면 같이 보여주도록 로직이 수정되었습니다.
+
+그러나 `Workflows`와 `ArchivedWorkflows`가 하나로 합쳐지면서 페이지네이션에서 문제가 발생했습니다.
+
+두 개의 리소스는 서로 전혀 다른 페이지네이션을 사용하도 있었습니다. `Workflows`는 쿠버네티스 자체 페이지네이션인 `continue`값을 사용하고 있었고, `ArchivedWorkflows`는 자체적으로 데이터베이스를 사용하기 때문에 데이터베이스를 이용하여 `offset` 방식으로 페이지네이션을 하고 있었습니다.
+
+그러나 `ArchivedWorkflows`에 `Workflows`에서 사용하는 `continue`값을 그대로 전달하면서 `ArchivedWorkflows`가 아예 조회되지 않는 문제가 발생했습니다.
+
+> 이슈 해결 
+
+`Search by name for WorkflowTemplates in UI` 이슈를 해결하면서 구현했던 페이지네이션 로직을 참고하여 해당 이슈를 해결할 수 있었습니다.
+
+두 리소스는 다른 방법의 페이지네이션을 사용할 수 밖에 없기 때문에 두 개의 리소스를 합치기 전에 페이지네이션을 사용하는 것이 아닌, 일단 전체 리소스를 조회하여 두 리소스를 합친 후에 마지막으로 페이지네이션 로직을 적용하는 방법을 사용하였습니다.
+
+`ArchivedWorkflows`가 조회되지 않는 문제를 해결할 수 있었으나 페이지를 변경할 때마다 전체 리스트를 가져와 합치기까지 하는 것이 성능상 걱정이 되는 부분이라 성능 테스트를 할 수 있는 방법을 고민해볼 생각입니다.
+
+성능테스트를 해본 뒤 아니다싶으면 프론트에서 페이지네이션을 하는 방식으로 변경해볼 생각입니다.
+
+크리티컬한 이슈를 해결할 수 있어서 너무 좋았고 ArgoWorkflows 프로젝트에 컨트리뷰터로써 제대로 기여를 하고 있다는 생각이 들어 뿌듯하고 재밌었습니다.
+
+
+**5. Relocation of Commit Guidelines Information in the Documentation**
+
+[Issue #11700](https://github.com/argoproj/argo-workflows/issues/11700)  
+[PR #11701](https://github.com/argoproj/argo-workflows/pull/11701)
+
+> 이슈 분석 
+
+ArgoWorkflows 프로젝트에는 컨트리뷰션을 시도하는 개발자들을 위한 리드미 문서가 있습니다.
+
+하지만 그곳에는 커밋에 관한 가이드라인이 따로 언급되어있지 않습니다.
+
+GeunSam2 멘토님께서 본인이 처음 기여를 시도하려고 했을 때 커밋에 대한 가이드라인을 찾는데 너무 오래 걸려서 불편했다고 말해주셨습니다.
+
+> 이슈 해결 
+
+![ContributingDocs](./images/sunyeongchoi/ContributingDocs.png)
+
+이 불편사항을 들은 후 컨트리뷰션 리드미에 커밋에 대한 가이드라인의 링크를 걸어주도록 수정함으로써 ArgoWorkflows에 기여하고자 하는 개발자들이 편하게 기여할 수 있도록 하였습니다.
+
+이 PR에서는 메인테이너가 코드 제안을 해주었는데 코드 제안 기능을 처음 접해보아서 흥미롭고 재밌었습니다.
 </details>
 
 #### **🌵 참가 후기**
 
-ㄱㄴㄷㄹ
+이번년도에 가장 잘 한 일이 무엇인지 묻는다면, 아무 망설임도 없이 ArgoWorkflows 프로젝트 컨트리뷰션 활동에 참여한 것이라고 이야기 할 것입니다.
+
+같은 분야에 있는 다양한 개발자들을 만나서 서로 공감대를 형성하며 이야기하는 것이 너무 좋았고 다양한 회사에 대한 이야기를 듣는것이 참 재밌었습니다.
+
+매주 모임마다 그저 모각코를 하는 것이 아니라 멘티들과 멘토님이 매번 좋은 세미나를 진행해주셔서 매주 일요일이 참 즐겁고 시간이 빨리갔습니다.
+
+또한 너무 능력있는 멘토님을 만나 평소에 주니어 개발자로서 고민되었던 부분, 앞으로의 방향성, 개발자로서 잘 공부하는 방법에 대한 조언들을 들을 수 있어서 행복했습니다.
+
+평소 컨트리뷰션에 도전해보고싶었지만, 이런 큰 프로젝트에 어떻게 기여를 하나 두려워서 시도하지 않았던 부분들을 이렇게 좋은 멘티들과 멘토님과 같이 부딪혀보니 두려움이 사라졌습니다.
+
+많은 PR을 올려보면서 메인테이너들과 소통하는 것도 너무 재미있었고 실제 나의 코드가 반영되는 것을 지켜보는게 정말 뿌듯했습니다.
+
+이번 경험으로 인해 ArgoWorkflows 뿐만 아니라 다른 프로젝트에도 충분히 기여할 수 있겠다는 자신감이 생겼습니다.
+
+이 기간이 끝난다고 컨트리뷰션을 멈출 생각은 없습니다. 앞으로도 ArgoWorkflows를 꾸준히 보면서 기여하고 싶은 부분에 기여할 생각입니다. 또한 ArgoWorkflows 뿐만 아니라 회사에서 사용하는 Kubernetes나 Argo CD 프로젝트에도 기여해보고 싶어서 도전해볼 생각입니다.

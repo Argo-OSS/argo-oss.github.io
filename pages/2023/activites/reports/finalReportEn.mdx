@@ -461,10 +461,223 @@ abcd
 <details>
 <summary>Collapse/Expand</summary>
 
-abcd
+**1. Cron workflow can not apply volumeClaimTemplates config from argo controller config map (workflowDefaults)**
+
+[Issue #11344](https://github.com/argoproj/argo-workflows/issues/11344)  
+[PR #11662](https://github.com/argoproj/argo-workflows/pull/11662)
+
+> Issue Analysis
+
+To understand this issue, I first needed to grasp what [Default Workflows](https://argoproj.github.io/argo-workflows/default-workflow-specs) are.
+
+I learned that the `workflowDefaults` field in the `argo workflows controller configmap` allows you to set default values for workflows. Additionally, I discovered that if a workflow already has values for this field, those values take precedence.
+
+For example, after configuring the `configmap` as follows, when you create a Workflow, 
+
+```yaml
+# This file describes the config settings available in the workflow controller configmap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: workflow-controller-configmap
+data:
+  # Default values that will apply to all Workflows from this controller, unless overridden on the Workflow-level
+  workflowDefaults: |
+    metadata:
+      annotations:
+        argo: workflows
+      labels:
+        foo: bar
+    spec:
+      ttlStrategy:
+        secondsAfterSuccess: 5
+      parallelism: 3
+```
+it will be automatically created with the values set in the `workflowDefaults` field, like this:
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: gc-ttl-
+  annotations:
+    argo: workflows
+  labels:
+    foo: bar
+spec:
+  ttlStrategy:
+    secondsAfterSuccess: 5     # Time to live after workflow is successful
+  parallelism: 3
+```
+
+The issue was related to an error occurring when adding the `volumeClaimTemplates` value to `workflowDefaults`, causing errors when creating `CronWorkflows` or `Workflows`.
+
+The error message indicated, `does not contain declared merge key: name.`
+
+Upon checking the code, it was found that the error occurred in the `StrategicMergePatch` function, which is related to Kubernetes' `patch` strategy.
+
+```go
+VolumeClaimTemplates []apiv1.PersistentVolumeClaim `json:"volumeClaimTemplates,omitempty" patchStrategy:"merge" patchMergeKey:"name" protobuf:"bytes,6,opt,name=volumeClaimTemplates"`
+```
+
+The issue arose from the fact that the `VolumeClaimTemplates` type defined in `Workflows` used name as the `patchMergeKey`.
+
+However, upon inspecting the `PersistentVolumeClaim` type below, it was found that `name` was not present. In other words, the problem occurred because a value was defined as the `patchMergeKey` that was not part of the structure.
+
+```go
+type PersistentVolumeClaim struct {
+	metav1.TypeMeta `json:",inline"`
+	// Standard object's metadata.
+	// More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+	// +optional
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
+
+	// spec defines the desired characteristics of a volume requested by a pod author.
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
+	// +optional
+	Spec PersistentVolumeClaimSpec `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
+
+	// status represents the current information/status of a persistent volume claim.
+	// Read-only.
+	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
+	// +optional
+	Status PersistentVolumeClaimStatus `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
+}
+```
+
+> Issue Resolution
+
+I removed the `patchMergeKey` from `VolumeClaimTemplates`.
+
+However, the reason `patchMergeKey` was added to `VolumeClaimTemplates` was to maintain consistency with conventions used for `Volumes`.
+
+Since this issue is related to policies, it indeed requires further discussion.
+
+This was my first PR to the ArgoWorkflows project, and it's great that i was able to identify the cause of an issue that was causing inconvenience for many people.
+
+
+**2. Search by name for WorkflowTemplates in UI**
+
+[Issue #11004](https://github.com/argoproj/argo-workflows/issues/11004)  
+[PR #11684](https://github.com/argoproj/argo-workflows/pull/11684)
+
+> Issue Analysis
+
+This issue was worked on by a team of three people.
+
+![HackertonC](./images/sunyeongchoi/HackertonC.png)
+
+`WorkflowTemplates` do not have a search function based on 'name', so to find a specific `WorkflowTemplates`, you could only search based on `label`.
+
+So, many users were feeling inconvenienced, and it was an issue related to 'feature improvement' that they would like to provide a function to search based on 'name'.
+
+> Issue Resolution
+
+![namePattern](./images/sunyeongchoi/namePattern.png)
+
+We added additional logic to filter the results of WorkflowTemplates retrieved through the Kubernetes API based on their 'name', successfully implementing this feature.
+
+However, there was one issue.
+
+Existing pagination was implemented using Kubernetes' own `continue` value, so if Kubernetes results were custom manipulated like this, Kubernetes pagination could not be used.
+
+We had a lot of concerns about how to solve this, but We solved the problem by applying logic to implement cursor pagination using Kubernetes' `resourceVersion`.
+
+It was so fun to be able to discuss it with others instead of alone.
+
+I also felt good about providing some really needed functionality to the ArgoWorkflows project.
+
+
+**3. A problem that is not initialized when changing the number of page limits**
+
+[Issue #11702](https://github.com/argoproj/argo-workflows/issues/11702)  
+[PR #11703](https://github.com/argoproj/argo-workflows/pull/11703)
+
+> Issue Analysis
+
+While resolving the `Search by name for WorkflowTemplates in UI` issue, i discovered a new pagination bug.
+
+When changing the number of pages, the `continue` value used for pagination was not initialized in the UI, so the data was not displayed properly.
+
+> Issue Resolution
+
+I was able to solve the problem by simply modifying the logic to initialize `offset` when a change in page number is detected in the UI code.
+
+It was only a one-line code change, but this one line solved a problem that was quite inconvenient.
+
+
+**4. Pagination may not work correctly for archived workflows**
+
+> Issue Analysis
+
+[Issue #11715](https://github.com/argoproj/argo-workflows/issues/11715)  
+[PR #11761](https://github.com/argoproj/argo-workflows/pull/11761)
+
+This issue was directly communicated to us by Maintainer @terrytangyuan through Slack.
+
+![Slack](./images/sunyeongchoi/Slack.png)
+![Github](./images/sunyeongchoi/Github.png)
+
+It felt like I was contacted by my favorite celebrity and I was so happy that I almost flew away. I suppressed my happy and excited heart and analyzed the issue.
+
+`Workflows` and `ArchivedWorkflows` were previously separated into different pages, but starting from the `master` version, `Workflows` and `ArchivedWorkflows` are combined into one page, and the logic has been modified to show `ArchivedWorkflows` together if they exist.
+
+However, when `Workflows` and `ArchivedWorkflows` were merged into one, a problem occurred with pagination.
+
+The two resources also used completely different pagination. `Workflows` was using the `continue` value, which is Kubernetes' own pagination, and `ArchivedWorkflows` used its own database, so it was using the database to perform pagination using the `offset` method.
+
+However, while passing the `continue` value used in `Workflows` to `ArchivedWorkflows` as is, a problem occurred where `ArchivedWorkflows` was not searched at all.
+
+> Issue Resolution
+
+I was able to resolve the issue by referring to the pagination logic that was implemented while resolving the `Search by name for WorkflowTemplates in UI` issue.
+
+Since the two resources have no choice but to use different methods of pagination, rather than using pagination before merging the two resources, use a method of first searching the entire resource and merging the two resources and finally applying the pagination logic. I did it.
+
+I was able to solve the problem of `ArchivedWorkflows` not being searched, but fetching and merging the entire list every time the page is changed is a performance concern, so i'm thinking about a way to test performance.
+
+I plan to switch to front-end pagination if performance testing indicates that it's not working well.
+
+It was great to be able to solve a critical issue, and I felt proud and fun because I felt like I was contributing properly to the ArgoWorkflows project as a contributor.
+
+**5. Relocation of Commit Guidelines Information in the Documentation**
+
+[Issue #11700](https://github.com/argoproj/argo-workflows/issues/11700)  
+[PR #11701](https://github.com/argoproj/argo-workflows/pull/11701)
+
+> Issue Analysis
+
+The ArgoWorkflows project has a README document for developers attempting to contribute.
+
+However, it does not mention specific guidelines for commits.
+
+@GeunSam2 mentor mentioned that it was inconvenient when initially attempted to contribute and had difficulty finding commit guidelines.
+
+> Issue Resolution
+
+![ContributingDocs](./images/sunyeongchoi/ContributingDocs.png)
+
+Upon hearing this feedback, I made a modification to the contribution README by adding a link to commit guidelines.
+
+This change aims to make it easier for developers who want to contribute to ArgoWorkflows.
+
+In this PR, a maintainer provided a code suggestion, which was intriguing and enjoyable for me as I was encountering the code suggestion feature for the first time.
 
 </details>
 
 #### **🌵 Participation Review**
 
-abcd
+If someone were to ask me what I did best this year, I would confidently say that it was my participation in the ArgoWorkflows project contribution activities.
+
+Meeting various developers in the same field, forming a sense of empathy, and engaging in discussions with them was truly enjoyable. Hearing stories about different companies was also quite interesting.
+
+During our weekly meetings, it wasn't just about working together; our mentors always conducted insightful seminars. Sundays became genuinely enjoyable, and time flew by.
+
+Meeting such capable mentors was a delight. I received advice on the concerns I had as a junior developer, my future direction, and how to study effectively as a developer, which made me happy.
+
+I always wanted to try contributing, but I was afraid to tackle such a big project. However, facing these challenges with such great mentees and mentors made my fears disappear.
+
+Submitting numerous PRs and communicating with maintainers was also a lot of fun, and it was really satisfying to see my code being incorporated.
+
+Thanks to this experience, I gained the confidence to contribute not only to ArgoWorkflows but also to other projects.
+
+I have no intention of stopping my contributions after this period ends. I plan to continue contributing to ArgoWorkflows while looking for opportunities to contribute to Kubernetes and Argo CD projects used by my company.
