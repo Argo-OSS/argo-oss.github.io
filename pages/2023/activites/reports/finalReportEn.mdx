@@ -385,13 +385,82 @@ abcd
 <details>
 <summary>Collapse/Expand</summary>
 
-abcd
+**1. Create a beginner's dockerfile**
+![task1](./images/YunWooYu/task1.png)
+
+- Create your own web service, build an image via dockerfile, and run a container.
+- Build your service using a framework and language of your choice, I used Nest.js.
+
+**2. Learn the Nest.js framework**
+
+- [Nest.js Learning Repository](https://github.com/yunwoo-yu/nest-board-app)
+- Since I only knew the front end, I quickly learned to create a simple API service using the
+
+**3. PR after creating the dockerfile**
+![task2](./images/YunWooYu/task2.png)
+
+- I created a docker file to build the image, verified that the service is working, and raised a PR, but the build test of the github action fails.
+- Remove the --production option and it passes the test, but the image is not optimised. Ask your mentor for advice
+
+![task3](./images/YunWooYu/task3.png)
+
+- Start troubleshooting based on your mentor's feedback
+
+**4. Trouble Shooting**
+![task4-1](./images/YunWooYu/task4-1.png)
+![task4-2](./images/YunWooYu/task4-2.png)
+
+- I tried to install node_modules for production only to reduce the size when creating images with dokerfile, but it didn't pass the github action.
+- After a lot of shovelling, I realised that a module called nest-cli is required for nest build, but it was in the devdependency, so I changed it and it worked. (My mentor gave me a hint, but I didn't understand and shovelled it in)
+- The reason I was confused was that I had nest-cli installed globally on my MacBook.
+
+**5. Open source contributor activity**
+**[UI: The position sticky on the workflow toolbar is not working]**
+
+- Fixed a bug where the position of the toolbar when selecting a checkbox in the workflows-list was not fixed at the top.
+- [Read the issue](https://github.com/argoproj/argo-workflows/issues/11442)
+- [Read the PR](https://github.com/argoproj/argo-workflows/pull/11444)
+
+[before]
+![before1](./images/YunWooYu/before1.png)
+
+- The top toolbar was not visible when checkboxes were selected and scrolling.
+- Fixed an issue with the existing `position : sticky` not being applied by changing it to `position : fixed`.
+
+[after]
+![after1](./images/YunWooYu/after1.png)
+
+- After checking a checkbox, you can pin the toolbar to the top of the scroll to fire events for that list without having to scroll further.
+
+**[UI - show history about completed runs in each cron workflow]**
+
+- Work with a good improvement found by a Uijeong Issue to add a list to the `cron-workflows-detail` component to view the history of a given workflow.
+- [Read the issue](https://github.com/argoproj/argo-workflows/issues/11706)
+- [Read the PR](https://github.com/argoproj/argo-workflows/pull/11811)
+
+[before]
+![before2](./images/YunWooYu/before2.png)
+
+- There was nothing on the existing `cron-workflows-detail` page, but the
+
+[after]
+![after2-1](./images/YunWooYu/after2-1.png)
+![after2-2](./images/YunWooYu/after2-2.png)
+
+- Added a history `workflows` to the corresponding `cron-workflows` and an example of when there is no history.
+- This PR is still under verification
 
 </details>
 
 #### **🌵 Participation Review**
 
-abcd
+It was a great experience.
+
+Unfortunately, when I got a job, I became busy and lacked knowledge of server and DevOps, so I didn't participate in many contributor activities or offline gatherings.
+
+However, I will not give up and try to contribute more to argoWorkflow by doing more front-end contributions and studying server side as well!
+
+Thank you for making such a good activity and thank you to the mentors and mentees for helping me grow step by step even though I'm a beginner 👍
 
 ### 12. 이병곤
 
