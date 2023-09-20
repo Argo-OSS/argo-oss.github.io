@@ -796,13 +796,181 @@ Argo Workflow PR 전 여러 사람이 기여하기 위한 사전 연습을 진�
 <details>
 <summary>접기/펼치기</summary>
 
-ㄱㄴㄷㄹ
+**✅ Contribution 관련 블로그 기록**
+
+[시리즈 | 2023 OSSCA - ddubi.log](https://velog.io/@juijeong8324/series/2023-OSSCA)
+
+<br />
+<br />
+
+**✅ 다양한 과제 수행**
+
+1. **Github에서 issue/commit/PR 미션 수행**
+
+   **[과제 요약]**
+
+   ![mission1](./images/UiJeongJeon/mission.png)
+
+   - 멤버 프로필 업데이트 이슈를 선택하고 해당 repo를 나의 repo에 fork한 후 나의 repo에서 `users.md` 와 `[이름].md`를 `docs/user`아래에 추가한다. 그 후 이슈를 연결해서 PR을 올리고 commit 하는 과제
+
+   **[과제 결과]**
+
+   [docs : 전의정 프로필 업데이트 by juijeong8324 · Pull Request #19 · ArgoWorkflows-OSS/ArgoWorkflows-OSS](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/pull/19)
+
+   [Github에서 issue/commit/PR](https://velog.io/@juijeong8324/OSSCA-2023-2)
+
+<br />
+
+1. **Running Locally**
+
+   **[과제 요약]**
+
+   - Argo Workflows를 local 환경에서 실행시키는 과제
+   - Windows 환경에서 wsl2를 설치한 후 devcontainer cli를 이용하여 argo workflows 실행
+
+   **[과제 결과]**
+
+   [Argo Workflows 로컬에서 실행하기](https://velog.io/@juijeong8324/OSSCA-2023-3)
+
+   [Argo Workflows 로컬에서 실행하기 - 재도전](https://velog.io/@juijeong8324/OSSCA-2023-4)
+
+   [Argo Workflows 로컬에서 실행하기 - 파이널](https://velog.io/@juijeong8324/OSSCA-2023-5)
+
+   [Argo Workflows 로컬에서 실행하기 - 최종 정리](https://velog.io/@juijeong8324/OSSCA-2023-6)
+
+<br />
+
+3. **왕초보 특별반 - 나만의 서비스 컨테이너 이미지 제작**
+
+   ![mission2](./images/UiJeongJeon/mission2.png)
+
+   **[과제 요약]**
+
+   - 왕초보 특별반은 Argo-worfklows 팀 내에서 컨테이너, 쿠버네티스, argo에 대해 잘 모르고 있는 뉴비들(It's me...)을 위한 특별반이다.
+   - 나만의 웹서비스를 제작하고 이를 컨테이너화 할 수 있는 Dockerfile을 작성하는 과제
+   - Dockerfile, docker, image, container와 관련된 개념을 이해하고 있어야 함
+   - 본인은 node.js, express 환경에서 웹서버 구축 후 dockerfile 작성
+
+   **[과제 결과]**
+
+   [과제 관련 코드](https://github.com/ArgoWorkflows-OSS/container-playground/tree/main/juijeong8324)
+
+   [왕초보 특별반 - 1. 나만의 서비스 컨테이너 이미지 제작](https://velog.io/@juijeong8324/OSSCA-2023-7)
+
+   [[Docker] Dockerfile 기본 명령어에 대해 알아보자](https://velog.io/@juijeong8324/Docker-dockerfile)
+
+<br />
+<br />
+
+**✅ 오프라인 참석**
+| 날짜 | 활동요약 |
+| :--- | :--- |
+| 2023.07.15 | - 자기소개 <br /> - (세미나) Argo workflows에 대한 소개 및 멘토님의 적용 사례 |
+|2023.07.30|- 금주의 이슈 탐색 공유 <br /> - 본인은 로컬 실행 문제 해결 중임을 언급 <br /> - (세미나) 혜민님의 WebRtc, 수녕님의 keyclock과 argo worfklows 연동|
+|2023.08.13|- 왕초보 특별반 과제 피드백 받음 <br /> - 금주의 이슈 탐색 공유 <br /> - (세미나)멘토님의 컨테이너 역사와 원리 특강|
+|2023.08.20|- 금주의 이슈 탐색 공유 <br /> - 본인은 Issue #11131에 대해 공유 <br /> - (세미나) 다혜님의 ‘개발자가 스스로 부하테스트 할 수 있는 플랫폼 구축기 & K6 부하테스트 PoC’|
+
+<br />
+<br />
+
+**✅ Issue 탐색 및 Issue 생성**
+
+- [**Issue #11131**](https://github.com/argoproj/argo-workflows/issues/11131) `버그수정`
+
+  **[이슈 요약]**
+
+  workflow input parameter 안의 `"`가 escape 되지 않아 `workflow.parameter.json`으로 참조할 때 에러 발생
+
+  **[결과]**
+
+  Argo workflows 상의 문제가 아닌 파이썬 환경의 문제이기 때문에 해당 이슈는 기각
+
+  [Blog : Argo Workflows - Issue #11131](https://velog.io/@juijeong8324/Argo-Issue11131)
+
+<br />
+
+- [**Issue #11706**](https://github.com/argoproj/argo-workflows/issues/11706) `UI 개선`
+
+  **[이슈 요약]**
+
+  ![issue 11706](./images/UiJeongJeon/issue.png)
+  cron workflow 탭에서 각 workflow의 history를 확인할 수 있는 UI를 추가했으면 좋겠다는 이슈
+
+  [Blog : Argo Workflows - Issue #11706 (인생 처음으로 올린 감격적인 나의 소중한 Issue)](https://velog.io/@juijeong8324/OSSCA-2023-11)
+
+  **[결과]**
+
+  [PR #11811](https://github.com/argoproj/argo-workflows/pull/11811) Open
+
+<br />
+<br />
+
+**✅ PR open & merge**
+
+- [**PR #11732**](https://github.com/argoproj/argo-workflows/pull/11732) `문서기여` `PR Merge`
+
+  **[PR 요약]**
+
+  Argo Workflows 공식문서에서 **Artifact Visualization**에 존재하는 이미지가 유뷰트 영상 링크임을 잘 보여줄 수 있게 이미지를 수정하는 PR
+
+  ![pr1](./images/UiJeongJeon/pr1.png)
+
+  **[결과]**
+
+  [Argo Workflows - PR #11732 docs: Add description about img in artifact-visualization.md](https://velog.io/@juijeong8324/OSSCA-2023-13)
+
+  ![result1_1](./images/UiJeongJeon/result1_1.png)
+  위와 같이 이미지 가운데에 유튜브 재생 버튼을 추가한 이미지로 대체
+
+  ![result1-2](./images/UiJeongJeon/result1_2.png)
+  merge 완료
+
+<br />
+
+- [**PR #11811**](https://github.com/argoproj/argo-workflows/pull/11811) `UI개선` `PR Open`
+
+  **[PR 요약]**
+
+  [Issue #11706](https://github.com/argoproj/argo-workflows/issues/11706) 을 해결하고자 한 PR
+
+  ![pr2](./images/UiJeongJeon/pr2_1.png)
+  cron workflows page에서 특정 cron-workflow를 클릭했을 때 실행된 cron-workflow를 확인할 수 있게 수정
+
+  ![pr2_1](./images/UiJeongJeon/pr2_2.png)
+  실행된 cron-workflow를 찾을 수 없는 경우 위와 같은 안내 사항을 표시
+
+  **[결과]**
+
+  Github action CI/CD 실패 이슈 해결 중
 
 </details>
 
 #### **🌵 참가 후기**
 
-ㄱㄴㄷㄹ
+- **후기**
+
+  - 사실 DevOps, 인프라 분야가 크게 와 닿지 않고 많이 생소한 분야였는데 Argo Workflows 프로젝트를 통해서 해당 분야에 대해 이전보다 좀 더 친숙해진 느낌을 받습니다.
+  - Docker, Container 등의 개념들을 이론적으로만 접하다가 직접 실습을 통해 익히고, 또 해당 개념들 이외에 새롭게 알게 된 것들(wsl의 존재..!)이 생기고 본인이 스스로 잘 모르고 지나쳤던 개념들(리눅스의 접근 권한, 네트워크 )도 다시 돌아보게 된 계기가 되었습니다.
+  - 또한 처음으로 이슈를 생성해보는 성장을 하게 되었습니다. 이슈를 작성하는데 막연한 두려움을 갖고 있었는데 직접 작성하면서 해당 두려움을 부수게 되었습니다.
+  - 그리고 기여를 할 수 있는 여러 방법이 있는데 내가 기여할 수 있는 부분을 하나씩 시도하는 것이 중요하다고 느꼈습니다. 처음에는 개인적인 욕심+해결하면서 배운다는 생각으로 인해 내가 잘 공감하지 못하는 이슈들 위주로 찾았는데, 이슈의 난이도와 상관없이 내가 직접 공감하는 이슈를 해결하면서 해당 레포에 대해 이해해야 함을 많이 깨달았던 시간이었습니다.
+  - 앞으로도 오픈소스 기여하는데에 즐길 수 있겠다는 기대를 갖게 됩니다!
+
+- **계획**
+
+```
+- 1단계
+: Argo Workflows에 대해서 적응하고 직접 알아가는 시간 / 간단한 기여
+: Repo의 TODO를 통해 문서 기여
+: UI 위주 개선
+
+- 2단계
+: template,backend 위주 기여
+
+- 3단계
+: 해결 하면 좋은 이슈 작성 후 기여
+```
+
+오픈소스 컨트리뷰션이 끝나도 멘토님께서도 정기적으로 모임을 계속 유지할 계획이시고 스스로도 이번 학기에는 Argo Workflows 레포에 적어도 한 달에 1개의 이슈라도 기여하겠다는 목표를 갖고 있습니다.
 
 ### 15. 정성락
 
