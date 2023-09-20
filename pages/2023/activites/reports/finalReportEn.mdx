@@ -414,14 +414,290 @@ abcd
 
 <details>
 <summary>Collapse/Expand</summary>
+lint test
+**1. how to use Git & Commit, PR rules**
 
-abcd
+    - Tasked with mastering basic Git usage and sending strict commits and pull requests for contributions.
+    - In the official Argo Workflow project, it was helpful to use the **Issue Template** and send a PR for the issue you want to contribute to, and it was also an opportunity to learn about the existence of the Issue Template.
+    - It was an opportunity to indirectly experience the elements essential for future contributions.
+        - [PR naming convention](https://flank.github.io/flank/pr_titles/)
+        - [DCO Bot Check](https://github.com/apps/dco)
+        - [GPG Commit](https://www.44bits.io/ko/post/add-signing-key-to-git-commit-by-gpg)
+        - [Commit Message convention](https://www.conventionalcommits.org/en/v1.0.0/)
+        - [Link issues and PR](https://docs.github.com/ko/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword)
+     - Issue creation - Member profile update - PR - Review - Merge process
+
+         ![menberprofile1](./images/EuiJooLee/memberprofile1.png)
+
+**2. Participate in a special beginner class** - **[Repository for beginner special class missions(container-playground)](https://github.com/ArgoWorkflows-OSS/container-playground)** - The purpose was to help people who are unfamiliar with Docker or Kubernetes or who are new to it.
+
+         ![class1](./images/EuiJooLee/class1.png)
+    - Learn about the need for Docker Image optimization while performing tasks presented by a mentor
+        - Since it is a process of stacking certain packages and static files by layer from the From clause, we realized that optimization is essential because the Docker image can become heavy and have a negative impact on performance improvement.
+
+    - Mission
+        ```
+       ❗️objective❗️
+
+        Create your own web service and write a Docker file that can be containerized.
+
+        To pass the assignment, please be sure to follow the instructions below.
+
+        • Directory and file placement
+            • Be sure to create your own github account directory for your own service and write it there.
+            • The `Dockerfile` must be located at the top of your directory. (If this condition is not achieved, CI will fail.)
+            • As long as it is under your own directory, you can freely write the rest of the files except for the location of `Dockerfile`.
+            • However, the image must be built successfully when you execute the command `docker build -t [image name] .` at the top of your directory.
+        • Behavior of built images
+            • Your web service must operate on port 8080.
+            • The built image must be serviced without problems when run with `docker run -d -p [forwarding port number]:8080 [image name]` without any additional parameters.
+        • Web service development language and service structure
+            • It doesn’t matter which language or framework you prefer.
+            • It doesn't matter if you create a simple API service with no UI or design.
+            • However, you must create two required APIs. (I don't care about the response value.)
+                1. /api/v1/[your github account]
+                2. /healthcheck
+        • (Optional) It would be better to optimize the Docker image.([참고](https://thearchivelog.dev/article/optimize-docker-image/))
+        • [How to link PR and issues using keywords](https://docs.github.com/ko/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an Please refer to -issue-using-a-keyword) to connect the issue and PR. (Manual connection x)
+
+       ❗️Note❗️
+
+        •It would be a good idea to refer to the documents below to understand Docker concepts and write a Dockerfile.
+
+            • [Official documentation for creating a Dockerfile](https://docs.docker.com/engine/reference/builder/)
+            • [How to use Docker for beginners](https://mysetting.io/slides/xxj85vnvey) (Content related to Docker Toolbox has been deprecated)
+
+        •To raise PR and merge, please refer to the points below.
+
+            • Since you do not have permission to create or push branches in the repo, you must fork and then work on it.
+            • Please refer to [PR's naming convention](https://flank.github.io/flank/pr_titles/).
+            • [DCO](https://github.com/apps/dco) Please commit while referring to the conditions for passing the bot's check.
+            • Please understand how to commit using [GPG](https://www.44bits.io/ko/post/add-signing-key-to-git-commit-by-gpg) and create a signed commit.
+            • It would be good if [Commit Message Convention](https://www.conventionalcommits.org/en/v1.0.0/) could also be applied. Even if you don't have to follow it, please avoid making commit messages that are too meaningless. (Optional)```
+
+    - Having previous experience with the Python-based Django framework, I wrote a Docker file that creates a Django REST API.
+    - I sent out a PR, but was pointed out a **security issue** or an error in **unnecessary package import syntax**.
+
+        ![review1](./images/EuiJooLee/review1.png)
+        ![review1](./images/EuiJooLee/review2.png)
+
+    - This is the first time I learned that **SECRET_KEY** is exposed in the settings.py code of the Django project, and I will take the time to think about how to solve this security issue.
+        - We created a .json file containing the secret key and proceeded to refer to the json file in settings.py.
+        - Since the secret.json file cannot be uploaded to Commit, I learned how to ignore the json file through **.gitignore**, and was able to ignore unnecessary files created after executing certain commands such as dbsqlite3.
+        - It was an experience that made me realize that several considerations are needed to upload locally developed results to a Git project.
+
+**3. Argo Workflow Contributor**
+
+- While looking into Argo Workflow, I came across the Argo Workflow Slack channel marked **Deprecated** in the **Argo Workflow - Contact - Help** field.
+
+- I thought it was a minor **UI Issue**, but I thought it was an opportunity to check what language the UI is displayed in and how it was developed, so I raised an issue and submitted a PR.
+
+        ![slack11](./images/EuiJooLee/slack1.png)
+
+  - Created **Issue**
+
+    **[UI: non-existent Slack Workspace link on help page Issue](https://github.com/argoproj/argo-workflows/issues/11615)**
+
+    ![issue1](./images/EuiJooLee/issue1.png)
+
+    - When I created an issue, the Maintainer of the Argo project quickly left a comment.
+
+    - I randomly tried to fix it with the CNCF Argo Channel link, but I received a comment from the maintainer asking me to update it with a different link.
+
+  - Created **PR**
+
+    **[fix: deprecated Link(Help-Contact) Issue](https://github.com/argoproj/argo-workflows/pull/11627)**
+
+    ![issue2](./images/EuiJooLee/issue2.png)
+
+    - Argo Workflow had a UI based on React, and the directories were arranged by component, making it easy to analyze the code.
+
+    - I didn't pass the DCO bot test because I accidentally omitted the Signed-off option during Commit
+
+      - but I learned about the ability to revert previous commits (**Rebase**) or merge multiple unnecessary commits into one (**Squash**) in GIt. And I returned the previous commit and committed it with `git commit -S -s -m "Commit Message"`.
+
+    - I looked up what the comment ‘LGTM’ meant, and on Google, I used the tag LGTM to express my opinion. 'Looks Good To Me'. In other words, it was a rewarding experience because it meant it looked good.
+
+    - The process of finding bugs or modifying the UI is important, but I think the most important thing is the process of performing contributions according to the rules set by the Argo Workflow ecosystem.
+
+**4. Participating in Argo Workflow Hackerton (Argo workflow - Hackathon held within the OSSCA team)**
+
+- **Pull Request(Merged) :** **[feat: Search by name for WorkflowTemplates in UI](https://github.com/argoproj/argo-workflows/pull/11684)**
+
+- **Issue :** **[Search by name for WorkflowTemplates in UI](https://github.com/argoproj/argo-workflows/issues/11004)**
+
+- Issue Hackathon activity period
+
+  - 1st Hackathon (Hackathon Group C) : 23.08.16 - 23.08.20
+  - 2st Hackathon (Hackathon Group C) : 23.08.20 - 23.08.27
+
+        ![hack1](./images/EuiJooLee/hack1.png)
+        ![hack2](./images/EuiJooLee/hack2.png)
+
+    - Issue content
+
+      - When there are a large number of templates in a cluster, it is good to search by name, but scrolling through all the templates is always inconvenient due to the lack of a search function.
+      - It was thought that the Argo Workflow UI needed a function to filter the results of workflow templates by name, so the issue was adopted as a result of a group meeting.
+
+    - Role
+      - Front-End
+        - Creating a search field (Bar) in Argo workflow Template UI
+        - Analyze .get logic to analyze where the Name Pattern (Like search) is sent
+        - Modify workflow-template-filter.tsx and workflow-template-list.tsx in the workflow-template component directory.
+    - Meeting details
+
+      - The meeting is held through the Slack hackathon channel, where opinions and information are shared every day.
+      - 1st Meeting details
+
+      ```
+      1. name search function (backend)
+
+          • WorkflowTemplate page
+          • Add name search (LIKE search)
+          • ClusterWorkflowTemplate page
+          • Add name search (LIKE search)
+          • CronWorkflow page
+          • Add name search (LIKE search)
+
+
+
+      2. name search function (frontend)
+
+          • WorkflowTemplate page
+          • Add name search ui
+          • ClusterWorkflowTemplate page
+          • Add search sidebar (name, label)
+          • CronWorkflow page
+          • Add name search ui
+
+      3. pagenation (frontend)
+
+          • WorkflowTemplate page
+          • pagination based on name
+          • ClusterWorkflowTemplate page
+          • Add pagination
+          • CronWorkflow page
+          • Add pagination
+
+      4. Write test code
+
+          - name search (LIKE search)
+          - Need more analysis on what test code should be written
+      ```
+
+      - 2nd discussion content
+
+        - 1st offline meeting
+
+          ![hack3](./images/EuiJooLee/hack3.png)
+
+      ```
+      1. Co-commit method
+
+          •  Clone the repository https://github.com/ArgoWorkflows-OSS/argo-workflows locally.
+          • We create a branch in the repository for our team to work on. (`master` vs `release-3.4.10`)
+          • Work on the functions you are responsible for in the corresponding branch of the repository. (Commit by carefully following the commit rules for raising PR.)
+          • When everyone's work is completed, 1 out of 3 people will send out a PR according to the PR template.
+          • All 3 people can be contributors
+
+      2. Since it is a hackathon and there is a set period, we decided to first implement the workflow-template name filter, which we think is the main one among workflow-template, cluster-workflow, and cron-workflow, send a PR, and move on once the maintainer merges it.
+
+          • Roles for each part
+
+          • Back-End
+
+              • workflow_template_server.go
+                  • Name filtering and pagination recalculation
+
+          • Front-End :
+
+              • workfflow-template-filter.tsx
+                  • Add Name search UI
+                  • Receiving and filtering the Name argument
+              • workflow-template-list.tsx
+                  • Add Name state
+                  • Pass name to userEffect list
+              • workflow-template.tsx, Utils.tsx
+                  • Passing the Name argument
+      ```
+
+      - 3rd discussion details
+
+        - 2nd offline meeting
+
+          ![hack4](./images/EuiJooLee/hack4.png)
+
+        ```
+           1. Offline Meeting Meeting Contents
+
+               • An opinion that even cases where there is no namespace should be included in the filter. (Insufficient grounds to say to eliminate namespace - Other sites (Kubernetes Dashboard, OpenShift, Argo CD, etc.) also provide namespace without namespace)
+               • Thoughts on whether it is possible to import and apply the logic used in continue and whether continue can be maintained as is even with custom results.
+               • After analyzing the continue logic until Wednesday night, if it is concluded that pagination using continue is not possible, upload a question in the issue comment.
+               • Front-end pagination (data is not reloaded, the method used in argocd) vs. server-side pagination (pagination after checking the entire list each time, will the load be okay?)
+               • If server-side caching is implemented, is there a place to store it?
+           2. I decided to do a full K8s search by applying only the namespace and label every time I turned the page.
+
+           3. Additional logic implemented in offset-based pagination method
+               • The part that didn't work
+                   • If you perform a filtered search after clicking the next page button, no data appears even if there are search results.
+                   • If you increase the number of pagination after clicking the next page button, the search results do not display properly.
+               • What changed
+                   • As the continue value is updated on the server, when increasing the number of pages or applying filtering, there is a problem with pagination based on the continue value already set on the server.
+                   • A method of changing the continue value to be passed from the front was adopted ( When increasing the number of pages or applying filtering, set continue back to 0)
+
+
+           4. Pagination Test
+               • workflow_template_server_test.go passed
+               • (14 workflow templates registered)
+               • Normal : UI workflow template first page
+               • Normal : when workflow template page limit is 5, 10, 50
+               • Workflow template page Add workflow template on page 1 and move to page 2
+               • Workflow template page Delete the workflow template from page 1 and move to page 2
+               • Test the above with `name pattern` filtering search
+               • Search without name pattern and then re-search by adding name pattern
+               • After searching including the name pattern, deleting the name pattern and searching again
+
+           5. Create PR
+        ```
+
+      - Like filter (Name Pattern) implementation
+
+        - ex) Workflow-template starting with sp can be searched
+
+          ![filter1](./images/EuiJooLee/filter1.png)
+
+      - Result
+
+              ![filter2](./images/EuiJooLee/filter2.png)
+
+        - The implementation was a success, and we plan to modify the previously discussed cluster-template and cron-template components.
+
+**5. Learning outside of contribution activities** - Completion of Google Kubernetes Study Jam training - **[Badge](https://www.cloudskillsboost.google/public_profiles/7f855d64-3f2e-432a-9763-fde644b6af4b)** - Architecting with Google Kubernetes Engine: Foundations
+Earned 7월 18, 2023 EDT - Architecting with Google Kubernetes Engine: Workloads
+Earned 7월 26, 2023 EDT - Architecting with Google Kubernetes Engine: Production
+Earned 8월 4, 2023 EDT
+
+    - The organized contents are recorded on a personal blog (velog)
+        **[euijoo's Velog GCP Series](https://velog.io/@euijoo3233/series/GCP)**
 
 </details>
 
 #### **🌵 Participation Review**
 
-abcd
+- **Post-Participation Review**
+
+  - Before the Academy, I only had knowledge of Argo CD, but afterward, I was able to research and analyze Argo Workflow projects and reach a level where I could think about how to utilize its powerful functions.
+  - When making my first contribution, I created an issue, communicated with the maintainers, modified the requested items, and created a PR, so I quickly received comments and achieved the result of merging.
+  - It may be a minor issue, but it was an experience that made me feel that a holistic analysis of the part I wanted to contribute was necessary.
+  - Not only this, it was an opportunity to analyze how the Argo workflow interacts internally by conducting an issue hackathon within the team, analyzing not only the UI, i.e. the front part, but also the logic of the back end part.
+  - Our group's body was a big issue, so we were able to reach our goal by holding online as well as offline meetings accordingly, and since the two members were working in the field, they kindly explained difficult parts, so it was a useful experience.
+  - I have a desire to continue communicating with the hackathon team members or the entire team.
+
+- **Future plans**
+  - Since the OSSCA period has not yet ended, we plan to continue exploring issues (Cluster-workflow-template, Cron-workflow, etc.), discover typos or translation errors in the Argo Workflow document, and continue to submit PRs.
+  - In addition, after the OSSCA period ends, we plan to portfolioize the contents that have been organized so far.
+  - As a toy project, we plan to complete data ETL work using Argo Workflow, which is currently in progress.
+  - If I get a job, I hope to create many insights by introducing many of Argo Workflow's functions into my field.
 
 ### 14. 전의정
 
