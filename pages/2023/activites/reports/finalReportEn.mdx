@@ -133,7 +133,8 @@ abcd
 - 1 issue, 3 PRs
 - Modified GitHub Actions log name to improve readability
    - https://github.com/argoproj/argo-workflows/pull/11670
-   - Among the steps performed in publish-release, Run actions/cache@v3 is performed a total of three times, and although each person has a different role, they are marked with the same name, so the part where it may feel like the same task is performed three times has been modified to a name that fits each role.
+   - Among the steps performed in publish-release, Run actions/cache@v3 is performed a total of three times.
+   - Each person has a different role, but the same name is used, so the part where it may feel like the same task is being done three times has been changed to a name that fits each role.
 - Delete cache logic that does not require GitHub Actions
    - https://github.com/argoproj/argo-workflows/pull/11754
    - Fixed an error that occurred due to overlapping cache because caching is performed by default unless the cache option is set to false in setup-go actions.
