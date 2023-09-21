@@ -130,13 +130,23 @@ abcd
 <details>
 <summary>Collapse/Expand</summary>
 
-abcd
+- 1 issue, 3 PRs
+- Modified GitHub Actions log name to improve readability
+   - https://github.com/argoproj/argo-workflows/pull/11670
+   - Among the steps performed in publish-release, Run actions/cache@v3 is performed a total of three times, and although each person has a different role, they are marked with the same name, so the part where it may feel like the same task is performed three times has been modified to a name that fits each role.
+- Delete cache logic that does not require GitHub Actions
+   - https://github.com/argoproj/argo-workflows/pull/11754
+   - Fixed an error that occurred due to overlapping cache because caching is performed by default unless the cache option is set to false in setup-go actions.
+- Upgrade all checkout@v3 that uses the deprecated NodeJS 16 version to checkout@v4.
+   - https://github.com/argoproj/argo-workflows/pull/11782
+   - Since NodeJS will soon end its security support, changes have been made to use actions using the latest version.
 
 </details>
 
 #### **🌵 Participation Review**
 
-abcd
+I enjoyed last year's experience so much that I decided to participate again this year, but this year was a great experience again with a different feel from last year.
+Thanks to all the passionate team members and active projects, I was able to maintain interest in the project without losing tension, and I am very happy that I have a colleague with whom I can share not only the project but also related stories.
 
 ### 3. 권영길
 
@@ -228,7 +238,7 @@ abcd
 
 ** Mutex check happens after memoization cache check and lock info missing from UI `Bug Fix` **
 
-[Issue #11219](https://github.com/argoproj/argo-workflows/issues/11219)  
+[Issue #11219](https://github.com/argoproj/argo-workflows/issues/11219)
 [PR #11456 - Merged/Included in 3.4.10 release](https://github.com/argoproj/argo-workflows/pull/11456)
 
 I managed to modify Argo Workflow to simultaneously utilize the Synchronization and Cache functionalities.
@@ -249,7 +259,7 @@ While the fix was not complicated, modifying the `operation.go`, one of the intr
 
 ** Parent level memoization is broken `Bug Fix` **
 
-[Issue #11612](https://github.com/argoproj/argo-workflows/issues/11612)  
+[Issue #11612](https://github.com/argoproj/argo-workflows/issues/11612)
 [PR #11623 - Merged/Included in 3.4.11 release](https://github.com/argoproj/argo-workflows/pull/11623)
 
 A new bug arose from the above fix. When using the Memo function in child components rather than at the Template level in Argo Workflow, a bug was reported that caused infinite pending.
@@ -262,7 +272,7 @@ I realized that there were unaddressed cases in the tests added in the previous 
 
 ** UI: workflowDrawer's information link is not correctly working `Bug Fix` **
 
-[Issue #11494](https://github.com/argoproj/argo-workflows/issues/11494)  
+[Issue #11494](https://github.com/argoproj/argo-workflows/issues/11494)
 [PR #11495 - Merged/Included in 3.4.10 release](https://github.com/argoproj/argo-workflows/pull/11495)
 
 I fixed an issue where the Information icon link was broken when expanding a workflow on the Argo Workflow dashboard.
@@ -275,7 +285,7 @@ I introduced code to prevent incorrect event propagation caused by nested `<a>` 
 
 ** Search by name for WorkflowTemplates in UI `Feature Enhancement` **
 
-[Issue #11004](https://github.com/argoproj/argo-workflows/issues/11004)  
+[Issue #11004](https://github.com/argoproj/argo-workflows/issues/11004)
 [PR #11684 - Merged/Included in 3.4.10 release](https://github.com/argoproj/argo-workflows/pull/11684)
 
 This was a collaborative effort with two other contributors.
@@ -291,24 +301,24 @@ We developed an additional feature that lets users search for templates not just
 
 ** Add more readable Argo CLI installation guide into github documentation `Documentation Contribution` **
 
-[Issue #11750](https://github.com/argoproj/argo-workflows/issues/11750)  
+[Issue #11750](https://github.com/argoproj/argo-workflows/issues/11750)
 [PR #11751 - Merged](https://github.com/argoproj/argo-workflows/pull/11751)
 
 This contribution pertains to the documentation of the Argo CLI, the command-line interface used with Argo Workflows.
 
 ![slack11](./images/HaeMinSong/song_pr5_img.png)
 
-The current Argo CLI GitHub documentation lacked installation procedures, making it challenging for first-time users to determine how to install the Argo CLI. Initially, users had to directly navigate to the Release Note or the Quick Start page.  
+The current Argo CLI GitHub documentation lacked installation procedures, making it challenging for first-time users to determine how to install the Argo CLI. Initially, users had to directly navigate to the Release Note or the Quick Start page.
 By adding an Installation section to the Argo CLI page alongside the existing Usage details, I aimed to enhance user convenience.
 
 ---
 
 ** Workflow templating is skipped when whitespace is added to template parameters `Bug Fix` **
 
-[Issue #11767](https://github.com/argoproj/argo-workflows/issues/11767)  
+[Issue #11767](https://github.com/argoproj/argo-workflows/issues/11767)
 [PR #11781 - Merged](https://github.com/argoproj/argo-workflows/pull/11781)
 
-In Argo Workflow, when authoring a workflow template, the placeholder in the form `{{parameter}}` did not undergo validation when spaces were added, such as `{{ parameter }}`.  
+In Argo Workflow, when authoring a workflow template, the placeholder in the form `{{parameter}}` did not undergo validation when spaces were added, such as `{{ parameter }}`.
 The root cause was the internal validation code not trimming spaces before and after the parameter. By adding the trim function to remove spaces, I resolved this issue. This contribution also rectified other placeholder content that previously bypassed validation.
 
 ---
@@ -329,7 +339,7 @@ I undertook a preliminary exercise for multiple people to contribute to the Argo
 
 [PR #6 - Merged](https://github.com/ArgoWorkflows-OSS/container-playground/pull/6)
 
-This exercise was about creating a Dockerfile that communicates with a local 8080 server and makes it accessible via localhost:8080.  
+This exercise was about creating a Dockerfile that communicates with a local 8080 server and makes it accessible via localhost:8080.
 We simply crafted a Python server using Flask, and through the Dockerfile, we set up the environment, initiated the server, and connected the port, making the server accessible externally via Docker commands.
 
 ---
@@ -822,7 +832,7 @@ abcd
 
 **1. Cron workflow can not apply volumeClaimTemplates config from argo controller config map (workflowDefaults)**
 
-[Issue #11344](https://github.com/argoproj/argo-workflows/issues/11344)  
+[Issue #11344](https://github.com/argoproj/argo-workflows/issues/11344)
 [PR #11662](https://github.com/argoproj/argo-workflows/pull/11662)
 
 > Issue Analysis
@@ -917,7 +927,7 @@ This was my first PR to the ArgoWorkflows project, and it's great that i was abl
 
 **2. Search by name for WorkflowTemplates in UI**
 
-[Issue #11004](https://github.com/argoproj/argo-workflows/issues/11004)  
+[Issue #11004](https://github.com/argoproj/argo-workflows/issues/11004)
 [PR #11684](https://github.com/argoproj/argo-workflows/pull/11684)
 
 > Issue Analysis
@@ -948,7 +958,7 @@ I also felt good about providing some really needed functionality to the ArgoWor
 
 **3. A problem that is not initialized when changing the number of page limits**
 
-[Issue #11702](https://github.com/argoproj/argo-workflows/issues/11702)  
+[Issue #11702](https://github.com/argoproj/argo-workflows/issues/11702)
 [PR #11703](https://github.com/argoproj/argo-workflows/pull/11703)
 
 > Issue Analysis
@@ -967,7 +977,7 @@ It was only a one-line code change, but this one line solved a problem that was 
 
 > Issue Analysis
 
-[Issue #11715](https://github.com/argoproj/argo-workflows/issues/11715)  
+[Issue #11715](https://github.com/argoproj/argo-workflows/issues/11715)
 [PR #11761](https://github.com/argoproj/argo-workflows/pull/11761)
 
 This issue was directly communicated to us by Maintainer @terrytangyuan through Slack.
@@ -999,7 +1009,7 @@ It was great to be able to solve a critical issue, and I felt proud and fun beca
 
 **5. Relocation of Commit Guidelines Information in the Documentation**
 
-[Issue #11700](https://github.com/argoproj/argo-workflows/issues/11700)  
+[Issue #11700](https://github.com/argoproj/argo-workflows/issues/11700)
 [PR #11701](https://github.com/argoproj/argo-workflows/pull/11701)
 
 > Issue Analysis
