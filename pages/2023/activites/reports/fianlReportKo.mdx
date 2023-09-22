@@ -136,13 +136,48 @@ Argo Workflows의 3.5버전 릴리즈 이후에도, 계속하여 컨트리뷰터
 <details>
 <summary>접기/펼치기</summary>
 
-ㄱㄴㄷㄹ
+- **개인 성과**
+  - `문서기여` `#11762` [Remove helm installation guide and Add helm documentation link](https://github.com/argoproj/argo-workflows/pull/11762#event-10327741834)
+    - MinIO 설정을 위해 helm 설치를 해야하는데, mac에 관련된 설정만 나와 있어 helm 공식문서에 접근할 수 있도록 수정하였습니다.
+  - `문서기여` `#11735` [Add installation option descrption](https://github.com/argoproj/argo-workflows/pull/11735#event-10365473861)
+    - managed namespace 옵션에 대한 상세한 설명을 추가해보았습니다.
+    - 여기서 Kubernetes의 [Documentation 컨벤션](https://kubernetes.io/docs/contribute/style/style-guide/#use-simple-and-direct-language)이 존재한다는 것을 메인테이너분께 배웠습니다.
+- **컨트리뷰션 준비 과정 및 활동**
+  - Github 기초 익히기
+    - 멘토님께서 과제로 본인의 프로필을 업데이트 하는 과제를 주셨습니다. GPG와 DCO봇의 개념을 익혀보며 github에 더 친숙해지는 시간을 가졌습니다.
+      ![왕초보](./images/ByungSeonKang/profile_update.png)
+  - Docker 왕초보 특별반
+    - Dockerfile을 사용해서 도커 이미지를 만드는 활동을 했습니다. 멘토님께서 정리하신 자료를 읽고 개념을 익혔습니다.
+      추가적으로 이미지를 만들 때 실행 시 필요한 기능만 넣도록 [multi stage build](https://www.notion.so/Dockerfile-65f85f55b1b647ebb85617da9747db58?pvs=21)를 적용해보았습니다.
+      ![dockerfile_pull_request](./images/ByungSeonKang/kbs_docker_pull_request.png)
+      ![multi-staging-build](./images/ByungSeonKang/multi-staging-build.png)
+    - 실습 이후 멘토님께서 [Overlay FS](https://ykarma1996.tistory.com/192)에 대해 하나하나 보여주시면서 이미지가 어떻게 만들어지는지 보여주셨습니다. 이건 정말 알찼습니다..
+  - 쿠버네티스 기초 공부
+    - 컨트리뷰션 이전에 쿠버네티스의 기초를 공부하는 시간을 가졌습니다.
+      - [개인 공부자료](https://www.notion.so/bf8924a756b34bacb82d7051a05f1168?pvs=21)
+  - Argo workflows
+    - template을 만들어보며 [스스로 공부하는 시간을 가졌습니다](https://www.notion.so/e4d8e9e18f154a2181135b3e1b6b2d45?v=599976df8f114b5bb48943bdeef08360&pvs=4).
+    - 학준 멘티님이 [GCP에서 ArgoCD와 Argo Workflows를 활용해 배포하는 파이프라인](https://junkmm.tistory.com/28)을 알려주셨습니다.
+  - OSS 모임 활동 참여
+    - 멘토님과 멘티분들께서 다양한 주제로 발표하는 시간을 가졌습니다. 컨트리뷰션 이외에 실무에서 어떤 문제들을 고민하는지, 그리고 문제들을 어떻게 해결했는지 들을 수 있는 좋은 시간이었습니다
+  - 해커톤 참여
+    - 성락 멘티님이 많은 도움을 주셨습니다. 괜찮다고 생각하는 이슈들을 공유해주시고 항상 도전할 것을 권해주셨습니다.
+      ![hackImage](./images/ByungSeonKang/hack.png)
+    - `#11609` [Compile `expr` in config](https://github.com/argoproj/argo-workflows/issues/11609) 이슈를 추천해주셔서 도전해보았습니다.
+    - [Golang을 스스로 공부해보고](https://www.notion.so/491f51f4142244ca875708c5556c58a2?pvs=21) Issue를 분석하는 시간을 가졌습니다.
+    - golang에 좀 더 친숙해질 수 있는 시간이 되었습니다.
 
 </details>
 
 #### **🌵 참가 후기**
 
-ㄱㄴㄷㄹ
+- **참가후기**
+  - 주니어 개발자인 저에게 이 활동은 단순히 컨트리뷰션을 위한 것이 아니라 아니라 개발자들이 무엇을 고민하는지, 어떻게 성장하는지 확인할 수 있는 소중한 시간이었습니다.
+  - 도움을 너무 많이 받아서 항상 감사합니다. 너무 좋은 분들 만나뵈서 행복한 시간이었습니다.
+  - 컨테이너와 친해지는 첫 걸음을 뗀 것 같아 기쁩니다.
+- **앞으로의 계획**
+  - 개발에서 사용하는 모든 오픈소스에 관심을 가지고 기여할 수 있도록 하겠습니다.
+  - Argo workflows를 실제 프로젝트에 적용해보고 더 기여할 방안들을 찾아가겠습니다!
 
 ### 2. 강시온
 
