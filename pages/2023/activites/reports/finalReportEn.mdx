@@ -775,13 +775,186 @@ Earned 8월 4, 2023 EDT
 <details>
 <summary>Collapse/Expand</summary>
 
-abcd
+**✅ Records about Contribution**
+
+[Series | 2023 OSSCA - ddubi.log](https://velog.io/@juijeong8324/series/2023-OSSCA)
+
+-> Unfortunately It is not translated..
+
+<br />
+<br />
+
+**✅ Various tasks**
+
+1. **The task regarding issue/commit/PR in Github**
+
+   **[Summary]**
+
+   ![mission1](./images/UiJeongJeon/mission.png)
+
+   - Select `the profile update` issue, fork ArgoWorkflows-OSS repository, and commit it by adding `users.md` and `[name].md` under `docs/user` in the repository. After that, link the issue and submit a PR.
+
+   **[Outcome]**
+
+   [docs : update UiJeong Profile by juijeong8324 · Pull Request #19 · ArgoWorkflows-OSS/ArgoWorkflows-OSS](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/pull/19)
+
+   [records: Github에서 issue/commit/PR](https://velog.io/@juijeong8324/OSSCA-2023-2)
+
+<br />
+
+2. **Running Locally**
+
+   **[Summary]**
+
+   - Running Argo workflows locally
+   - Install `Linux` on `Windows` with wsl2 and run argo workflows using devcontainer cli.
+
+   **[Outcome]**
+
+   [records: Argo Workflows running locally](https://velog.io/@juijeong8324/OSSCA-2023-3)
+
+   [records: Argo Workflows running locally - retry](https://velog.io/@juijeong8324/OSSCA-2023-4)
+
+   [records: Argo Workflows running locally - final](https://velog.io/@juijeong8324/OSSCA-2023-5)
+
+   [records: Argo Workflows running locally - real final](https://velog.io/@juijeong8324/OSSCA-2023-6)
+
+<br />
+
+3. **Special class for Beginners - Create my own service container image**
+
+   ![mission2](./images/UiJeongJeon/mission2.png)
+
+   **[Summary]**
+
+   - `Special class for Beginners` is a class for beginners(It's me) who don't know much about Container, kubernetes, argo from Argo-workflows oss team.
+   - The task is creating my own web service, writing dockerfile for containerize the application.
+   - You need to understand Dockerfile, docker, images, and containers.
+   - In my case, build web server with express and write dockerfile.
+
+   **[Outcome]**
+
+   [code: About task](https://github.com/ArgoWorkflows-OSS/container-playground/tree/main/juijeong8324)
+
+   [records: 왕초보 특별반 - 1. 나만의 서비스 컨테이너 이미지 제작](https://velog.io/@juijeong8324/OSSCA-2023-7)
+
+   [records: [Docker] Dockerfile 기본 명령어에 대해 알아보자](https://velog.io/@juijeong8324/Docker-dockerfile)
+
+<br />
+<br />
+
+**✅ Offline meeting**
+| Date | Activity |
+| :--- | :--- |
+| 2023.07.15 | - Introduction team <br /> - (Seminar) Introduction to Argo workflows and mentor’s application examples |
+|2023.07.30|- Searching and sharing issues of the week <br /> - I was solving a local running problem. <br /> - (Seminar) HaeMin's WebRtc, Sunyeong's keyclock and argo worfklows |
+|2023.08.13|- Receive feedback on Special class of beginners assignment <br /> - Searching and sharing issues of the week <br /> - (Seminar) Mentor’s special lecture on history and principles|
+|2023.08.20|- Searching and sharing issues of the week <br /> - I share `Issue #11131`` <br /> - (Seminar) DaHae's ‘Platform builder & K6 execution test PoC that allows developers to perform execution tests on their own’|
+
+<br />
+<br />
+
+**✅ Searching Issue & Creating Issue**
+
+- [**Issue #11131**](https://github.com/argoproj/argo-workflows/issues/11131) `Fix Bug`
+
+  **[Summary]**
+
+  Error occurs when `"` in a workflow input parameter fails to escape and is referenced as `workflow.parameter.json`
+
+  **[Outcome]**
+
+  I dissmiss this issue because of the eeror occured from python environment not argo workflows.
+
+  [records: Argo Workflows - Issue #11131](https://velog.io/@juijeong8324/Argo-Issue11131)
+
+<br />
+
+- [**Issue #11706**](https://github.com/argoproj/argo-workflows/issues/11706) `Improve UI`
+
+  **[Summary]**
+
+  ![issue 11706](./images/UiJeongJeon/issue.png)
+  An issue that would like to add a UI that can check the history of each workflow in the cron workflow tab.
+
+  [records: Argo Workflows - Issue #11706 (인생 처음으로 올린 감격적인 나의 소중한 Issue)](https://velog.io/@juijeong8324/OSSCA-2023-11)
+
+  **[Outcome]**
+
+  [PR #11811](https://github.com/argoproj/argo-workflows/pull/11811) Closes
+
+<br />
+<br />
+
+**✅ PR open & merge**
+
+- [**PR #11732**](https://github.com/argoproj/argo-workflows/pull/11732) `docs` `PR Merge`
+
+  **[PR Summary]**
+
+  PR that modifies the image in the Argo Workflows official document to clearly show that the image in **Artifact Visualization** is a YouTube video link.
+
+  ![pr1](./images/UiJeongJeon/pr1.png)
+
+  **[Outcome]**
+
+  [records: Argo Workflows - PR #11732 docs: Add description about img in artifact-visualization.md](https://velog.io/@juijeong8324/OSSCA-2023-13)
+
+  ![result1_1](./images/UiJeongJeon/result1_1.png)
+  Image replacement to add a play button to the center of the image
+
+  ![result1-2](./images/UiJeongJeon/result1_2.png)
+  merge complete
+
+<br />
+
+- [**PR #11811**](https://github.com/argoproj/argo-workflows/pull/11811) `Improve UI` `PR Merge`
+
+  **[PR Summary]**
+
+  The PR tries to solve [Issue #11706](https://github.com/argoproj/argo-workflows/issues/11706)
+
+  ![pr2](./images/UiJeongJeon/pr2_1.png)
+  Modify to check completed cron-workflow when you click specific cron-workflow at cron workflow page
+
+  ![pr2_1](./images/UiJeongJeon/pr2_2.png)
+  If it cannot find a completed cron-workflow, it will be display like above
+
+  **[Outcome]**
+
+  Merge Complete
 
 </details>
 
 #### **🌵 Participation Review**
 
-abcd
+- **Review**
+
+  - Actually DevOps, Infra were unfamiliar fields to me, but through the Argo workflows project, I feel more familiar with the field than before.
+    - I have only been learned to concepts such as Docker, Container, etc. theoretically, but I learned those concepts more easily through hands-on practice, and in addition new things (the existence of wsl...!).
+    - It gave me an opportunity to look back on concepts that I miss (e.g Linux authority and network.)
+  - Also I had a vague fear of writing an issue, but I was able to overcome that fear by writing it myself.
+  - At last, There are many ways to contribute and I realize it was important to try to contribute step by step.
+    - The first time I focused on issues that I did not sympathize with, due to my personal greed and the idea of learning while solving problems.
+    - However I realized regardless of the difficulty of the issue, I needed to understand the repo while solving an issue that I personally sympathized with.
+  - I look forward to continuing to enjoy contributing to open source!
+
+- **Forward Plan**
+
+```
+- Step 1
+: Time to adapt and learn about Argo Workflows / Simple contribution
+: Contribute articles via Repo's TODO
+: Focuse on UI improvements
+
+- Step 2
+: Focus on template,backend contribution
+
+- Step 3
+: Write an issue that would be good to solve and then contribute
+```
+
+Even after the open source contribution ends, the mentor plans to continue meeting regularly, and I have a goal of contributing at least one issue per month to the Argo Workflows repo this semester.
 
 ### 15. 정성락
 
