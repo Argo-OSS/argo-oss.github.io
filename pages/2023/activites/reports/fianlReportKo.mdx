@@ -211,13 +211,141 @@ Argo Workflows의 3.5버전 릴리즈 이후에도, 계속하여 컨트리뷰터
 <details>
 <summary>접기/펼치기</summary>
 
-ㄱㄴㄷㄹ
+[프로젝트 기여 항목]
+
+1. `버그수정` Argo Workflow Datepicker 개선 _(완료)_
+
+   workflow 목록 페이지의 filter 기능 중 하나인 datepick의 ui를 개선
+
+   ![1.UI.png](./images/YounggilKwon/1.UI.png)
+
+   ![2.UI.png](./images/YounggilKwon/2.UI.png)
+
+   이슈링크
+
+   [UI: Datepicker Style Malfunction Issue · Issue #11476 · argoproj/argo-workflows](https://github.com/argoproj/argo-workflows/issues/11476)
+
+   PR링크
+
+   [fix: Datepicker Style Malfunction Issue. Fixes #11476 by zel0rd · Pull Request #11480 · argoproj/argo-workflows](https://github.com/argoproj/argo-workflows/pull/11480)
+
+2. `버그수정` _Cron workflow의 State filter 초기값 설정(완료)_
+
+   cron workflow의 status filter가 초기값과 상관없이 랜더링 되는 버그 수정
+
+   ![3.UI.png](./images/YounggilKwon/3.UI.png)
+
+   이슈링크
+
+   [ui: Cron workflow initial filter value · Issue #11685 · argoproj/argo-workflows](https://github.com/argoproj/argo-workflows/issues/11685)
+
+   PR링크
+
+   https://github.com/argoproj/argo-workflows/pull/11686
+
+3. `버그수정` _초기 페이지에서 발생하는 webpack 관련 warning 제거하기 (진행중)_
+
+   argo workflow ui 로드시 발생하는 웹팩 워닝을 제거하기
+
+   현재 관련 라이브러리들의 의존성 및 기능을 테스트 하는 중
+
+   ![4.UI.png](./images/YounggilKwon/4.UI.png)
+
+4. `기능개선` _로그인 페이지 개선 (진행중)_
+
+   Argo Workflow의 기존 로그인 페이지를 Argo CD와 같은 형태고 개선하는 이슈
+
+   현재 workflow에서 제공하는 로그인 기능을 분석하고, 이후 새로운 설계 및 디자인을 적용할 예정
+
+   이슈링크
+
+   [Similar login page to Argo CD · Issue #10816 · argoproj/argo-workflows](https://github.com/argoproj/argo-workflows/issues/10816)
+
+**[프로젝트 활동 내역]**
+
+**7.8 발대식(프로젝트 소개 및 자기소개)**
+
+- 발대식 진행
+  ![5.meet.png](./images/YounggilKwon/5.meet.png)
+- 별명을 이용한 자기소개 시간
+- 프로젝트에 대한 대략적인 소개
+- 모임활동 규칙을 위한 다수결 투표
+  - 다음 모임 활동은 발대식 참석자들의 다수결에 따라 정기 일정과 다르게 **토요일(07/15) 오후 1시**부터 진행하기로 했습니다. 계획된 활동 주제는:
+  - 다음 한 주간 진행할 **공통 활동**에 대한 리뷰 또는 이야기 나누는 시간
+  - 서로 관심 있는 주제에 대한 소통 시간
+  - 멘티 여러분들의 진행도에 따라 개발 환경 설정도 진행해 볼 수 있습니다. (Optional)
+  - (공통 활동 내용은 내일 일과 시간 내로 정리해서 공유드릴 것입니다.)
+
+**7.15 1차 모임 (개발환경 설정 및 workflow 기능 소개)**
+
+- Open Up에서 1차 모임 진행
+- 개발 환경 설정 (dev-container)
+- 플레이그라운드 미션 (DCO 봇 체크 통과, GPG를 이용한 커밋, 커밋 메시지 컨벤션)
+  - 실제 오픈소스 프로젝트에 바로 도전하기 전에 플레이그라운드를 생성했습니다. 첫 목표는 이 플레이그라운드의 프로젝트에 외부인의 입장에서 이슈/PR/커밋 등을 수행하는 것입니다. 간단하지만 처음 경험하는 입장에서는 생각하지 못한 관문이 존재할 수 있으니 집중해 주세요. 첫 이슈를 일찍 해결하면 추가로 지시할 사항을 전달해 드릴 것입니다. ㅎㅎ
+  - 저장소: https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS
+  - 목표 : 이슈 템플릿의 멤버 프로필 업데이트 이슈를 선택하고, 이슈 내용에 따라 첫 PR을 생성해요.
+
+**7.23 2차 모임(관심있는 이슈사항 공유)**
+
+- 성수에 모여서 2차 모임 진행(무신사 장소제공 - 안다혜 멘티 지원)
+- 관심있는 이슈에 대해 소개하고, 서로의 문제 공유하기
+  ![6.meet.png](./images/YounggilKwon/6.meet.png)
+
+**8.6 4차 모임**
+
+발표활동
+
+- argo event와 workflow, cd연동
+- eBpf
+
+![7.meet.png](./images/YounggilKwon/7.meet.png)
+
+**8.13 5차 모임**
+
+발표활동
+
+- webRTC
+
+![8.meet.png](./images/YounggilKwon/8.meet.png)
+
+**8.20 6차 모임**
+
+발표활동
+
+- 개발자가 스스로 부하테스트 할 수 있는 플랫폼 구축기 & K6 부하테스트 PoC
+
+![9.meet.png](./images/YounggilKwon/9.meet.png)
+
+**[프로젝트 활동 내용]**
+
+1. **[기여를 위한 학습]**
+   1. 쿠버네티스 아키텍처 강의 - [YouTube 링크](https://www.youtube.com/watch?v=Iue9TC13vPQ)
+   2. 쿠버네티스 리소스 강의 - [YouTube 링크](https://www.youtube.com/watch?v=6n5obRKsCRQ&list=PLApuRlvrZKohaBHvXAOhUD-RxD0uQ3z0c)
+   3. Go Playground - https://go.dev/play/
+2. **배운점 및 느낀점**
+   1. 프로젝트에 기여하기 위해선 해당 분야의 도메인 지식이 중요하다는 것을 깨달았습니다.
+      단순히 웹서비스에 기여하고자 하였지만, 쿠버네티스에 대한 지식부족으로 환경셋팅하는 것부터 쉽지 않았습니다.
+   2. 큰 오픈소스 프로젝트에선 DCO/GPG 같은 것을 사용한다는 것을 배웠고, 오픈소스 프로젝트가 어떻게 관리되고 운영되는지 배워볼 수 있었습니다.
+3. **이슈 및 PR내역**
 
 </details>
 
 #### **🌵 참가 후기**
 
-ㄱㄴㄷㄹ
+우선 ‘오픈소스 컨트리뷰션’이라고 하면 여러가지 감정이 교차하는 일이였습니다.
+다른 개발자들과 함께 오픈소스에 기여하고, 이를 통해 공유/협업하는 오픈소스의 문화를 경험한다는 것은 개발자에게 큰 기쁨이자 보람이라고 생각합니다.
+하지만 이전에도 여러차례 컨트리뷰톤을 할 때 겪었던 막연함과 두려움은 또 다시 도전하는 것을 주저하게 하는 커다란 벽이였습니다.
+
+이번 3번째 참가를 결심하게 되었을 때 다짐했던 것이 ‘이전에는 학생이라, 잘 몰라서, 취업준비로 바빠서 등등의 변명은 더 이상 통하지 않는다. 꼭 이번엔 성공해야지’ 였습니다.
+그랬기 때문에 더욱 부담이 되기도하고 설레기도 했던 시작할 때의 다짐이 아직도 생생하네요.
+프로젝트를 지원할 때, 잘 아는 분야를 할까? 새로운 분야를 할까? 라는 고민을 했었는데 스스로에게 공부도 되고 열심히 하기 위해 접해보지 않은 devops와 관련된 프로젝트를 지원했습니다. 이러한 결정은 얼마지나지 않아 후회로 다가왔습니다.
+기여를 하기도 전에 공부해야 할 내용이 많고, 프로젝트의 기본적인 환경구축에도 많은 시간이 허비되었습니다. 하지만 다른 팀원들과 함께 매일같이 서로의 어려움을 공유하고 도움을 주기위한 적극적인 활동으로 개발환경이 구축되자 너무나 설레는 시간이 다가왔습니다.
+환경이 구축되고 내가 할 수 있는 이슈를 찾는 것도 새로운 즐거움이였습니다. 업무에서 발생하는 오류나 버그들은 언제나 예민하게하고 귀찮은 것이였는데, 아카데미에서는 내가 할 수 있는 미션과 같이 다가왔고, 그 과정은 게임과 같이 즐거웠습니다.
+
+어느덧 참가후기를 쓰고 있는 지금, 내가 기여한 내역들이 너무 뿌듯하고 대견한 느낌이 듭니다. 또한 이런 과정을 함께 도와준 동료들과 멘토님에게 감사합니다.
+
+앞으로는 argo-workflow 프로젝트를 업무에 적용할 수 있는 방안에 대해 고민해보고, 이 때 발생하는 이슈들에 대해 적극적으로 기여할 수 있는 방향을 고민해보려고 합니다. 또 다른 좋은 프로젝트가 있다면 새로운 프로젝트에도 기여를 하고 싶습니다.
+감사합니다.
 
 ### 4. 김수빈
 
@@ -327,13 +455,103 @@ Argo Workflows의 3.5버전 릴리즈 이후에도, 계속하여 컨트리뷰터
 <details>
 <summary>접기/펼치기</summary>
 
-ㄱㄴㄷㄹ
+`기능개선`
+
+**A new feature to support Secrets as a type of parameters ([링크](https://github.com/argoproj/argo-workflows/pull/11446))**
+
+![1.picture](./images/JinsuPark/1.picture.png)
+
+![2.picture](./images/JinsuPark/2.picture.png)
+
+기존의 Argo Workflow는 WorkflowTemplate에 argument(인자)를 전달할 때 직접 인자를 정의할 수도 있고, ConfigMap을 참조하도록 설정할 수도 있었습니다. 하지만 일반적인 kubernetes 생태계를 지원하는 다른 도구들과 달리 Secret을 참조하는 기능은 지원되지 않았습니다.
+
+이에 대한 Feature request가 https://github.com/argoproj/argo-workflows/issues/5506에서 이루어지기 시작했고, 해당 기능을 구현해 Draft PR을 만들어둔 상태입니다.
+
+이 기능은 특히나 Kubernetes에서의 CustomResourceDefinition이라는 인터페이스와 같은 것의 정의를 바꿔야하고, workflow가 생성되어 사이드카를 주입받고 Pod로 생성되는 일련의 라이프사이클을 모두 파악해야했기에 개발하기 쉽지 않은 편이었습니다.
+
+하지만, 해당 기능을 구현해나가면서 Workflow가 결국 Pod와 container로 변환되어 동작하게 되는 과정을 깊이 있게 파악할 수 있었고, Workflow가 내부적으로 context 및 argument를 templating하는 로직도 많이 파악할 수 있었던 이슈였습니다.
+
+`이슈생성`
+
+**Incorrect creator labels on a resubmitted Workflow ([링크](https://github.com/argoproj/argo-workflows/issues/11414))**
+
+![3.picture](./images/JinsuPark/3.picture.png)
+
+![4.picture](./images/JinsuPark/4.picture.png)
+
+Argo Workflow에는 동일한 template을 바탕으로 Workflow를 다시 생성하고 실행하는 Resubmit이라는 기능이 존재합니다. Resubmit된 Workflow의 경우 Workflow 생성 유저 관련 k8s object label이 Resubmit한 유저를 바탕으로 설정되는 것이 아니라 기존 잘못된 값으로 설정되는 버그가 존재했습니다.
+
+이로 인해 한 Workflow를 실행한 유저와 그 Workflow를 Resubmit한 유저가 다르면 Resubmit을 통해 생성된 Workflow에는 잘못된 Workflow 생성 유저 관련 k8s object label이 붙곤 했습니다.
+
+이에 대한 이슈를 제기했습니다.
+
+`버그수정`
+
+**fix: Apply the creator labels about the user who resubmitted a Workflow ([링크](https://github.com/argoproj/argo-workflows/pull/11415))**
+
+![5.picture](./images/JinsuPark/5.picture.png)
+
+![6.picture](./images/JinsuPark/6.picture.png)
+
+앞서 생성했던 이슈(버그)를 해결하는 Pull Request를 작성했습니다.
+
+Resubmit 시에 기존 Workflow 실행자의 정보를 고려하지 않고 Resubmit한 유저 정보만을 바탕으로 올바른 Workflow 생성자 k8s object label을 달도록하여 버그를 수정했습니다.
+
+변경사항에 대한 예시로 foo라는 유저가 실행한 Workflow를 bar라는 유저가 Resubmit한 경우, 인증되지 않은 유저가 Resubmit한 경우 creator 관련 label이 어떻게 달리는지를 제시했습니다.
+
+또한 다른 코드에도 많은 영향을 끼친 부분이 존재해 이에 대한 테스트 코드도 작성해 안정성을 높였습니다.
+
+`기능개선`
+
+**feat: Propagate creator labels of a CronWorkflow to the Workflow to be scheduled ([링크](https://github.com/argoproj/argo-workflows/pull/11407))**
+
+![7.picture](./images/JinsuPark/7.picture.png)
+
+![8.picture](./images/JinsuPark/8.picture.png)
+
+로그인한 유저가 CronWorkflow를 만든 경우 CronWorkflow에는 생성자에 대한 k8s object label이 붙게 됩니다. 하지만 CronWorkflow의 설정을 바탕으로 주기적으로 생성되는 Workflow에는 해당 k8s object label이 붙지 않게 되는 이슈가 존재했습니다.
+
+따라서 CronWorkflow로 생성되는 Workflow들이 CronWorfklow의 생성자 라벨을 그대로 전파받도록 개선했습니다.
+
+`이슈생성`
+
+**Insufficient logging in /oauth2/callback handler when using SSO Authentication ([링크](https://github.com/argoproj/argo-workflows/issues/11369))**
+
+![9.picture](./images/JinsuPark/9.picture.png)
+
+Keycloak이라는 Identity Provider 오픈소스 제품을 이용해 Argo Workflows에 SSO(Single Sign On)으로 인증 기능을 활성화하려했으나 이 과정에서 로그가 부족해 활성화 작업이 크게 지연된 것을 경험했습니다. 이에 해당 기능 활성화 작업에 대한 로깅 강화를 주제로한 이슈로 열었습니다.
+
+`기능개선`
+
+**feat: Improve logging in the oauth2 callback handler ([링크](https://github.com/argoproj/argo-workflows/pull/11370))**
+
+![10.picture](./images/JinsuPark/10.picture.png)
+
+위에서 언급한 이슈([블록 링크](https://www.notion.so/82d2ee40c48e482a8db93123a7b38407?pvs=21))를 해결한 Pull Request입니다. SSO를 위해 OAuth2 Protocol을 이용하는 과정에서 발생하는 에러 케이스별로 에러 로그를 출력하도록 기능을 개선했습니다.
+
+또한 Pull Request의 Reviewer가 좀 더 편하게 리뷰할 수 있도록, Pull Request가 설득력을 갖도록, 변경사항을 검증할 수 있는 Verification을 코드로 나타냈습니다.
+
+`공부`
+
+**docs: Add a user named 박진수 ([링크](https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/pull/51))**
+
+![11.picture](./images/JinsuPark/11.picture.png)
+
+행사를 시작하면서 멘토님께서 GitHub에과 친해질 수 있도록 만들어주는 레포지토리의 멤버 프로필에 저에 대한 소개를 추가해 Pull Request를 생성해보는 실습을 진행했습니다.
 
 </details>
 
 #### **🌵 참가 후기**
 
-ㄱㄴㄷㄹ
+그동안 수많은 오픈소스를 활용해 업무를 하고 취미생활을 하면서도 단순히 사용자로서만 남아있었던 제가 유명 오픈소스의 컨트리뷰터가 될 수 있었던 좋은 기회였습니다.
+
+멘토님의 도움으로 Argo Workflow를 통해 오픈소스 컨트리뷰션 활동에 입문할 수 있었고, 컨트리뷰터 간의 실시간 화상 미팅의 두려움도 극복할 수 있었으며, 다른 사람이 작성한 코드도 거부감 없이 읽어보는 습관을 기를 수 있었습니다.
+
+저는 지금 Argo Workflow뿐만 아니라 Argo Rollouts, Istio 등 클라우드 네이티브한 환경에서 많이 사랑받고 있는 오픈소스에도 많은 관심을 갖고 있으며 Slack을 통해 컨트리뷰터들과 자주 소통해오고 있습니다.
+
+오픈소스 컨트리뷰션을 진행하기 전의 저였다면 이러한 소통 조차도 꺼렸을 것이 분명합니다. 하지만 이제는 이런 소통에 전혀 부담이 없고 앞으로는 Argo Workflow에서 제가 기여했던 것처럼 Argo Rollouts와 Istio에도 많은 기여를 해보고자 합니다!
+
+지난 기간동안 힘써주신 주최측과 멘토님께 감사의 인사를 전합니다. 감사합니다.
 
 ### 7. 서청운
 
