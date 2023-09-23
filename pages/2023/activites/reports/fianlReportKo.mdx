@@ -827,42 +827,49 @@ Argo Workflow PR 전 여러 사람이 기여하기 위한 사전 연습을 진�
 <summary>접기/펼치기</summary>
 
 **다양한 과제 수행**
+
 - Github Issue/Commit/PR 미션 수행
-    - 대형 오픈소스에 컨트리뷰트하기 위한 깃허브 사용 방법 숙지
-    - https://github.com/ArgoWorkflows-OSS/argoworkflows-oss.github.io/issues/43
-    - https://github.com/ArgoWorkflows-OSS/argoworkflows-oss.github.io/pull/44
+  - 대형 오픈소스에 컨트리뷰트하기 위한 깃허브 사용 방법 숙지
+  - https://github.com/ArgoWorkflows-OSS/argoworkflows-oss.github.io/issues/43
+  - https://github.com/ArgoWorkflows-OSS/argoworkflows-oss.github.io/pull/44
 - Argo Workflow Running Locally
-    - Argo Workflow를 Local 환경에서 실행시키는 과제
-    - Argo Workflow의 구조, DevContainer, 컨테이너 기반 애플리케이션, Makefile 구조 이해
+  - Argo Workflow를 Local 환경에서 실행시키는 과제
+  - Argo Workflow의 구조, DevContainer, 컨테이너 기반 애플리케이션, Makefile 구조 이해
 - 나만의 서비스 컨테이너 이미지 제작
-    - Docker File 명령어, 레이어 구조, 최적화, 캐싱 등 성능 개선
-    - https://github.com/ArgoWorkflows-OSS/container-playground/pull/16
-    - https://github.com/ArgoWorkflows-OSS/container-playground/pull/23
+  - Docker File 명령어, 레이어 구조, 최적화, 캐싱 등 성능 개선
+  - https://github.com/ArgoWorkflows-OSS/container-playground/pull/16
+  - https://github.com/ArgoWorkflows-OSS/container-playground/pull/23
 
 **이슈 분석**
+
 - 매트릭 이슈 분석
-    - Github Reaction이 많은 이슈로 많은 사용자들이 개선을 필요로 하는 이슈 분석
-        - 매트릭 Label의 추가하여, 모니터링 편의성 증대
-    - 이슈 분석 결과, 해당 내용을 개발했을 때 또 다른 문제를 야기할 수 있다는 것을 발견
-        - 매트릭 Label을 추가할 경우, 많은 양의 메트릭이 수집되어 기존 사용자들에게 많은 양의 메트릭 트래픽이 유입되어 성능 문제가 생길 수 있다.
-    - 우회하여 해결할 수 있는 방법을 제시하고 소통함
-        - 커스텀 매트릭을 활용할 경우 이슈에서 요구했던 모니터링이 가능함을 확인하여, 우회하여 해결할 수 있는 방법 제시
-        - https://github.com/argoproj/argo-workflows/issues/9849#issuecomment-1685227337
+  - Github Reaction이 많은 이슈로 많은 사용자들이 개선을 필요로 하는 이슈 분석
+    - 매트릭 Label의 추가하여, 모니터링 편의성 증대
+  - 이슈 분석 결과, 해당 내용을 개발했을 때 또 다른 문제를 야기할 수 있다는 것을 발견
+    - 매트릭 Label을 추가할 경우, 많은 양의 메트릭이 수집되어 기존 사용자들에게 많은 양의 메트릭 트래픽이 유입되어 성능 문제가 생길 수 있다.
+  - 우회하여 해결할 수 있는 방법을 제시하고 소통함
+    - 커스텀 매트릭을 활용할 경우 이슈에서 요구했던 모니터링이 가능함을 확인하여, 우회하여 해결할 수 있는 방법 제시
+    - https://github.com/argoproj/argo-workflows/issues/9849#issuecomment-1685227337
 - 추후 개선을 위해 남겨놓은 주석에 모호한 부분이 있어 문의
-    - https://github.com/argoproj/argo-workflows/pull/8486#discussion_r1306700745
+  - https://github.com/argoproj/argo-workflows/pull/8486#discussion_r1306700745
 - 이슈 해커톤으로 이슈 분석
 
 **컨트리뷰트**
+
 - (리팩토링) 잘못된 함수 이름, 변수명 등 수정
-    - 다른 개발자에게 혼란을 야기할 수 있는 부분을 수정했음
-    - https://github.com/argoproj/argo-workflows/pull/11604
-    - [https://github.com/argoproj/argo-workflows/pull/11633](https://github.com/argoproj/argo-workflows/pull/11633#event-10138490619)
-    - https://github.com/argoproj/argo-workflows/pull/11687
+  - 다른 개발자에게 혼란을 야기할 수 있는 부분을 수정했음
+  - https://github.com/argoproj/argo-workflows/pull/11604
+  - [https://github.com/argoproj/argo-workflows/pull/11633](https://github.com/argoproj/argo-workflows/pull/11633#event-10138490619)
+  - https://github.com/argoproj/argo-workflows/pull/11687
+
 </details>
 
 #### **🌵 참가 후기**
 
-대형 오픈소스 커뮤니티에 기여하고 싶었으나, 막막함이 컸다. 이번 아카데미를 통해 직접 기여할 수 있어 좋았다. 기여 경험이 많은 멘티님이 기여할 수 있도록 단계별로 안내해주고, 도전할 수 있게끔 유도해주어서 가능했다. 다른 개발자와 기술 세미나를 하고 기술 교류를 하며, 상호 성장할 수 있었다. ArgoWorkflow는 큰 규모의 프로젝트이기 때문에 혼자 분석하면 어려운 부분이 많은데, 다른 개발자와 의견을 나누어 좀 더 빠르게 문제를 해결할 수 있었다. ArgoWorkflow 프로젝트를 어느 정도 이해했고, 작은 컨트리뷰트 경험을 통해 자신감이 생겼기 때문에 다음 기여는 더 쉽게 할 수 있으리라 기대된다. 이번 프로그램이 끝난 후에도 ArgoWorkflow에 관심이 많은 다른 멘티들과 서로 협업하며 더 큰 규모의 기여를 할 계획이다.
+대형 오픈소스 커뮤니티에 기여하고 싶었으나, 막막함이 컸다. 이번 아카데미를 통해 직접 기여할 수 있어 좋았다. 기여 경험이 많은 멘티님이 기여할 수 있도록 단계별로 안내해주고,
+도전할 수 있게끔 유도해주어서 가능했다. 다른 개발자와 기술 세미나를 하고 기술 교류를 하며, 상호 성장할 수 있었다. ArgoWorkflow는 큰 규모의 프로젝트이기 때문에 혼자 분석하면
+어려운 부분이 많은데, 다른 개발자와 의견을 나누어 좀 더 빠르게 문제를 해결할 수 있었다. ArgoWorkflow 프로젝트를 어느 정도 이해했고, 작은 컨트리뷰트 경험을 통해 자신감이
+생겼기 때문에 다음 기여는 더 쉽게 할 수 있으리라 기대된다. 이번 프로그램이 끝난 후에도 ArgoWorkflow에 관심이 많은 다른 멘티들과 서로 협업하며 더 큰 규모의 기여를 할 계획이다.
 
 ### 17. 최수녕
 
