@@ -66,7 +66,7 @@
         "allowTaggedTemplates": true
       }
     ],
-    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "import/no-extraneous-dependencies": ["off", { "devDependencies": true }],
     "max-len": [
       "error",
       {
@@ -76,7 +76,9 @@
         "ignoreTemplateLiterals": true
       }
     ], // prettier의 printWidth 옵션 대신 사용
-    "react/prop-types": false
+    "react/prop-types": 0,
+    "import/no-unresolved": 0,
+    "import/extensions": 0
   },
 
   "overrides": [
