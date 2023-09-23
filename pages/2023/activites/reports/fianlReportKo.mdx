@@ -106,6 +106,147 @@ Argo Workflows의 3.5버전 릴리즈 이후에도, 계속하여 컨트리뷰터
 
 프로젝트 기간동안 저희 팀이 기여한 작업물들을 소개합니다.
 
+## ☑️ 컨트리뷰션 아카데미 진행 과정과 활동 내역
+
+### GIT알못에서 오픈소스 컨트리뷰터가 될 때 까지
+
+저희 팀은 마스터즈 단계 참가자 17명 중에서, 12명은 GIT을 통한 제대로 된 협업/코드리뷰 경험이 없는 멤버들로 구성이 되어 있었습니다.
+
+쿠버네티스를 엔진으로 삼고 동작하는 CRD인 만큼 쿠버네티스에 대한 높은 이해도가 필요한 프로젝트인데, **쿠버네티스를 제대로 써본 경험이 있는 멤버는 고작 4명에 불과** 했습니다.
+
+처음에는 어떻게 시작해야할지 감도 안잡히고 막막했던 상황이었지만, 멘토와 함께 하는 GIT 연습 및 컨테이너, 쿠버네티스에 익숙해지기 위한 연습용 REPO에서의 다양한 과제 수행 및 스터디의 결과로 하나 둘씩 Argo Workflows라는 툴에 익숙해지기 시작했습니다.
+
+그러한 결과, **현재 보고서를 쓰는 시점에는 마스터즈 단계 참가자 17명 전원 PR을 생성해 보는 즐거운 경험**을 해 볼 수 있었습니다.
+
+![chart1](./images/common/chart1.png)
+
+컨트리뷰션 활동 요약
+
+또한, 처음에는 툴에 익숙해고 배경 지식을 습득하는데 바빠 적극적으로 하지 못했던 컨트리뷰션 활동도 시간이 갈수록 가속도가 붙어서 9월에는 첫주차만에 지난달 한달 동안 기여한 PR에 가까운 갯수를 따라가게 될 정도로 멤버들의 실력이 빠르게 성장하고 있습니다.
+
+![chart2](./images/common/chart2.png)
+
+월별 활동 그래프
+
+저희 팀이 지금의 기여활동을 해내기까지 수행한 다양한 활동들을 소개합니다.
+
+### GIT 사용 연습을 위한 REPO 생성 및 기여 활동 진행
+
+> REPO주소 : https://github.com/ArgoWorkflows-OSS/argoworkflows-oss.github.io 
+> 목표 : 이슈 템플릿의 멤버 프로필 업데이트 이슈를 선택하고, 이슈 내용에 따라 첫 PR을 생성.
+
+![activity1](./images/common/activity1.png)
+
+```
+- **목표 상세**
+  - 아래 두개 파일을 수정/추가 해서 유저 정보를 업데이트 하는 PR을 생성해요.
+    - `docs/users/users.md`
+    - `docs/users/[이름].md`
+  - [키워드를 활용한 PR과 이슈 연결 방법](https://docs.github.com/ko/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword)을 참고하여 이슈와 PR을 연결해주세요. (수동연결 x)
+    PR을 올리고 머지하기 위해 아래 사항들을 참고하면 좋아요.
+  - Repo에 브랜치등을 생성하거나 Push할 수 있는 권한이 없으므로 fork 후 작업해야 해요.
+  - [PR의 네이밍 컨벤션](https://flank.github.io/flank/pr_titles/)을 참고해주세요.
+  - [DCO](https://github.com/apps/dco) 봇의 체크를 통과하기 위한 조건을 참고하여 커밋해주세요.
+  - [GPG](https://www.44bits.io/ko/post/add-signing-key-to-git-commit-by-gpg)를 이용해 커밋하는 방법을 이해하여 서명된 커밋을 작성해주세요.
+  - [커밋 메시지 컨벤션](https://www.conventionalcommits.org/en/v1.0.0/)도 적용할 수 있으면 좋아요. 꼭 따르지 않더라도, 너무 의미없는 커밋 메시지는 지양해주세요.(Optional)
+```
+
+### 컨테이너 기초 특별반 운영
+
+> 페이지 주소 : https://github.com/ArgoWorkflows-OSS/container-playground
+> 목표 : 본인만의 서비스를 만들고, 컨테이너화 하는 CI를 구성하기
+
+![activity2](./images/common/activity2.png)
+
+![activity3](./images/common/activity3.png)
+
+```
+- **목표 상세**
+  나만의 웹서비스를 제작하고, 컨테이너화 할 수 있는 도커파일을 작성해 봅니다.
+  과제 통과를 위해서 반드시 아래 사항을 준수해 주세요.
+
+  - **디렉터리 및 파일 배치**
+
+    - 개인 서비스를 개발할 때 꼭 본인의 GitHub 계정 디렉터리를 생성하고 그 아래에 코드를 작성하세요.
+    - 본인 디렉터리 내 최상위에는 반드시 `Dockerfile`이 위치해야 합니다. (이 조건을 만족하지 않으면 CI가 실패할 수 있습니다.)
+    - 본인 디렉터리 아래에서 `Dockerfile`의 위치를 제외한 다른 파일은 자유롭게 작성할 수 있습니다.
+    - 다만, 본인 디렉터리 최상위에서 `docker build -t [이미지명] .` 명령을 실행했을 때 이미지가 성공적으로 빌드되어야 합니다.
+
+  - **빌드된 이미지의 동작**
+
+    - 개인 웹 서비스는 반드시 8080 포트에서 동작해야 합니다.
+    - 빌드된 이미지는 별도의 매개변수 없이 `docker run -d -p [포워딩 포트번호]:8080 [이미지명]` 명령을 실행했을 때 문제 없이 서비스되도록 만들어야 합니다.
+
+  - **웹 서비스 개발 언어 및 서비스 구조**
+    - 본인이 선호하는 어떤 언어, 어떤 프레임워크를 활용해도 상관 없습니다.
+    - UI, 디자인이 존재하지 않는 단순 api서비스를 제작해도 상관 없습니다.
+    - 단, 필수 api를 두개 만들어야 합니다. (응답값은 신경쓰지 않습니다.)
+      1. /api/v1/[본인 github계정]
+      2. /healthcheck
+  - (Optional) 도커 이미지 최적화를 하면 더 좋습니다. ([참고](https://thearchivelog.dev/article/optimize-docker-image/))
+  - [키워드를 활용한 PR과 이슈 연결 방법](https://docs.github.com/ko/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword)을 참고하여 이슈와 PR을 연결해주세요. (수동연결 x)
+```
+
+### 팀내 이슈 해커톤 개최 및 진행
+
+> 이슈를 지정하여 조별로 한 이슈를 기간 내에 해결하기 위한 팀내 해커톤
+
+![activity4](./images/common/activity4.png)
+
+![activity5](./images/common/activity5.png)
+
+### Argo Workflows 컨트리뷰터 / 커뮤니티 정기 미팅 참여
+
+> Argo Workflows 공식 컨트리뷰터/커뮤니티 미팅 참여 오픈소스 컨트리뷰톤 소개
+
+![activity6](./images/common/activity6.png)
+
+### Argo Workflows OSS 팀 페이지 생성 및 운영
+
+> 페이지 주소 : https://argoworkflows-oss.github.io/
+> 제작 프레임워크 : nextra
+
+![activity7](./images/common/activity7.png)
+
+### 매주 최소 1회 이상 오프라인 모임활동 진행
+
+> **정기 모임 활동**
+
+- 매주 일요일 정기 오프라인 모임 날짜로 선정하여 정기적인 모임활동을 진행했습니다.
+- 모임활동을 통해 해결할 이슈 탐색과 본인의 이슈 해결 경험에 대한 공유 및 진행 중 발생한 오류에 대한 논의 등 다양한 소통 활동을 진행했습니다.
+- 오프라인 정기 모임에 대한 자세한 정보는 [여기](https://argoworkflows-oss.github.io/) 링크를 통해 확인하실 수 있습니다.
+
+![activity8](./images/common/activity8.png)
+
+---
+
+> **관심 주제 발표 활동**
+
+- 오프라인 모임활동 시간 중 본인의 관심사에 대해 자유주제로 발표를 진행했습니다.
+- 관심 주제 발표 주제 및 발표자
+  | 순서 | 제목 | 발표자 | 발표일 |
+  | :----: | ---------------------------------------------------------------------------- | :--------: | :------------------: |
+  | 1 | 당근마켓에서 Argo Workflows 도입한 사례 | 염근철 | 7월 15일 |
+  | 2 | 실시간 통신을 위한 WebRtc의 개념 및 활용사례 | 송혜민 | 7월 30일 |
+  | 3 | Argo Workflows와 Keyclock 연동방법 | 최수녕 | 7월 30일 |
+  | 4 | Argo Project로 CI/CD 구현하기 | 김학준 | 8월 6일 |
+  | 5 | eBPF의 개념, 필터 개발 방법, 활용사례 발표 | 정성락 | 8월 6일 |
+  | 6 | 컨테이너의 역사와 도커 없이 컨테이너 만들기 | 염근철 | 8월 13일 |
+  | 7 | 개발자가 스스로 부하테스트 할 수 있는 플랫폼 구축기 & K6 부하테스트 PoC 발표 | 안다혜 | 8월 20일 |
+  | 8 | 컨테이너 생태계에 관한 고찰 | 염근철 | 8월 27일 |
+  | 9 | Github Actions 쿠버네티스에서 self-hosted로 설치&운영하기 | 서청운 | 9월 2일 |
+
+![activity9](./images/common/activity9.png)
+
+---
+
+> **모각코**
+
+- 비정기적으로 모여서 각자 코딩하는 모각코 진행했습니다.
+- ArgoWorkflow의 구조나 이슈 분석하는 등 기술 교류를 진행했습니다.
+
+![activity10](./images/common/activity10.png)
+
 ## ☑️ 참가자 기여 내용 상세
 
 ### 0. 염근철
