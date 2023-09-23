@@ -637,13 +637,53 @@ Argo Workflow에서 수많은 이슈를 보며, 만만한 것이 있으면 한�
 <details>
 <summary>접기/펼치기</summary>
 
-ㄱㄴㄷㄹ
+- 발대식 참여
+- K8s 학습
+  - Operator 개념 학습
+  - Helm 학습
+  - CNI 개념 학습
+  - Service Mesh 개념 학습
+- Argo Workflows 학습
+  - 기본적인 사용법 학습
+    - https://argoproj.github.io/argo-workflows/workflow-concepts/
+    - https://www.youtube.com/watch?v=kxl6wYd5i2g
+  - 주변 기술 학습
+    - DevContainer 학습
+    - Nix 학습
+    - https://nixos.org/manual/nixos/stable/
+    - MinIO 학습
+    - KeyCloak 학습
+- Argo Workflows 컨트리뷰션 `버그수정`
+
+  - DevContainer 오작동 관련 이슈작성 https://github.com/argoproj/argo-workflows/issues/11439
+    - 컨테이너 재시작 시 /etc/hosts 엔트리 지워지는 문제
+  - DevContainer 오작동 해결 PR 작성 및 머지 완료 https://github.com/argoproj/argo-workflows/pull/11440
+    - devcontainer.json의 runArgs에 —add-host 옵션 추가하여 해결
+
+- Argo Workflows 주변 기술 학습
+  - 학습한 내용 토대로 NixOS 설치 및 사용
+  - Argo CD, Argo Events, Argo Rollout 에 대해 조사
+  - Keycloak 학습
+    - Argo Workflows에서는 Keycloak 연동을 지원하고 있음, 이에 궁금증이 생겨 Keycloak에 대해 조사
+    - OAuth2와 OIDC 차이점에 대해 학습
+    - Keycloak 개념에 대해 학습
+      - Role
+      - Ream
+      - Client
+    - Keycloak 설정 방법에 대해 학습
+    - Keycloak API 및 연동 방법에 대해 학습
+    - Keycloak 공식 문서 학습
+      - https://www.keycloak.org/docs/latest/securing_apps/index.html
+      - https://www.keycloak.org/docs-api/22.0.1/rest-api/index.html
+    - Keycloak 직접 설치 및 사용 실습
 
 </details>
 
 #### **🌵 참가 후기**
 
-ㄱㄴㄷㄹ
+이번 컨트리뷰션 아카데미를 통해 오픈소스에 기여하는 것 뿐만 아니라 새로운 기술에 대해 학습하게 되는 동기부여가 되서 좋았습니다.
+직장 일이 바쁜 와중에 참가해서 쉽지는 않았지만 꼭 올해 컨트리뷰션에서만 Argo Workflows에 대해 기여하는 것이 아니라 향후 컨트리뷰션에서도 몇년간 기여해보는 것을 목표로 길게 보고 있습니다.
+앞으로의 계획은 Argo Workflows뿐만 아니라 다른 Argo Projects를 직접 구축해보고 제 개인 토이 프로젝트에도 적용해보는 것이 목표이고 K8s에 대해서도 더 많은 공부를 하는 것이 계획입니다.
 
 ### 13. 이의주
 
