@@ -1115,13 +1115,98 @@ Even after the open source contribution ends, the mentor plans to continue meeti
 <details>
 <summary>Collapse/Expand</summary>
 
-abcd
+1. **git/github Getting Started**
+   **issue**: https://github.com/ArgoWorkflows-OSS/argoworkflows-oss.github.io/issues/11 \
+   **pr**: https://github.com/ArgoWorkflows-OSS/argoworkflows-oss.github.io/pull/15 \
+   **summary**: Familiarize yourself with git/github, the core of code shape management in the open source ecosystem.\
+   **detail**:\
+   Much of the open source world relies on git and github for collaboration.\
+   Therefore, in order to contribute to open source, it is necessary to familiarize yourself with git/github.\
+   Using git/github, it was a hands-on activity to issue issues, follow commit rules, and create PRs.
+
+<br />
+
+2. **feat: logging for client-side throttling**
+
+   **issue**: [#11387](https://github.com/argoproj/argo-workflows/issues/11387), [#11402](https://github.com/argoproj/argo-workflows/issues/11402) \
+   **pr**: [#11437](https://github.com/argoproj/argo-workflows/pull/11437) \
+   **summary**: fix to figure out faster if user set certain options incorrectly \
+   **detail:** \
+   It uses a library called `client-go` to communicate with `kubernetes`.\
+   This library provides options `--qps`, `-burst` for `request limit`.\
+   If this option is set very low, it will cause `throttling`. That's why we have a separate `log level` to inform the user more quickly.\
+   While working on this issue, I learned a lot about `client-go`, especially about `RoundTrip`.\
+   It was a shock when I realized that I could add middleware using `RoundTrip` for any object that respects the `http request interface` provided by golang.
+
+<br />
+
+3. **go 1.21 upgrade**
+
+   **issue**: [#11566](https://github.com/argoproj/argo-workflows/issues/11556) \
+    **pr**: [#11601](https://github.com/argoproj/argo-workflows/pull/11601) \
+    **summary**: golang 1.21 ver release에 따른 version upgrade 진행 \
+    **detail:**
+   As a lead mentee, I decided it would be better to have a teammate who hasn't contributed yet try to solve the issue rather than me.
+
+   ![issue-report1](./images/Jack-R-lantern/issue-report1.jpg)
+
+   I shared the issue with my teammate, and I was able to support him in successfully resolving the issue.\
+    We shared our approach to the issue in our regular weekly meeting.
+
+   ![issue-report2](./images/Jack-R-lantern/issue-report2.jpg)
+
+   On weekdays, we would take questions and answer them separately in a slack channel so that everyone on the team could get experience submitting PRs.
+
+   ![issue-report3](./images/Jack-R-lantern/issue-report3.jpg)
+
+   Team members also gained invaluable experience merging PRs.
+
+<br />
+
+4. **Debugging 설정**
+
+   **summary:** 팀원의 argo-workflow debugging setting \
+   **detail:** \
+   For team members who are new to developing with golang, we had some difficulties setting up the debugging environment, and we worked together to solve it.
+
+   ![debug-1](./images/Jack-R-lantern/debug1.jpg)
+
+   During this process, I realized that I'm not very good at setting up debugging for apps that are closely related to kubernetes,
+   and I realized that I needed to get some help with that.
 
 </details>
 
 #### **🌵 Participation Review**
 
-abcd
+- **After**
+  - Participating in OSSA for 13 weeks was a great experience.
+    After applying 3 times, I was so happy to be part of a project built with my favorite community, CNCF, and my favorite language, Golang.
+  - Participating in argo-workflow under the CNCF umbrella through OSSCA and being able to contribute to the ecosystem of CNCF, even in a small way, was a very happy time for me.
+    In particular, I thought it was a good experience for beginners to be able to quickly communicate with maintainers through mentoring, a system operated by argo-workflow.
+  - With feedback through argo-workflow's mentoring system, I quickly gained confidence and good experience through PR submission and merge, which I wanted to share with all team members as a lead mentee.
+    Helping a team member who was new to open source contributing made me realize how much of a barrier to entry it is for people who are new to it, and it made me think about how to bring beginners into the ecosystem more reliably.
+  - In addition to the open source contribution activities, the team members from Developer, DevOps, and SRE roles, the different skills they use in their respective roles, and the sharing of experiences broadened my horizons.
+  - If I have the opportunity next year, I would definitely participate in OSSCA and continue my open source contribution activities with various people.
+- **Planning**
+  - Working on this argo-workflows project has made me very interested in the projects in the argo camp.
+    By participating in the project, I was able to identify my shortcomings as a developer, and I plan to improve them.
+    Even if ossca ends, I will continue to contribute to open source under the CNCF umbrella.
+    - **argo-workflow**
+      - **shortfalls**
+        - Lack of understanding of kubernetes operators
+        - Lack of frontend knowledge
+      - **Future plans**
+        - The UI of argo-workflow is a bit lacking compared to other argo projects, and I'm going to try to improve it based on user feedback.
+        - Regarding area/artifact, I would like to extend it to use more storage.
+        - Regarding area/plugin, it currently only supports sidecar, but I'd like to make it easier to extend externally implemented plugins with code.
+        - Regarding the documentation, I'd like to think about the parts that are difficult for beginners and improve them.
+  - **Personal growth**
+    - **shortfalls**
+      - Talking to members from different companies and lacking their own perspective on developing and keeping the service stable.
+      - Difficulty communicating to transfer knowledge.
+    - **Future plans**
+      - I'm going to study how to organize and speak about the knowledge I want to convey.
+      - I'm going to talk to a lot of people, share my thoughts, and try not to get caught up in otherness.
 
 ### 16. 채문영
 
