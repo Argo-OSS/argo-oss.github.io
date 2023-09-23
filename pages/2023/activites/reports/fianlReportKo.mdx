@@ -494,13 +494,35 @@ Argo Workflow PR 전 여러 사람이 기여하기 위한 사전 연습을 진�
 <details>
 <summary>접기/펼치기</summary>
 
-ㄱㄴㄷㄹ
+`문서 수정` 공식 문서의 [running-locally](https://argoproj.github.io/argo-workflows/running-locally/) 부분이 Dev-container와 Makefile을 처음 사용하는 사람들에게 직관적이지 않고, 깨진 링크들이 있어 pr [#11405](https://github.com/argoproj/argo-workflows/pull/11405)를 올리고 공식 문서를 수정하는 데 기여하였습니다.
+
+`이슈 기여` `미완성` 이지만 Argo-workflows 의 워크플로우나, 워크플로우 내의 Pod 내에서 Secret 정보가 echo 등의 명령어로 노출될 수 있는 이슈 [#8685](https://github.com/argoproj/argo-workflows/issues/8685) 가 있어 이를 해결해보고자 했습니다.
+
+4일 동안 하루에 3시간 정도, 총 12시간 정도를 이 이슈에 투자했으나 아직 해결하진 못하였습니다. ([중간 커밋](https://github.com/argoproj/argo-workflows/commit/35866a599de80c02a950c52e800e69fc894d5b80))
+
+- 총 11개 파일에 걸쳐 Argo-workflows 실행 시 주입할 수 있는 환경변수인 `ARGO_HIDE_SECRETS` 을 추가하고 기본적으로 해당 옵션이 `true` 로 작동하게 하였습니다.
+  - 위 환경변수를 command line에서 입력받거나, Argo-workflows 를 실행할 당시에 설정으로 추가할 수 있도록 하였습니다.
+  - 만약 `ARGO_HIDE_SECRETS=false` 로 설정할 경우, "You are running with logging include secrets. Be careful." 라는 로그가 찍히도록 하였습니다.
+  - workflow, pod의 로그에서 Secret에 해당하는 정보가 포함될 경우, SecretValue를 마스킹 할 수 있도록 코드를 수정하였습니다.
+    - 테스트 코드를 작성하여 위 기능이 목적한 대로 동작하는지 검증하였습니다.
+    - 하지만 위 기능이 목적한 대로 작동하지 않았기에, 로그가 찍히는 과정을 탐색하기 시작하였습니다. Go 언어에서 사용하는 [logrus](https://github.com/sirupsen/logrus) 라이브러리는 [io](https://pkg.go.dev/io) 패키지의 io.Writer 를 사용한다는 것을 알게 되었습니다.
+
+`과제 수행` Argo-workflows 팀은 멘토님이 OSS-Argo-workflows 레포지토리를 생성하고 여러 과제를 내주셨습니다.
+
+- 실제 Argo-workflows 레포에서 pr을 올릴 때 지켜야 하는 원칙 (presigned commit, gpg check) 을 지키며 pr을 올리고, git conflict 를 해결하는 방법을 과제를 통해 배워나갔습니다.
+- 실제 Argo-workflows 레포에서 pr을 올리기 위해, 코드를 수정한 후 Argo-workflows가 제대로 작동하는지 확인하려면 local 환경에서 Dev Container로 Argo-workflows를 동작시켜야 합니다. 저희 팀은 이 과정을 직접 수행해보는 과제를 받았고, 그 과정에서 수행에 어려움을 겪는 멤버들을 서로 도와주었습니다. 저는 블로그 글에 해당 방법을 수행하는 법을 정리하여 팀원들에게 공유하였습니다. [blog](https://aimb.tistory.com/317)
 
 </details>
 
 #### **🌵 참가 후기**
 
-ㄱㄴㄷㄹ
+오픈소스 컨트리뷰톤에 참여하면서 멋진 멘토님과 팀원들을 만났습니다. 저희는 매주 오프라인으로 만나며 그간 기여했던 이슈에 대해 공유하고, 업무적으로 도움이 되는 발표들을 매주 돌아가면서 진행하였습니다. 또한 막바지에는 ‘이슈 해커톤’을 만들어, 조를 나누어 이슈를 집중적으로 해결하는 자리를 만들었습니다. 그 결과 Argo-workflows 팀 자체에서 4건이 넘는 pr이 머지되었으며, 저도 한 이슈를 잡고 집중적으로 시간을 내 오픈소스를 깊숙히 파볼 수 있었습니다.
+
+Go 언어로 개발을 해보는 커리어를 염두에 두고 있었기 때문에, 프로덕션 레벨의 Go 코드를 보고 수정해보는 경험을 해볼 수 있어 정말 값진 경험이었습니다. 이렇게 열심히 사시는 분들과 같은 집단에 속할 수 있을까, 생각해보게 될 정도입니다. Masters가 끝나더라도 저는 위에서 해결하려던 이슈를 끝까지 파볼 작정이며, 개발 pr을 하나 더 올려보고자 합니다.
+
+그리고 기회가 된다면 2024년 오픈소스 컨트리뷰톤에도 참가해보고 싶습니다.
+
+좋은 기회와 장을 마련해주셔서 감사합니다.
 
 ### 10. 안지완
 
@@ -655,13 +677,53 @@ Argo Workflow에서 수많은 이슈를 보며, 만만한 것이 있으면 한�
 <details>
 <summary>접기/펼치기</summary>
 
-ㄱㄴㄷㄹ
+- 발대식 참여
+- K8s 학습
+  - Operator 개념 학습
+  - Helm 학습
+  - CNI 개념 학습
+  - Service Mesh 개념 학습
+- Argo Workflows 학습
+  - 기본적인 사용법 학습
+    - https://argoproj.github.io/argo-workflows/workflow-concepts/
+    - https://www.youtube.com/watch?v=kxl6wYd5i2g
+  - 주변 기술 학습
+    - DevContainer 학습
+    - Nix 학습
+    - https://nixos.org/manual/nixos/stable/
+    - MinIO 학습
+    - KeyCloak 학습
+- Argo Workflows 컨트리뷰션 `버그수정`
+
+  - DevContainer 오작동 관련 이슈작성 https://github.com/argoproj/argo-workflows/issues/11439
+    - 컨테이너 재시작 시 /etc/hosts 엔트리 지워지는 문제
+  - DevContainer 오작동 해결 PR 작성 및 머지 완료 https://github.com/argoproj/argo-workflows/pull/11440
+    - devcontainer.json의 runArgs에 —add-host 옵션 추가하여 해결
+
+- Argo Workflows 주변 기술 학습
+  - 학습한 내용 토대로 NixOS 설치 및 사용
+  - Argo CD, Argo Events, Argo Rollout 에 대해 조사
+  - Keycloak 학습
+    - Argo Workflows에서는 Keycloak 연동을 지원하고 있음, 이에 궁금증이 생겨 Keycloak에 대해 조사
+    - OAuth2와 OIDC 차이점에 대해 학습
+    - Keycloak 개념에 대해 학습
+      - Role
+      - Ream
+      - Client
+    - Keycloak 설정 방법에 대해 학습
+    - Keycloak API 및 연동 방법에 대해 학습
+    - Keycloak 공식 문서 학습
+      - https://www.keycloak.org/docs/latest/securing_apps/index.html
+      - https://www.keycloak.org/docs-api/22.0.1/rest-api/index.html
+    - Keycloak 직접 설치 및 사용 실습
 
 </details>
 
 #### **🌵 참가 후기**
 
-ㄱㄴㄷㄹ
+이번 컨트리뷰션 아카데미를 통해 오픈소스에 기여하는 것 뿐만 아니라 새로운 기술에 대해 학습하게 되는 동기부여가 되서 좋았습니다.
+직장 일이 바쁜 와중에 참가해서 쉽지는 않았지만 꼭 올해 컨트리뷰션에서만 Argo Workflows에 대해 기여하는 것이 아니라 향후 컨트리뷰션에서도 몇년간 기여해보는 것을 목표로 길게 보고 있습니다.
+앞으로의 계획은 Argo Workflows뿐만 아니라 다른 Argo Projects를 직접 구축해보고 제 개인 토이 프로젝트에도 적용해보는 것이 목표이고 K8s에 대해서도 더 많은 공부를 하는 것이 계획입니다.
 
 ### 13. 이의주
 

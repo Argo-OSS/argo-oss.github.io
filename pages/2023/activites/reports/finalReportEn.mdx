@@ -448,7 +448,25 @@ We simply crafted a Python server using Flask, and through the Dockerfile, we se
 <details>
 <summary>Collapse/Expand</summary>
 
-abcd
+`Document modification` The [running-locally](https://argoproj.github.io/argo-workflows/running-locally/) part of the official document is not intuitive for people who are new to Dev-container and Makefile, and is broken.
+There were links, so I uploaded pr [#11405](https://github.com/argoproj/argo-workflows/pull/11405) and contributed to editing the official document.
+
+`Issue Contribution` Although `incomplete`, this is an issue where secret information can be exposed through commands such as echo within Argo-workflows workflows or Pods within workflows [#8685](https://github.com/argoproj/ argo-workflows/issues/8685), so I tried to solve it.
+
+I invested about 3 hours a day for 4 days, for a total of 12 hours, on this issue, but I have not yet been able to resolve it. ([Intermediate commit](https://github.com/argoproj/argo-workflows/commit/35866a599de80c02a950c52e800e69fc894d5b80))
+
+- We added `ARGO_HIDE_SECRETS`, an environment variable that can be injected when running Argo-workflows, across a total of 11 files, and set the option to `true` by default.
+  - The above environment variables can be entered from the command line or added as settings when running Argo-workflows.
+  - If you set `ARGO_HIDE_SECRETS=false`, "You are running with logging include secrets. Be careful." A log saying was recorded.
+  - If information corresponding to Secret is included in the workflow or pod log, the code has been modified to mask SecretValue.
+    - We wrote test code and verified that the above function works as intended.
+    - However, since the above function did not work as intended, I started exploring the process of recording logs. I found out that the [logrus](https://github.com/sirupsen/logrus) library used in the Go language uses io.Writer from the [io](https://pkg.go.dev/io) package. .
+
+`Assignment Performance` For the Argo-workflows team, the mentor created the OSS-Argo-workflows repository and assigned several tasks.
+
+- In the actual Argo-workflows repo, I learned through assignments how to upload a PR by following the principles (presigned commit, gpg check) that must be followed when uploading a PR, and how to resolve git conflicts.
+- In order to upload pr from the actual Argo-workflows repo, modify the code and check whether Argo-workflows is working properly, you must run Argo-workflows with a Dev Container in the local environment.
+  -Our team was given the task of carrying out this process ourselves, and along the way, we helped each other with members who had difficulty performing it. I summarized how to perform the method in a blog post and shared it with my team members.[blog](https://aimb.tistory.com/317)
 
 </details>
 
@@ -562,13 +580,54 @@ Thank you for making such a good activity and thank you to the mentors and mente
 <details>
 <summary>Collapse/Expand</summary>
 
-abcd
+- Participate in the launching ceremony
+- K8s learning
+  - Learn Operator concept
+  - Helm learning
+  - Learning CNI concepts
+  - Learning Service Mesh concepts
+- Learn Argo Workflows
+  - Learn basic usage
+    - https://argoproj.github.io/argo-workflows/workflow-concepts/
+    - https://www.youtube.com/watch?v=kxl6wYd5i2g
+  - Learn skills around you
+    - DevContainer learning
+    - Nix Learning
+    - https://nixos.org/manual/nixos/stable/
+    - Learning MinIO
+    - Learn KeyCloak
+- Argo Workflows contribution ‘bug fix’
+  - Create issue related to DevContainer malfunction https://github.com/argoproj/argo-workflows/issues/11439
+    - Issue with /etc/hosts entries being deleted when container restarts
+  - DevContainer malfunction resolved PR created and merge completed https://github.com/argoproj/argo-workflows/pull/11440
+    - Solved by adding —add-host option to runArgs in devcontainer.json
+
+---
+
+- Learn technologies around Argo Workflows
+  - Install and use NixOS based on what you have learned
+  - Research on Argo CD, Argo Events, and Argo Rollout
+  - Learn Keycloak
+    - Argo Workflows supports Keycloak integration, so I became curious and investigated Keycloak.
+    - Learn about the differences between OAuth2 and OIDC
+    - Learn about Keycloak concepts
+      -Role
+      -Ream
+      -Client
+    - Learn how to set up Keycloak
+    - Learn about Keycloak API and integration methods
+    - Study Keycloak official documentation
+      - https://www.keycloak.org/docs/latest/securing_apps/index.html
+      - https://www.keycloak.org/docs-api/22.0.1/rest-api/index.html
+    - Practice installing and using Keycloak yourself
 
 </details>
 
 #### **🌵 Participation Review**
 
-abcd
+It was great to be motivated not only to contribute to open source but also to learn about new technologies through this Contribution Academy.
+It wasn't easy to participate while I was busy at work, but my long-term goal is not only to contribute to Argo Workflows in this year's contribution, but also in future contributions for the next few years.
+My future plans are to build not only Argo Workflows, but also other Argo Projects and apply them to my personal toy project, as well as to study more about K8s.
 
 ### 13. 이의주
 
