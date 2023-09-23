@@ -1102,13 +1102,100 @@ Argo Workflow에서 수많은 이슈를 보며, 만만한 것이 있으면 한�
 <details>
 <summary>접기/펼치기</summary>
 
-ㄱㄴㄷㄹ
+1. **git/github 사용법 익히기**
+   **issue**: https://github.com/ArgoWorkflows-OSS/argoworkflows-oss.github.io/issues/11 \
+   **pr**: https://github.com/ArgoWorkflows-OSS/argoworkflows-oss.github.io/pull/15 \
+   **요약**: opensource 생태계에서 code 형상 관리 핵심인 git/github와 친해지기 위한 작업\
+   **상세내용**:\
+   opensource의 상당수들은 git과 github를 이용해 협업을 하고 있습니다.\
+   그렇기에 opensource에 기여하기 위해서는 필연적으로 git/github와 친해져야합니다.\
+   git/github를 사용 issue 발행, commit 규칙 준수, pr 생성등 다양한것들을 직접해보는 활동이었습니다.
+
+<br />
+
+2. **feat: logging for client-side throttling**
+
+   **issue**: [#11387](https://github.com/argoproj/argo-workflows/issues/11387), [#11402](https://github.com/argoproj/argo-workflows/issues/11402) \
+   **pr**: [#11437](https://github.com/argoproj/argo-workflows/pull/11437) \
+   **요약**: user가 특정 옵션을 잘못 설정한 경우 더 빠르게 파악 할 수 있도록 수정 \
+   **상세내용:** \
+   `kubernetes`와의 통신을 위해 `client-go`라는 라이브러리를 사용합니다. \
+   해당 라이브러리에서는 `request limit`을 위해 `--qps`, `—burst`옵션을 제공합니다. \
+   이 옵션을 매우 낮게 설정한 경우 `throttling`이 발생하게 됩니다. \
+   그렇기에 사용자에게 좀 더 빠르게 알려주기 위해 별도의 `log level` 을 부여하게 되었습니다. \
+   해당 이슈를 해결하는 과정에서 `client-go`에 대해 많이 학습하게 되었습니다. \
+   특히 제일 유익했던 부분은 `RoundTrip`이었습니다. \
+   golang에서 제공하는 `http request interface`를 지키는 모든 객체에 대해 `RoundTrip` 을 이용해 미들웨어를 추가 할 수 있다는것을 배웠을땐 정말 충격이었습니다.
+
+<br />
+
+3. **go 1.21 upgrade**
+
+   **issue**: [#11566](https://github.com/argoproj/argo-workflows/issues/11556) \
+    **pr**: [#11601](https://github.com/argoproj/argo-workflows/pull/11601) \
+    **요약**: golang 1.21 ver release에 따른 version upgrade 진행 \
+    **상세내용:**
+   리드멘티로서 이슈를 제가 해결하는것보단 아직 기여하지 못한 팀원이 시도해보면 좋을거라고 판단했습니다.
+
+   ![issue-report1](./images/Jack-R-lantern/issue-report1.jpg)
+
+   해당 이슈를 팀원에게 공유했고, 팀원이 성공적으로 이슈를 해결 할 수 있도록 서포트 하게 되었습니다.
+   주 1회 정기적인 모임에서 해당 이슈의 접근 방법을 공유하였습니다.
+
+   ![issue-report2](./images/Jack-R-lantern/issue-report2.jpg)
+
+   평일의 경우엔 slack 채널에서 따로 질문을 받고 답변하는 식으로 모든 팀원이 PR을 제출하는 경험을 얻을 수 있도록 했습니다.
+
+   ![issue-report3](./images/Jack-R-lantern/issue-report3.jpg)
+
+   팀원도 PR을 Merge하는 아주 소중한 경험을 얻게 되었습니다.
+
+<br />
+
+4. **Debugging 설정**
+
+   **요약:** 팀원의 argo-workflow debugging setting \
+   **상세내용:** \
+   golang으로 개발을 처음하는 팀원을 위해 debugging 환경 설정에 어려움이 있었고, 이를 같이 해결하기위해 노력했습니다.
+
+   ![debug-1](./images/Jack-R-lantern/debug1.jpg)
+
+   이 과정에서 저 역시 kubernetes와 밀접한 app의 debugging 설정을 잘하지 못한다는것을 깨닫게 되었고,
+   해당 부분에 대해 여러 사람들에게 도움을 받아야겠다는 생각을 하게 되었습니다.
 
 </details>
 
 #### **🌵 참가 후기**
 
-ㄱㄴㄷㄹ
+- **후기**
+  - 13주간의 ossa 참가는 정말이나 즐거운 경험이었습니다.
+    3번의 지원 끝에 좋아하는 커뮤니티인 CNCF, 좋아하는 언어인 Golang으로 만들어진 프로젝트에 참여한다는게 정말 행복했습니다.
+  - ossca를 통해 CNCF 산하의 argo-workflow에 참여하면서 작더라도 CNCF의 생태계에 기여 할 수 있다는 것 자체가 저에게는 매우 행복한 시간이었습니다.
+    특히 argo-workflow에서 운영하는 제도인 mentoring을 통해, maintainer와 빠르게 의사소통 할 수 있는 점은 beginner에겐 특히나 좋은 경험이라고 생각했습니다.
+  - argo-workflow의 mentoring 시스템을 통한 피드백으로 빠르게 PR 제출 과 merge를 통해 자신감과 좋은 경험을 얻었고 리드 멘티로서 모든 팀원에게 공유를 하고 싶었습니다.
+    오픈소스 기여를 처음 접하는 팀원을 도와주면서 내가 당연히 여기던 부분이 처음 접하는 사람들에겐 얼마나 큰 진입 장벽인지 깨닫게 해주었고, beginner를 어떻게 더 안정적으로 생태계로 유입 시킬 수 있을지 고민을 하는 계기를 얻게 되었습니다.
+  - 오픈소스 기여 활동 뿐만 아니라, Developer, DevOps, SRE 직무를 수행하는 팀원과 각각 직무를 수행하면서 사용하는 다양한 기술, 경험 공유를 통해 시야가 더 넓어지게 되었습니다.
+  - 내년에도 기회가 된다면 꼭 ossa에 참가해 다양한 사람들과 오픈소스 기여 활동을 이어나가고 싶습니다.
+- **계획**
+  - 이번 argo-workflow 프로젝트에 참여하면서 argo 진영의 프로젝트들에 많은 관심을 가지게 되었습니다.
+    프로젝트에 참여하면서 개발자로서 부족한점을 확인 할 수 있었고 이를 개선할 생각입니다.
+    ossca가 종료 되더라도 CNCF 산하 오픈소스에 대한 기여는 계속 이어 나갈 생각입니다.
+    - **argo-workflow**
+      - **부족한 점**
+        - kubernetes operator에 대한 이해가 부족
+        - frontend 지식에 대한 부재
+      - **추후 계획**
+        - argo-workflow의 ui가 다른 argo project에 비해 많이 아쉬운데, 사용자의 피드백을 기반으로 개선을 시도해볼 생각입니다.
+        - area/artifact와 관련해서 더 다양한 스토리지를 사용할 수 있게 확장을 해보고 싶습니다.
+        - area/plugin과 관련해 현재 sidecar 형태로만 지원하는데, 외부에서 코드로 구현한 plugin을 더 쉽게 확장 가능하도록 구현할 생각입니다.
+        - document에서 beginner에게 난해한 부분을 고민해보며 개선을 진행하고 싶습니다.
+  - **개인적 성장**
+    - **부족한 점**
+      - 여러 회사의 멤버들과 대화를 하면서 스스로가 생각하기에 서비스를 개발하고 안정적으로 유지하는 관점이 부족
+      - 지식 전달을 위한 의사소통에 어려움.
+    - **추후 계획**
+      - 전달하고자 하는 지식을 어떻게 정리하고 말해야 하는지 연구 할 생각입니다.
+      - 많은 사람들과 대화하며 생각을 공유하고 타성에 젖지 않게 노력 할 생각입니다.
 
 ### 16. 채문영
 
