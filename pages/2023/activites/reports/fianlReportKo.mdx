@@ -272,13 +272,53 @@ Argo Workflows의 3.5버전 릴리즈 이후에도, 계속하여 컨트리뷰터
 <details>
 <summary>접기/펼치기</summary>
 
-ㄱㄴㄷㄹ
+`리팩토리`
+
+**fix: Upgrade Go to v1.21 Fixes #11556**[**Merged]\*\*
+
+- Argo Workflows는 Go언어로 개발되어 있습니다.
+- Go Version을 1.20 → 1.21로 업그레이드 하는 Issue가 발행되어 해결해보자 하였습니다.
+- `이슈 해커톤` 기간에 해당 이슈를 제시하여 같은 팀원 분들과 함께 이슈 해결 및 PR을 진행했습니다.
+- 결과적으로 첫 PR과 첫 컨트리뷰터 뱃지를 달아볼 수 있는 영광스러운 시간이었습니다.
+
+[fix: Upgrade Go to v1.21 Fixes #11556 by junkmm · Pull Request #11601 · argoproj/argo-workflows(opens in a new tab)](https://github.com/argoproj/argo-workflows/pull/11601)
+
+`소그룹 발표`
+
+- Challenges 기간에 Argo Projects를 활용한 CI/CD 구현했던 결과를 주제로 Offline 미팅 시간에 발표하는 시간을 가졌습니다.
+- 발표하며 제 생각을 정리하고, 서로 대화하며 데브옵스와 Argo Project 생태계를 이해할 수 있는 유익한 시간이었습니다.
+  ![meet](./images/HakjunKim/meet.png)
+  `이슈 해커톤`
+
+- 컨트리뷰션 활동에 진입 장벽과 동기부여를 위해 안다혜님의 의견으로 멘토님 주도하에 이슈해커톤이 진행되었습니다.
+- 멘토님의 주도하에 성락님과, 문영님, 병선님과 같은 팀이 되었습니다.
+- 이 기간에 제가 제시한 go 1.20 → 1.21 업그레이드 이슈 해결 성과를 달성했습니다.
+- Argo Workflows에 내장된 Prometheus Metric 값을 추가하는 Issue를 해결해보고자 했으나, 높은 난이도로 인해 중단되었습니다. 하지만 이 과정을 통해 Prometheus는 별도의 Exporter를 설치해야만 한다 라는 제 고정관념이 무너지고 시야가 확장되는 좋은 경험을 했습니다.
+  [plan to add workflow labels to the metric? · Issue #9849 · argoproj/argo-workflows(opens in a new tab)](https://github.com/argoproj/argo-workflows/issues/9849)
+- 아래 이슈를 해결하고자 하고 있습니다. [Compile `expr` in config · Issue #11609 · argoproj/argo-workflows(opens in a new tab)](https://github.com/argoproj/argo-workflows/issues/11609)
+
+`왕 초보 특별반 - Container Playground`
+
+- Argo Workflows는 쿠버네티스 네이티브 환경에서 기동되는 오픈소스 입니다.
+- 멘토님은 쿠버네티스에 대한 지식이 있어야 우리 프로젝트를 접근하는데 있어 도움이 된다고 하시며 쿠버네티스 스터디를 Open 하였습니다.
+- 첫 번째 미션은 제시하는 조건에 만족하는 Web Container를 생성하는 것이었습니다.
+  ![goal](./images/HakjunKim/goal.png)
+- 평소에 Dockerfile을 생각없이 작성하던 저에 대해 반성하게 됐고, 멀티 스테이징과 빌드 속도와 도커파일 작성 방법에 대한 관계를 배울수 있던 좋은 시간이었습니다.
 
 </details>
 
 #### **🌵 참가 후기**
 
-ㄱㄴㄷㄹ
+`참가 후기`
+
+결론 먼저 말씀드리면 만족중에 대 만족 입니다. 컨트리뷰션 초기 정말 오픈소스 생태계를 잘 알지 못했던 저에 비하면 현재의 저와는 비교할 수 없을 것 같습니다. 대 만족하는 이유는
+첫째, 똑똑한 조원 분들 입니다. 매주 다양한 주제와 사람들 께서 현업에서 사용하는 기술, 관심있는 기술 등 발표를 정말 많이 해 주셨는데, 어디가서 들을 수 없는 명품 강의였고, 정말 많은 도움이 된 시간이었습니다.
+둘째, 든든한 조원 분들 입니다. 아무래도 개발 경험이 적은 저로써 이 컨트리뷰션 기간이 조금 무서웠습니다. 하지만 저희 리더 멘티님인 성락님을 비롯하여 많은 분들이 슬랙에 질문을 올렸을때 적극적으로 알려주신 덕분에 제가 겪은 문제들을 스무스 하게 넘어갈 수 있었습니다.
+셋째, 쾌적한 모임 공간과 든든한지원입니다. 매주 일요일 서초 오픈업 공간에서 모임을 했는데, 신축 건물인지 정말 깔끔하고, 탕비실의 커피와 간식은 그저 빛이였습니다. 또 중간 회식에서는 정말 배터지게 맛있는 양꼬치를 먹을 수 있어서 좋았습니다.
+
+`앞으로의 계획`
+
+올해 컨트리뷰션 활동을 통해 확실히 오픈소스 생태계를 이해할 수 있었습니다. 다만 아쉬운점이 있다면 초반에 무서워서? 소극적으로 활동 했던 것과, 아무래도 소극적일 수 밖에 없었던 제 작고 귀여운 코딩 실력입니다. 저는 컨트리뷰션 활동 기간이 정말 값졌기 때문에, 저의 미흡한 점을 보완해서 다음 해 에도 꼭 참여하고 싶습니다.
 
 ### 6. 박진수
 
