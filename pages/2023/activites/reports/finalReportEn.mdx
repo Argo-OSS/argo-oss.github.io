@@ -404,7 +404,25 @@ We simply crafted a Python server using Flask, and through the Dockerfile, we se
 <details>
 <summary>Collapse/Expand</summary>
 
-abcd
+`Document modification` The [running-locally](https://argoproj.github.io/argo-workflows/running-locally/) part of the official document is not intuitive for people who are new to Dev-container and Makefile, and is broken.
+There were links, so I uploaded pr [#11405](https://github.com/argoproj/argo-workflows/pull/11405) and contributed to editing the official document.
+
+`Issue Contribution` Although `incomplete`, this is an issue where secret information can be exposed through commands such as echo within Argo-workflows workflows or Pods within workflows [#8685](https://github.com/argoproj/ argo-workflows/issues/8685), so I tried to solve it.
+
+I invested about 3 hours a day for 4 days, for a total of 12 hours, on this issue, but I have not yet been able to resolve it. ([Intermediate commit](https://github.com/argoproj/argo-workflows/commit/35866a599de80c02a950c52e800e69fc894d5b80))
+
+- We added `ARGO_HIDE_SECRETS`, an environment variable that can be injected when running Argo-workflows, across a total of 11 files, and set the option to `true` by default.
+  - The above environment variables can be entered from the command line or added as settings when running Argo-workflows.
+  - If you set `ARGO_HIDE_SECRETS=false`, "You are running with logging include secrets. Be careful." A log saying was recorded.
+  - If information corresponding to Secret is included in the workflow or pod log, the code has been modified to mask SecretValue.
+    - We wrote test code and verified that the above function works as intended.
+    - However, since the above function did not work as intended, I started exploring the process of recording logs. I found out that the [logrus](https://github.com/sirupsen/logrus) library used in the Go language uses io.Writer from the [io](https://pkg.go.dev/io) package. .
+
+`Assignment Performance` For the Argo-workflows team, the mentor created the OSS-Argo-workflows repository and assigned several tasks.
+
+- In the actual Argo-workflows repo, I learned through assignments how to upload a PR by following the principles (presigned commit, gpg check) that must be followed when uploading a PR, and how to resolve git conflicts.
+- In order to upload pr from the actual Argo-workflows repo, modify the code and check whether Argo-workflows is working properly, you must run Argo-workflows with a Dev Container in the local environment.
+- Our team was given the task of carrying out this process ourselves, and along the way, we helped each other with members who had difficulty performing it. I summarized how to perform the method in a blog post and shared it with my team members.[blog](https://aimb.tistory.com/317)
 
 </details>
 

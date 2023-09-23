@@ -454,13 +454,35 @@ Argo Workflow PR 전 여러 사람이 기여하기 위한 사전 연습을 진�
 <details>
 <summary>접기/펼치기</summary>
 
-ㄱㄴㄷㄹ
+`문서 수정` 공식 문서의 [running-locally](https://argoproj.github.io/argo-workflows/running-locally/) 부분이 Dev-container와 Makefile을 처음 사용하는 사람들에게 직관적이지 않고, 깨진 링크들이 있어 pr [#11405](https://github.com/argoproj/argo-workflows/pull/11405)를 올리고 공식 문서를 수정하는 데 기여하였습니다.
+
+`이슈 기여` `미완성` 이지만 Argo-workflows 의 워크플로우나, 워크플로우 내의 Pod 내에서 Secret 정보가 echo 등의 명령어로 노출될 수 있는 이슈 [#8685](https://github.com/argoproj/argo-workflows/issues/8685) 가 있어 이를 해결해보고자 했습니다.
+
+4일 동안 하루에 3시간 정도, 총 12시간 정도를 이 이슈에 투자했으나 아직 해결하진 못하였습니다. ([중간 커밋](https://github.com/argoproj/argo-workflows/commit/35866a599de80c02a950c52e800e69fc894d5b80))
+
+- 총 11개 파일에 걸쳐 Argo-workflows 실행 시 주입할 수 있는 환경변수인 `ARGO_HIDE_SECRETS` 을 추가하고 기본적으로 해당 옵션이 `true` 로 작동하게 하였습니다.
+  - 위 환경변수를 command line에서 입력받거나, Argo-workflows 를 실행할 당시에 설정으로 추가할 수 있도록 하였습니다.
+  - 만약 `ARGO_HIDE_SECRETS=false` 로 설정할 경우, "You are running with logging include secrets. Be careful." 라는 로그가 찍히도록 하였습니다.
+  - workflow, pod의 로그에서 Secret에 해당하는 정보가 포함될 경우, SecretValue를 마스킹 할 수 있도록 코드를 수정하였습니다.
+    - 테스트 코드를 작성하여 위 기능이 목적한 대로 동작하는지 검증하였습니다.
+    - 하지만 위 기능이 목적한 대로 작동하지 않았기에, 로그가 찍히는 과정을 탐색하기 시작하였습니다. Go 언어에서 사용하는 [logrus](https://github.com/sirupsen/logrus) 라이브러리는 [io](https://pkg.go.dev/io) 패키지의 io.Writer 를 사용한다는 것을 알게 되었습니다.
+
+`과제 수행` Argo-workflows 팀은 멘토님이 OSS-Argo-workflows 레포지토리를 생성하고 여러 과제를 내주셨습니다.
+
+- 실제 Argo-workflows 레포에서 pr을 올릴 때 지켜야 하는 원칙 (presigned commit, gpg check) 을 지키며 pr을 올리고, git conflict 를 해결하는 방법을 과제를 통해 배워나갔습니다.
+- 실제 Argo-workflows 레포에서 pr을 올리기 위해, 코드를 수정한 후 Argo-workflows가 제대로 작동하는지 확인하려면 local 환경에서 Dev Container로 Argo-workflows를 동작시켜야 합니다. 저희 팀은 이 과정을 직접 수행해보는 과제를 받았고, 그 과정에서 수행에 어려움을 겪는 멤버들을 서로 도와주었습니다. 저는 블로그 글에 해당 방법을 수행하는 법을 정리하여 팀원들에게 공유하였습니다. [blog](https://aimb.tistory.com/317)
 
 </details>
 
 #### **🌵 참가 후기**
 
-ㄱㄴㄷㄹ
+오픈소스 컨트리뷰톤에 참여하면서 멋진 멘토님과 팀원들을 만났습니다. 저희는 매주 오프라인으로 만나며 그간 기여했던 이슈에 대해 공유하고, 업무적으로 도움이 되는 발표들을 매주 돌아가면서 진행하였습니다. 또한 막바지에는 ‘이슈 해커톤’을 만들어, 조를 나누어 이슈를 집중적으로 해결하는 자리를 만들었습니다. 그 결과 Argo-workflows 팀 자체에서 4건이 넘는 pr이 머지되었으며, 저도 한 이슈를 잡고 집중적으로 시간을 내 오픈소스를 깊숙히 파볼 수 있었습니다.
+
+Go 언어로 개발을 해보는 커리어를 염두에 두고 있었기 때문에, 프로덕션 레벨의 Go 코드를 보고 수정해보는 경험을 해볼 수 있어 정말 값진 경험이었습니다. 이렇게 열심히 사시는 분들과 같은 집단에 속할 수 있을까, 생각해보게 될 정도입니다. Masters가 끝나더라도 저는 위에서 해결하려던 이슈를 끝까지 파볼 작정이며, 개발 pr을 하나 더 올려보고자 합니다.
+
+그리고 기회가 된다면 2024년 오픈소스 컨트리뷰톤에도 참가해보고 싶습니다.
+
+좋은 기회와 장을 마련해주셔서 감사합니다.
 
 ### 10. 안지완
 
