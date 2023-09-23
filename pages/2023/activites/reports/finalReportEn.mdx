@@ -3,39 +3,36 @@
 The ArgoWorkflows OSS 2023 team consisted of one mentor and 17 mentees, for a total of 18 people working as a team.
 
 The team was organized with the help of the [Open Source Contribution Academy](https://www.contribution.ac/2023-ossca),
-an awesome event that **brings together junior and senior developers** who may feel intimidated by open source to contribute,
-and was active for about **4 months from July to October 2023.**
+an awesome event that **junior and senior developers** who may feel the barriers to entry into open source **work together to contribute**, and was active for about **4 months from July to October 2023.**
 
-Starting from our humble beginnings with Git to becoming accomplished open source contributors.
-
-Here's a look at what our team accomplished.
+We share the achievements of our team, starting from beginners who were not familiar with using Git, until becoming full-fledged open source contributors.
 
 ## ☑️ What is ArgoWorkflows
 
 ![argoDag](./images/common/argoDag.png)
 
-Argo Workflows is a container-based workflow engine, an open source project that allows you to run parallel jobs on Kubernetes.
-Each workflow step is defined as a container, and multi-step workflows can be modeled as a series of tasks, or dependencies between tasks can be executed using a Directed Acyclic Graph (DAG).
+**Argo Workflows** is a container-based workflow engine, an open source project that can run parallel jobs on Kubernetes.
+Each workflow step is defined as a container, and multi-step workflows can be modeled as a series of jobs, or dependencies between tasks can be executed using a Directed Acyclic Graph (DAG).
 
-In short, Argo Workflows makes it faster and easier to perform tasks in the form of simple workflows, as well as complex tasks for machine learning or data processing, on Kubernetes.
+In other words, Argo Workflows makes it faster and easier to **simple workflows tasks, as well as complex tasks for machine learning or data processing, on Kubernetes**.
 
 ![argo_0](./images/common/argo_0.png)
 
-Argo Workflows is a graduated project of the Cloud Native Computing Foundation (CNCF).
+Argo Workflows is a graduated project of **the Cloud Native Computing Foundation (CNCF).**
 
-To become a graduated project, you must pass all of the tests that the CNCF conducts to meet their rigorous standards.
-This means that being recognized as a graduated project means that Argo meets the highest standards for clear governance and committer processes, healthy growth, and security and compliance adherence.
-Because of the rigorous standards, only about 13% of projects registered with the CNCF succeed in graduating.
+To become a graduated project, it must pass all tests conducted by the CNCF to meet their rigorous standards.
+Being recognized as a graduated project means that **Argo meets the highest standards** for clear governance and committer processes, healthy growth, and security and compliance adherence.
+Since the rigorous standards, **only about 13% of projects** registered with the CNCF succeed in graduating.
 
-In fact, it took the Argo project over 7000 contributors, over 11,000 PRs, and over 370,000 contributions over a period of about 5 years to be recognized as a graduating project.
+In fact, it took about 5 years for the Argo project to be recognized as a graduated project, with **over 7,000 contributors, over 11,000 PRs, and over 370,000 contributions.**
 
-Not only that, but the Argo project is still a very active and up-to-date open source project with over 2300 companies contributing to the code and over 8300 people contributing to the code.
+Moreover, the Argo project is **a very active and up-to-date open source**, with **over 2300 companies** contributing to the code and **over 8300 people** contributing to the code.
 
-This makes Argo Workflows the most recognized workflow engine in the cloud native community.
+Argo Workflows is recognized as **the most representative workflow engine** in the cloud native community.
 
-Many organizations around the world have officially adopted and use Argo Workflows. This is a strong proof that Argo Workflows can solve the problems of real workloads even in the largest enterprises.
+**Many companies around the world officially** have introduced and used Argo Workflows. This is means that Argo Workflows can solve issues with workload in big companies.
 
-Some of the leading companies using Argo Workflows include.
+The following major companies are using Argo Workflows.
 
 ![companys](./images/common/companys.png)
 
@@ -44,21 +41,21 @@ Some of the leading companies using Argo Workflows include.
 Some alternative tools to Argo Workflows include Apache Airflow, Tekton, and Prefect.
 
 Argo Workflows is a Kubernetes-native engine that makes it easy to orchestrate container-based workflows and manage resources.
-This is one of the key differences compared to similar tool Apache Airflow, which is a standalone application and does not inherently utilize the capabilities of Kubernetes.
-As a result, resource management and scalability can be more challenging with Airflow than with Argo Workflows.
+Apache Airflow, similiar but different to Argo Workflows, is a standalone application and does not inherently utilize the capabilities of Kubernetes.
+As a result, Airflow can more difficult to resource management and scalability than Argo Workflows.
 
-Also, because Argo Workflows runs each workflow step as an independent container, it can perform a variety of tasks, such as CI/CD as well as data pipelines.
-This is possible by leveraging the power of Docker and Kubernetes, which allows you to run anything without restrictions.
+Also, Argo Workflows can perform a various of tasks such as CI/CD as well as data pipelines because it runs each workflow step as an independent container.
+This is possible due to use the power of Docker and Kubernetes, than it can run **anything without restrictions.**
 
 ## ☑️ Key Accomplishments
 
 ### UI/UX improvements
 
-The Argo Workflows project is actively contributing to the topic, with UI/UX improvements as the main keyword for contributions, a separate project page, and issue tracking.
+The Argo Workflows project is actively contributing to UI/UX improvement as the main topic for contribution, operating a separate project page, and tracking issues.
 
 ![uiux_0.png](./images/common/uiux_0.png)
 
-Our team has also made many UI improvements along the lines of these project goals.
+Our team has also made many UI improvements along these project goals.
 
 > Key improvements
 
@@ -73,38 +70,36 @@ Our team has also made many UI improvements along the lines of these project goa
 
 ### Improving core functionality
 
-As members began to gain experience contributing, their understanding of the project grew, and as they gained confidence,
-they were increasingly able to contribute not only to UI/UX improvements, but also to the core functionality of the workflow engine.
+As we got used to contributing, our understanding of the project increased and we got more confidence.
+We were increasingly able to contribute not only UI/UX improvements, but also **the core functionality of the workflow engine.**
 
 [What’s new in Argo Workflows v3.5](https://blog.argoproj.io/whats-new-in-argo-workflows-v3-5-f260e8603ca6)
 
-The core logic of the workflow engine is installed as a CRD in Kubernetes and has a significant impact on the behavior and performance of a Kubernetes cluster,
-making it a very high level contribution that requires a high level of implementation and active participation in testing and policy discussions with maintainers.
+The core logic of the workflow engine is **installed as a CRD in Kubernetes and has a significant impact on the behavior and performance of a Kubernetes cluster.**
+So, Contributing to workflow engine is **a very high level contributions**, because it **requires a high level of implementation** and **active participation** in testing and policy discussions with maintainers.
 
-Despite the challenges, our team was able to make key contributions to the Argo Workflows 3.5 release,
-and our contributions to very important features such as Template Spec, Authentication, and Controller were mentioned on the Argo official blog.
+It was challenge for us, but our team was able to **make key contributions to the Argo Workflows 3.5 release**. Also We **were mentioned to the Argo official blog** by contributing very important features to `Template Spec`, `Authentication`, and `Controller`.
 
 ![core_0](./images/common/core_0.png)
 
-After the release of Argo Workflows 3.5, contributors continue to contribute to the CI and test environments for DX improvements, new features in the Nix, Controller, and Template specifications,
-and more challenging contributions such as updating the Go Lang version, and they are making meaningful contributions to the next release to make Argo Workflows an even better tool.
+After the release of Argo Workflows 3.5, we continue to make high level contributions such as CI and test environments for DX improvements, new features in the Nix, Controller, and Template specifications, updating GoLang version.
+With more contributions, We are making progress in making Argo workflows a much better tool in next release.
 
 ### Close communication with the maintainer group
 
 Our team was very fortunate that the Argo Workflows project got a new leader in May of this year, Yuan Tang, and the breath of contributions across the project really accelerated.
 
-Normally, in a large project like this, it would take quite a long time for reviews to take place, making it difficult to get a lot of contributions,
-but thanks to the talented project head and his team, all of the ArgoWorkflows team members who participated in this competition learned a lot, experienced a lot,
+Normally, in a large project like this, it would take quite a long time for reviews making it difficult to a lot of contributions.
+However, Thanks to the talented project head and his team, all of the ArgoWorkflows team members who participated in this competition learned a lot, experienced a lot,
 and grew through a lot of contributions in a short time.
 
 ![maintainer.png](./images/common/maintainer.png)
 
-As I've gotten closer to contributing to the core features of the workflow engine, there have been situations where I've been able to communicate and interact with maintainers on CNCF Slack beyond the PR page.
+As we've gotten closer to contributing to the core features of the workflow engine, there have been situations where We've been **able to communicate and interact with maintainers on CNCF Slack** beyond the PR page.
 
-Through these discussions, I've been able to determine policies for handling logic in the project to resolve issues,
-and have been assigned other related issues to work on, giving me valuable experience in being a true part of an open source project.
+Through discussions, We were able to have the valuable experience of being in open source project, such as deciding on a policy for processing logic in the project to resolve issues and experiencing being assigned and working on other related issues.
 
-Here are some of the contributions my team made during the project.
+Now, We introduce our contributions during the project.
 
 ## ☑️ Detail of Contributions
 
