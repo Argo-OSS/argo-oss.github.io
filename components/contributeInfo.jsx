@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 // import axios from 'axios';
 import { Octokit } from 'octokit';
 import Table from './common/table';
@@ -53,38 +53,79 @@ const gitIssueTypeBuilder = (issueTypeInfo, cloasedAt) => {
   return issueType;
 };
 
+const gitIssueBuilder = async githubId => {
+  const octokit = new Octokit({});
+  const response = await octokit.request('GET /repos/{owner}/{repo}/issues', {
+    owner: 'argoproj',
+    repo: 'argo-workflows',
+    creator: githubId,
+    state: 'all',
+    headers: {
+      'X-GitHub-Api-Version': '2022-11-28',
+    },
+  });
+
+  const issueObj = response.data;
+
+  return issueObj.map(issue => ({
+    GitHub: {
+      data: gitProfileBuilder(issue.user),
+      searchLabel: issue.user.login,
+    },
+    Type: {
+      data: gitIssueTypeBuilder(issue.pull_request, issue.closed_at),
+      searchLabel: issue.pull_request ? 'PR' : 'ISSUE',
+    },
+    Summary: {
+      data: gitIssueSummaryBuilder(issue),
+      searchLabel: null,
+    },
+  }));
+};
+
+const contributeInfoBuilder = async contributers => {
+  const promise = contributers.map(async contributer => await gitIssueBuilder(contributer));
+  const contributeInfo = await Promise.all(promise);
+  const flatInfo = contributeInfo.flat();
+  const sortedInfo = flatInfo.sort((a, b) => b.Type.searchLabel.localeCompare(a.Type.searchLabel)).sort((a, b) => a.GitHub.searchLabel.localeCompare(b.GitHub.searchLabel));
+  return sortedInfo;
+};
+
 const ContributeInfo = ({ contributers = [] }) => {
   const [issueList, setIssueList] = useState([]);
-
-  const gitIssueBuilder = useCallback(async githubId => {
-    const octokit = new Octokit({});
-    const response = await octokit.request('GET /repos/{owner}/{repo}/issues', {
-      owner: 'argoproj',
-      repo: 'argo-workflows',
-      creator: githubId,
-      state: 'all',
-      headers: {
-        'X-GitHub-Api-Version': '2022-11-28',
-      },
-    });
-
-    const issueObj = response.data;
-
-    return issueObj.map(issue => [gitProfileBuilder(issue.user), gitIssueTypeBuilder(issue.pull_request, issue.closed_at), gitIssueSummaryBuilder(issue)]);
-  }, []);
-
   const { current: contributersRef } = useRef(contributers);
 
   useEffect(() => {
-    contributersRef.map(contributer => {
-      gitIssueBuilder(contributer).then(data => {
-        setIssueList(prev => [...prev, ...data]);
-      });
-      return null;
-    });
-  }, [contributersRef, gitIssueBuilder, setIssueList]);
+    contributeInfoBuilder(contributersRef).then(data => setIssueList(data));
+  }, [contributersRef, contributeInfoBuilder, setIssueList]);
 
-  return <Table tableTitle="Contribute Info" colums={['GitHub', 'Type', 'Summary']} rows={issueList} />;
+  const onClick = () => {
+    const sortedList = [...issueList].sort((a, b) => a.Type.searchLabel.localeCompare(b.Type.searchLabel)).sort((a, b) => a.GitHub.searchLabel.localeCompare(b.GitHub.searchLabel));
+    setIssueList(sortedList);
+  };
+
+  return (
+    <div onClick={onClick}>
+      <Table
+        tableTitle="Contribute Info"
+        colums={[
+          {
+            columTitle: 'GitHub',
+            filter: true,
+          },
+          {
+            columTitle: 'Type',
+            filter: true,
+          },
+          {
+            columTitle: 'Summary',
+            filter: false,
+          },
+        ]}
+        rows={issueList}
+      />
+    </div>
+  );
 };
 
 export default ContributeInfo;

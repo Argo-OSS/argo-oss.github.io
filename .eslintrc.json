@@ -78,7 +78,8 @@
     ], // prettier의 printWidth 옵션 대신 사용
     "react/prop-types": 0,
     "import/no-unresolved": 0,
-    "import/extensions": 0
+    "import/extensions": 0,
+    "no-return-await": 0
   },
 
   "overrides": [

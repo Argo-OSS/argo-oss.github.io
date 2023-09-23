@@ -4,7 +4,7 @@ const TableHead = ({ colums }) => {
       <tr>
         {colums.map((colum, index) => (
           <th key={index} className="p-2 whitespace-nowrap">
-            <div className="font-semibold text-left">{colum}</div>
+            <div className="font-semibold text-left">{colum.columTitle}</div>
           </th>
         ))}
       </tr>
@@ -12,14 +12,14 @@ const TableHead = ({ colums }) => {
   );
 };
 
-const TableBody = ({ rows }) => {
+const TableBody = ({ colums, rows }) => {
   return (
     <tbody className="text-sm divide-y divide-gray-100">
       {rows.map((row, index) => (
         <tr key={index}>
-          {row.map((item, index) => (
+          {colums.map((colum, index) => (
             <td key={index} className="p-2 whitespace-nowrap">
-              {item}
+              {row[colum.columTitle].data}
             </td>
           ))}
         </tr>
@@ -30,10 +30,35 @@ const TableBody = ({ rows }) => {
 
 const Table = ({
   tableTitle = 'Table Title',
-  colums = ['Github', 'Type', 'Contribute Summary'],
+  colums = [
+    {
+      columTitle: 'GitHub',
+      filter: true,
+    },
+    {
+      columTitle: 'Type',
+      filter: true,
+    },
+    {
+      columTitle: 'Summary',
+      filter: false,
+    },
+  ],
   rows = [
-    [1, 2, 3],
-    [4, 5, 6],
+    {
+      GitHub: {
+        data: 'GeunSam2',
+        searchLabel: 'GeunSam2',
+      },
+      Type: {
+        data: 'PR',
+        searchLabel: 'PR',
+      },
+      Summary: {
+        data: '11111',
+        searchLabel: null,
+      },
+    },
   ],
 }) => {
   return (
@@ -47,7 +72,7 @@ const Table = ({
             <div className="overflow-x-auto">
               <table className="table-auto w-full">
                 <TableHead colums={colums} />
-                <TableBody rows={rows} />
+                <TableBody colums={colums} rows={rows} />
               </table>
             </div>
           </div>
