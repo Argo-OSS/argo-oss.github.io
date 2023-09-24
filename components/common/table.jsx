@@ -30,6 +30,7 @@ const TableBody = ({ colums, rows, className }) => {
 
 const Table = ({
   tableTitle = 'Table Title',
+  subTitle,
   colums = [
     {
       columTitle: 'GitHub',
@@ -67,12 +68,13 @@ const Table = ({
       <div className="h-full">
         <div className={'w-full mx-auto shadow-lg rounded-sm border ' + (theme === 'dark' ? 'bg-zinc-900 border-gray-800' : 'bg-white border-gray-200')}>
           <header className={'px-5 py-4 border-b ' + (theme === 'dark' ? 'border-gray-800' : 'border-gray-100')}>
-            <h2 className={'font-semibold ' + (theme === 'dark' ? 'text-gray-200' : 'text-gray-800')}>{tableTitle}</h2>
+            <h2 className={'font-semibold ' + (theme === 'dark' ? 'text-gray-200' : 'text-gray-600')}>{tableTitle}</h2>
+            {subTitle || null}
           </header>
           <div className="p-3">
             <div className="overflow-x-auto">
               <table className="table-auto w-full">
-                <TableHead colums={colums} className={'text-xs font-semibold uppercase ' + (theme === 'dark' ? 'bg-gray-800 text-gray-200' : 'bg-gray-50 text-gray-400')} />
+                <TableHead colums={colums} className={'text-xs font-semibold uppercase ' + (theme === 'dark' ? 'bg-gray-800 text-gray-200' : 'bg-gray-100 text-gray-500')} />
                 <TableBody colums={colums} rows={rows} className={'text-sm divide-y ' + (theme === 'dark' ? 'divide-gray-800 text-gray-400' : 'divide-gray-100 text-gray-600')} />
               </table>
             </div>

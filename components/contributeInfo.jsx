@@ -105,9 +105,27 @@ const ContributeInfo = ({ contributers = [] }) => {
     contributeInfoBuilder(contributersRef).then(data => setIssueList(data));
   }, [contributersRef, contributeInfoBuilder, setIssueList, theme]);
 
+  const contributeSummary = (
+    <div className="grid grid-cols-3 gap-5 mt-2 text-center text-gray-600 text-sm">
+      <div className="grid grid-cols-3">
+        <div className="col-span-2 bg-orange-200 p-3 rounded-l-md font-semibold">TOTAL COUNT</div>
+        <div className="bg-gray-100 p-3 rounded-r-md font-semibold text-orange-400">{issueList.length}</div>
+      </div>
+      <div className="grid grid-cols-3">
+        <div className="col-span-2 bg-blue-100 p-3 rounded-l-md font-medium">PR COUNT</div>
+        <div className="bg-gray-100 p-3 rounded-r-md font-medium text-blue-600">{issueList.filter(issue => issue.Type.searchLabel === 'PR').length}</div>
+      </div>
+      <div className="grid grid-cols-3">
+        <div className="col-span-2 bg-gray-200 p-3 rounded-l-md font-medium">ISSUE COUNT</div>
+        <div className="bg-gray-100 p-3 rounded-r-md font-medium">{issueList.filter(issue => issue.Type.searchLabel === 'ISSUE').length}</div>
+      </div>
+    </div>
+  );
+
   return (
     <Table
       tableTitle="Contribute Info"
+      subTitle={contributeSummary}
       theme={theme}
       colums={[
         {
