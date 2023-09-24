@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
-// import axios from 'axios';
 import { Octokit } from 'octokit';
+import { useTheme } from 'nextra-theme-docs';
 import Table from './common/table';
 
 const gitProfileBuilder = userInfo => (
@@ -8,20 +8,24 @@ const gitProfileBuilder = userInfo => (
     <div className="w-7 h-7 flex-shrink-0 mr-2 sm:mr-3">
       <img className="rounded-full" src={userInfo.avatar_url} alt={userInfo.login} />
     </div>
-    <div className="font-medium text-gray-800">{userInfo.login}</div>
+    <a href={userInfo.html_url} className="font-medium hover:underline">
+      {userInfo.login}
+    </a>
   </div>
 );
 
 const gitIssueSummaryBuilder = issueInfo => (
-  <a key={issueInfo.id} href={issueInfo.html_url} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+  <a key={issueInfo.id} href={issueInfo.html_url} className="font-medium text-blue-600 hover:underline">
     {issueInfo.title}
   </a>
 );
 
+const IssueLabel = ({ children, colorClass }) => <span className={'text-[8px] font-semibold inline-block px-1 rounded-full last:mr-0 mr-1 ' + colorClass}>{children}</span>;
+
 const gitIssueTypeBuilder = (issueTypeInfo, cloasedAt) => {
-  const margedLabel = <span className="text-[8px] font-semibold inline-block py-[1px] px-1 rounded-full text-blue-600 bg-blue-200 last:mr-0 mr-1">MERGED</span>;
-  const openedLabel = <span className="text-[8px] font-semibold inline-block py-[1px] px-1 rounded-full text-green-800 bg-green-300 last:mr-0 mr-1">OPENED</span>;
-  const closedLabel = <span className="text-[8px] font-semibold inline-block py-[1px] px-1 rounded-full text-red-600 bg-red-200 last:mr-0 mr-1">CLOSED</span>;
+  const margedLabel = <IssueLabel colorClass={'text-blue-600 bg-blue-200'}>MERGED</IssueLabel>;
+  const openedLabel = <IssueLabel colorClass={'text-emerald-600 bg-emerald-200'}>OPENED</IssueLabel>;
+  const closedLabel = <IssueLabel colorClass={'text-red-600 bg-red-200'}>CLOSED</IssueLabel>;
 
   const prMarged = (
     <div>
@@ -95,36 +99,32 @@ const ContributeInfo = ({ contributers = [] }) => {
   const [issueList, setIssueList] = useState([]);
   const { current: contributersRef } = useRef(contributers);
 
+  const { theme } = useTheme();
+
   useEffect(() => {
     contributeInfoBuilder(contributersRef).then(data => setIssueList(data));
-  }, [contributersRef, contributeInfoBuilder, setIssueList]);
-
-  const onClick = () => {
-    const sortedList = [...issueList].sort((a, b) => a.Type.searchLabel.localeCompare(b.Type.searchLabel)).sort((a, b) => a.GitHub.searchLabel.localeCompare(b.GitHub.searchLabel));
-    setIssueList(sortedList);
-  };
+  }, [contributersRef, contributeInfoBuilder, setIssueList, theme]);
 
   return (
-    <div onClick={onClick}>
-      <Table
-        tableTitle="Contribute Info"
-        colums={[
-          {
-            columTitle: 'GitHub',
-            filter: true,
-          },
-          {
-            columTitle: 'Type',
-            filter: true,
-          },
-          {
-            columTitle: 'Summary',
-            filter: false,
-          },
-        ]}
-        rows={issueList}
-      />
-    </div>
+    <Table
+      tableTitle="Contribute Info"
+      theme={theme}
+      colums={[
+        {
+          columTitle: 'GitHub',
+          filter: true,
+        },
+        {
+          columTitle: 'Type',
+          filter: true,
+        },
+        {
+          columTitle: 'Summary',
+          filter: false,
+        },
+      ]}
+      rows={issueList}
+    />
   );
 };
 
