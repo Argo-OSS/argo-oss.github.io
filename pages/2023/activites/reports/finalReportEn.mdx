@@ -521,13 +521,46 @@ Thank you.
 <details>
 <summary>Collapse/Expand</summary>
 
-abcd
+- **Personal performance**
+  - Contributing one 'issue' and one 'PR'
+- **Preparation for Countryview**
+  - Viewed: OSSCA Basic Training uploaded to YouTube. I've used it a lot before, such as Git and Vim, and I knew the concept, but I was able to know and understand a lot of parts that I didn't know or roughly used.
+  - In the 'ArgoWorkflows-OSS/ArgoWorkflows-OSS' repository, we performed an example of Git configuration settings and linking and closing Issue and PR.
+    Argo Workflows must have all commitments signed with gpg private key and signed off when creating PR. Otherwise, it will fail in the GitHub CI. Before I actually contributed to Argo Workflows, it helped me greatly to set up a local Git environment in advance and create a simulated PR.
+    - - https://github.com/ArgoWorkflows-OSS/ArgoWorkflows-OSS/pull/38
+  - You have set up the Argo Workflows development environment. At first, I set it up with devcontainer, and then I used Nix.
+    Argo Workflows requires multiple components in the development environment, including React UI, Argo Server, and MySQL, making it difficult to configure the development environment, but we were able to fully configure it over several weeks.
+- **Countryview progress**
+  - Fix 'Bug Fix' Fix go build
+    - - https://github.com/argoproj/argo-workflows/pull/11635
+    - The existing code base was using Go 1.20, but there was a problem with using Go 1.19 in the Nix build file. Previously, the build was fine, but when I started using the newly added grammar in Go 1.20, I encountered problems with the Nix build.
+    - Using '\_module.args', I modified Go 1.20 to be the default and modified the Nix build.
+  - Automatic update of 'function improvement' Nix go vendor hash
+    - - https://github.com/argoproj/argo-workflows/issues/11691
+    - This is an issue that I learned when I set up the development environment during the preparation of the contention. Nix pursues a reproducible build, but when GitHub's Dependency Hash value is not changed together when GitHub's Dependency Abot automatically raises the Go module version.
+    - This often requires developers to manually calculate and update Nix's go vendor hash when setting up a development environment, and we are looking for workable ways to improve it.
+    - In order to find a solution with the contributors, an issue was created by collecting the contents of existing PRs and Comments.
+    - Developers are reflecting it manually without solving it in other open-source projects, so after contributing to Argo Workflows, I think I can contribute to other projects as well.
+  - 'Improvement' 'CHANGELOG.md '
+    - - https://github.com/argoproj/argo-workflows/pull/11733
+    - Markdownlint is a tool that forces documents in a project to be written in a consistent format and makes them easier to read and modify.
+    - Previously, we used Markdownlint to configure the linker settings for the Project Markdown document, but we improved the 'CHANGELOG.md ' file, which is automatically generated using the script, because it does not comply with the linker rules.
+    - New 'CHANGELOG.md ' changes created by the changed script are contained in this PR. → → https://github.com/argoproj/argo-workflows/pull/11773
+  - 'Improvement' document style improvement
+    - - https://github.com/argoproj/argo-workflows/pull/11787
+    - We've improved the style of some documents that don't follow Markdownlint, and we've shared that we'll revise the documents that are automatically generated later in PR.
 
 </details>
 
 #### **🌵 Participation Review**
 
-abcd
+- **Review of participation in the program**
+- It would have been impossible if I had tried to contribute by myself, but I think I was able to prepare and contribute while gathering with mentor and other mentees to study and contribute.
+- It was great to understand the Argo Project ecosystem and community, and to understand Argo Workflows much deeper than before.
+- **Planning future contributions**
+- We will discuss the solution with the contributors in the issue we have created and implement it will be implemented.
+- Afterwards, we will improve the Nix development environment and gradually transfer the devcontainer development environment to Nix.
+- The documents related to Nix are poor, so we are going to improve the documents.
 
 #### **🌵 Personal Summary**
 
@@ -708,13 +741,28 @@ I would like to thank the organizers and mentors for all their hard work over th
 <details>
 <summary>Collapse/Expand</summary>
 
-abcd
+- **individual performance**
+  - 1 `PR` Open
+- **Countryview preparation process**
+  - We checked the shared video of the basic Git strategy shared by the OSSCA Secretariat and combined the new parts we missed with the existing concepts to enhance our understanding and application of Git.
+  - The team's 'ArgoWorkflows-OSS/ArgoWorkflows-OSS' repository allowed us to learn the gpg private keys, issues, PR titles, etc., which are essential for open-source attributes, by actually performing missions and gaining experience.
+  - dWe used devcontainer to build and test Argo Workflow's local development environment, and to test the requirements for actually doing the content. The portability tool for multiple library dependencies made it very easy to use.
+- **Content progress**
+  - Modifying fields example in formula docs
+    - https://github.com/argoproj/argo-workflows/pull/11748
+    - An example of a document that does not use Cron Workflow was included in the 'CronWorkflowSpec' and 'CronWorkflowStatus' fields in the existing official document, causing confusion in finding the required data.
+    - So, in the 'CronWorkflowSpec' and 'CronWorkflowStatus' fields, we only allowed examples using CronWorkflow to find the data we needed.
 
 </details>
 
 #### **🌵 Participation Review**
 
-abcd
+- **Program Participation Review**
+  - Mentors and mentees led the meeting so well that I wondered if there would be another meeting where I could get to know and understand the open-source ecosystem in depth.
+  - As an individual, I was very disappointed. I could have invested a little more time and actively participated in the meeting to make it a better meeting as well as personal growth, but it was a period that left a lot of regret because of various external factors and my own laziness.
+- **Future Contribution Plan**
+  - With great confidence that open-source attributes are no longer scary (?) things, we will be able to explore open-source beyond the Argo ecosystem and be more interested in the CNCF ecosystem.
+  - Based on the fact that we can make contributions through previous PR records and the help of the main container without having to look at the source from the beginning, we plan to actively continue our contribution beyond the psychological hurdle of the country.
 
 #### **🌵 Personal Summary**
 
@@ -913,13 +961,68 @@ Thank you for providing a great opportunity and venue.
 <details>
 <summary>Collapse/Expand</summary>
 
-abcd
+---
+
+**1. Open Source's first contribution**
+
+For the first time, I made a documented contribution to ArgoWorkflows. We've fixed the parts on the official site where there's room to confuse whether it's an image or a video, so that users know it's definitely a video.
+[docs: modify demo image in intermediate-inputs.md #11755](https://github.com/argoproj/argo-workflows/pull/11755)
+
+---
+
+**2. Learn how to contribute to open source by watching other members' activities**
+
+Through this Open Source Country View Line Academy, I learned how to contribute to open source and how to find issues. The summary is as follows.
+
+- There are many issues than the main logic, or UI parts, or UI parts, or UI parts.
+- There are many issues that can contribute to the open source sufficiently, even if you are a professional knowledge of the open source or a practitioner in another field (ex. UI issue)
+- When you want to contribute, you first comment that you want to solve this issue directly to the issue and then start working.
+- This part was a little strange, but in the case of Argo Workflow, it was a little strange that the person in charge was assigned when making a contribution. Something I don't know? Or, it seems to assign a person in charge when you feel unfamiliar.
+- There are many different people. Some people write just one line, and some people write very kindly comments.
+
+I learned how to contribute directly to the issue by looking at other members' issue hackathons. In particular, I found the issue of "Pagination" very interesting among other members' issues.
+I didn't notice when I was using argo workflow, but I realized that it was possible to contribute to places that could pass by by catching that page-nation is inconsistent and making issues.
+
+---
+
+**3. Development container construction**
+
+Personally, I set up the development environment by flying devcontainer myself. In fact, there were countless errors in the process, and I could imagine that other developers would come and squeeze their brains together if there was a bug in practice.
+
+I found out that when you solve dependency issues and later someone else makes an issue on my project, you use development containers to ensure you're working in the same environment,
+and I thought I'd have to use development containers in other projects I'm working on (discord bot-related projects).
+
+After the interim report, rather than changing my mind a little and feeling intimidated, I wanted to take the opportunity to overhear how other current employees operate the service in practice.
+In fact, mentees presented various topics, and I was able to hear interesting topics such as load tests and explanations about ebpf in the company. I think it was a very valuable presentation that was hard to hear while attending school.
+
+---
+
+**4. Mastering the Verified Commit method using GPG Sign and uploading the introduction to Team GitHub**
+
+Until now, I've been committing without a separate GPG Key, but in the process of uploading the member introduction, I checked the DCObot and GPG and kept getting blocked,
+so I learned how to create a Verified commit and uploaded the introduction to Team GitHub Repo. In the process, I solved it with the help of the same team member while constantly stopping whenever I committed.
+
+[docs: 안지완 프로필 업데이트](https://github.com/ArgoWorkflows-OSS/argoworkflows-oss.github.io/pull/49)
 
 </details>
 
 #### **🌵 Participation Review**
 
-abcd
+In fact, until I wrote the interim report, this activity was too high for my level and others were so good that I felt intimidated by myself, but thanks to the mentor's individual counseling and encouragement, I have since tried to participate in the regular meeting harder.
+
+I saw a lot of issues in Argo Workflow and looked for it to contribute to anything, but I couldn't touch it because it was so complicated and I didn't know the Go language.
+Instead, I felt like I entered the world of open source by looking at other people's contributions, even though I may not be able to contribute directly.
+
+Another person's most memorable contribution was "Page Nation." I was impressed to see that some parts of Argo Workflow are page-nations, some parts are not,
+and some parts are not title-free, but you found a problem of consistency in the UI, and you found a team member in the issue hackathon to solve this problem.
+
+When I was looking for something to contribute, I tried to find issues related to logic, but it was too difficult and I couldn't figure out how it worked, but I can't believe it can contribute like that…I thought that I didn't have to be so scared of contributions than I thought.
+
+As everyone else, including you, is an incumbent and is very talented, I learned a lot from going to the meeting.
+You can see the differences between theory and practice, how workflows are being used in practice, especially why the really universal airflow that I'm studying these days isn't being used very much in practice.
+
+To be honest, as I participated in open-source competition, I also have a desire to contribute at least one issue.
+As there is not much time left, my plan is to contribute at least one small issue before the end of the activity, and now the semester is waiting, so I want to have as much time to learn as possible to go to regular meetings and learn even if the semester begins.
 
 #### **🌵 Personal Summary**
 
@@ -1671,13 +1774,53 @@ Even after the open source contribution ends, the mentor plans to continue meeti
 <details>
 <summary>Collapse/Expand</summary>
 
-abcd
+**Multiple Tasks**
+
+- Github Issue/Commit/PR Mission
+  - Learned how to use Github to contribute the ArgoWorkflow which is a large scale of open source community.
+  - https://github.com/ArgoWorkflows-OSS/argoworkflows-oss.github.io/issues/43
+  - https://github.com/ArgoWorkflows-OSS/argoworkflows-oss.github.io/pull/44
+- ArgoWorkflow Running Locally
+  - Run ArgoWorkflow in local environment
+  - Understanding Argo Workflow Structure, DevContainer, Container-Based Applications, and Makefile Structure
+- Make a container image
+  - Learned Docker File Command, Docker layer structure, optimization and caching
+  - https://github.com/ArgoWorkflows-OSS/container-playground/pull/16
+  - https://github.com/ArgoWorkflows-OSS/container-playground/pull/23
+
+**Issue analysis**
+
+- Metric issue analysis
+  - Analysis of issues that require improvement by many users due to issues with many Github Reactions
+    - Increased monitoring convenience by adding metric labels
+  - As a result of issue analysis, it was discovered that developing the content could cause another problem.
+    - When adding a metric label, a large amount of metrics are collected, which may cause performance problems due to a large amount of metric traffic flowing to existing users.
+  - Suggest and communicate ways to solve problems by detouring
+    - Confirm that the monitoring requested by the issue is possible when using a custom metric, and suggest a way to resolve it by bypassing it.
+    - https://github.com/argoproj/argo-workflows/issues/9849#issuecomment-1685227337
+  - Inquire some ambiguous part in the comment in code for future improvement.
+    - https://github.com/argoproj/argo-workflows/pull/8486#discussion_r1306700745
+  - Issue analysis through issue hackathon
+
+**Contribute**
+
+- Fixed a type of function name and vaiable name
+  - Fixed parts that could cause confusion to other developers
+  - https://github.com/argoproj/argo-workflows/pull/11604
+  - https://github.com/argoproj/argo-workflows/pull/11633
+  - https://github.com/argoproj/argo-workflows/pull/11687
 
 </details>
 
 #### **🌵 Participation Review**
 
-abcd
+I wanted to contribute to a large open source community, but I felt at a loss. It was great to be able to contribute directly through this academy.
+This was possible because a mentee with a lot of experience in contributing guided me step-by-step to contribute and encouraged me to take on the challenge.
+Through technical seminars and technical exchanges with other developers, we were able to grow together.
+Because ArgoWorkflow is a large-scale project, there are many difficult parts to analyze alone, but by sharing opinions with other developers, I was able to solve the problem more quickly.
+Since I have gained some understanding of the ArgoWorkflow project and have gained confidence through my small contribution experience,
+I expect that my next contribution will be easier. Even after this program ends, we plan to contribute on a larger scale by collaborating
+with other mentees who are interested in ArgoWorkflow.
 
 #### **🌵 Personal Summary**
 
