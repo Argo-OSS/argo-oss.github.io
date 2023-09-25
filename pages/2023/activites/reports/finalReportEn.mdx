@@ -1,15 +1,28 @@
 import ContributeInfo from '@components/contributeInfo';
 
-## ☑️ Meet Our Team
+## TL;TR
 
-The ArgoWorkflows OSS 2023 team consisted of one mentor and 17 mentees, for a total of 18 people working as a team.
+[Go to see Contributions Summary](#contribute-info)
 
-The team was organized with the help of the [Open Source Contribution Academy](https://www.contribution.ac/2023-ossca),
-an awesome event that **junior and senior developers** who may feel the barriers to entry into open source **work together to contribute**, and was active for about **4 months from July to October 2023.**
+## ☑️ Who We Are
 
-We share the achievements of our team, starting from beginners who were not familiar with using Git, until becoming full-fledged open source contributors.
+The `ArgoWorkflows OSS 2023`team have 18 member. (1 Mentor, 17 Mentees)
+
+Our Team met for participant to [Open Source Contribution Academy](https://www.contribution.ac/2023-ossca).
+
+A **competition for junior developers** with the theme `How can I contribute well to open source?`
+
+This event is a competition where `some mentors` and about `20 mentees` are paired up and the goal is to contribute together and achieve results for four months.
+
+We participated in this event on the open source topic of ArgoWorkflows.
+
+Most of us were afraid to even use git at first. but we made succeeded in making various contributions over the past three months.
+
+Let me introduce our achievements.
 
 ## ☑️ What is ArgoWorkflows
+
+Before the achievements introduction, Lets know about what is `ArgoWorkflows`.
 
 ![argoDag](./images/common/argoDag.png)
 
@@ -47,49 +60,52 @@ Apache Airflow, similiar but different to Argo Workflows, is a standalone applic
 As a result, Airflow can more difficult to resource management and scalability than Argo Workflows.
 
 Also, Argo Workflows can perform a various of tasks such as CI/CD as well as data pipelines because it runs each workflow step as an independent container.
-This is possible due to use the power of Docker and Kubernetes, than it can run **anything without restrictions.**
+This is possible due to use the power of Container and Kubernetes, than it can run **anything without restrictions.**
 
 ## ☑️ Key Accomplishments
 
 ### UI/UX improvements
 
-The Argo Workflows project is actively contributing to UI/UX improvement as the main topic for contribution, operating a separate project page, and tracking issues.
+The Argo Workflows project is actively contributing to `UI/UX improvement` as the main topic for contribution.
+
+As proof of this, you can also check the dashboard for UI/UX improvement tracking.
 
 ![uiux_0.png](./images/common/uiux_0.png)
 
 Our team has also made many UI improvements along these project goals.
 
-> Key improvements
+> Key improvements for UI/UX
 
-- Workflows search functionality
-- Improvements to the summary view of cronworkflows
-- Improvements to DataPciker
-- Sticky option in workflows control panel
-- label highlighting in workflows list
-- Various other bug fixes
+- [Search by name for WorkflowTemplates in UI](https://github.com/argoproj/argo-workflows/pull/11684)
+- [show history about completed runs in each cron workflow](https://github.com/argoproj/argo-workflows/pull/11811)
+- [Improvements to DataPciker](https://github.com/argoproj/argo-workflows/pull/11480)
+- [UI toolbar sticky](https://github.com/argoproj/argo-workflows/pull/11444)
+- ... and Various other bug fixes
 
 ![uiux_1.png](./images/common/uiux_1.png)
 
 ### Improving core functionality
 
-As we got used to contributing, our understanding of the project increased and we got more confidence.
+As contributions accumulate, our understanding of the project increased and we got more confidence.
 We were increasingly able to contribute not only UI/UX improvements, but also **the core functionality of the workflow engine.**
 
 [What’s new in Argo Workflows v3.5](https://blog.argoproj.io/whats-new-in-argo-workflows-v3-5-f260e8603ca6)
 
-The core logic of the workflow engine is **installed as a CRD in Kubernetes and has a significant impact on the behavior and performance of a Kubernetes cluster.**
-So, Contributing to workflow engine is **a very high level contributions**, because it **requires a high level of implementation** and **active participation** in testing and policy discussions with maintainers.
+The core logic of the workflow engine is **install as a CRD in Kubernetes and has a significant impact on the behavior and performance of a Kubernetes cluster.**
+So, Contributing to workflow engine is **quite difficult**.
+
+because it **requires a high level of implementation** and **active participation** in testing and policy discussions with maintainers.
 
 It was challenge for us, but our team was able to **make key contributions to the Argo Workflows 3.5 release**. Also We **were mentioned to the Argo official blog** by contributing very important features to `Template Spec`, `Authentication`, and `Controller`.
 
 ![core_0](./images/common/core_0.png)
 
-After the release of Argo Workflows 3.5, we continue to make high level contributions such as CI and test environments for DX improvements, new features in the Nix, Controller, and Template specifications, updating GoLang version.
+Even after the release of Argo Workflows 3.5, we made many contributions such as CI and test environments for `DX improvements`, new features in the `Nix`, `Controller`, and `Template specifications`, `updating GoLang version`.
 With more contributions, We are making progress in making Argo workflows a much better tool in next release.
 
 ### Close communication with the maintainer group
 
-Our team was very fortunate that the Argo Workflows project got a new leader in May of this year, Yuan Tang, and the breath of contributions across the project really accelerated.
+Our team was very fortunate that the Argo Workflows project got a new leader in May of this year, [Yuan Tang](https://www.linkedin.com/in/terrytangyuan), and the breath of contributions across the project really accelerated.
 
 Normally, in a large project like this, it would take quite a long time for reviews making it difficult to a lot of contributions.
 However, Thanks to the talented project head and his team, all of the ArgoWorkflows team members who participated in this competition learned a lot, experienced a lot,
@@ -97,13 +113,13 @@ and grew through a lot of contributions in a short time.
 
 ![maintainer.png](./images/common/maintainer.png)
 
-As we've gotten closer to contributing to the core features of the workflow engine, there have been situations where We've been **able to communicate and interact with maintainers on CNCF Slack** beyond the PR page.
+Opportunities for contributions existed outside Issue and PR pages.
 
-Through discussions, We were able to have the valuable experience of being in open source project, such as deciding on a policy for processing logic in the project to resolve issues and experiencing being assigned and working on other related issues.
+We were able to have the valuable experience of being in open source project, such as deciding on a policy for processing logic in the project to resolve issues and experiencing being assigned and working on other related issues.
 
 Now, We introduce our contributions during the project.
 
-<ContributeInfo contributers={['GeunSam2', 'qudtjs0753', 'umi0410', 'newdeal123', 'binkoni', 'Leeeuijooo', 'sudosubin', 'junkmm', 'shmruin', 'da-head0', 'synoti21', 'Jack-R-lantern', 'Yaminyam', 'zel0rd', 'YunCow', 'juijeong8324', 'moonyoungCHAE', 'sunyeongchoi']} />
+<ContributeInfo contributers={['GeunSam2', 'qudtjs0753', 'umi0410', 'newdeal123', 'binkoni', 'Leeeuijooo', 'sudosubin', 'junkmm', 'shmruin', 'da-head0', 'synoti21', 'Jack-R-lantern', 'Yaminyam', 'zel0rd', 'yunwoo-yu', 'juijeong8324', 'moonyoungCHAE', 'sunyeongchoi']} />
 
 ## ☑️ Contribution Academy progress and activity details
 
@@ -117,17 +133,17 @@ At first, I had no idea how to start and was at a loss, but as a result of pract
 
 As a result, **at the time of writing this report, we had the enjoyable experience of creating PRs for all 17 Masters stage participants**.
 
-![chart1](./images/common/chart1.png)
-
-Summary of contribution activities
+| ![chart1](./images/common/chart1.png) |
+| :-----------------------------------: |
+| _Summary of contribution activities_  |
 
 Additionally, contribution activities, which I had not been able to actively do at first because I was busy familiarizing myself with the tool and acquiring background knowledge, accelerated over time.
 
 In the end, the members' skills are growing so quickly that in September, in just the first week, they were able to match the number of PRs that were close to the PRs contributed during the previous month.
 
-![chart2](./images/common/chart2.png)
-
-Monthly Activity Graph
+| ![chart2](./images/common/chart2.png) |
+| :-----------------------------------: |
+|       _Monthly Activity Graph_        |
 
 Introducing the various activities our team has performed to achieve the current contribution activities.
 
@@ -140,7 +156,7 @@ Introducing the various activities our team has performed to achieve the current
 ![activity1](./images/common/activity1.png)
 
 ```
-- **Goal Details**
+- Goal Details
    - Edit/add the two files below to create a PR that updates user information.
      - `docs/users/users.md`
      - `docs/users/[name].md`
@@ -164,23 +180,23 @@ Introducing the various activities our team has performed to achieve the current
 ![activity3](./images/common/activity3.png)
 
 ```
-- **Goal Details**
+- Goal Details
    Create your own web service and write a Docker file that can be containerized.
    To pass the assignment, please be sure to follow the instructions below.
 
-   - **Directory and file placement**
+   - Directory and file placement
 
      - When developing a personal service, be sure to create your own GitHub account directory and write code under it.
      - `Dockerfile` must be located at the top level of your directory. (If this condition is not met, CI may fail.)
      - You can freely create other files under your own directory except for the location of `Dockerfile`.
      - However, the image must be built successfully when you run the `docker build -t [image name] .` command at the top level of your directory.
 
-   - **Behavior of built images**
+   - Behavior of built images
 
      - Personal web service must operate on port 8080.
      - The built image must be serviced without problems when the `docker run -d -p [forwarding port number]:8080 [image name]` command is executed without any additional parameters.
 
-   - **Web service development language and service structure**
+   - Web service development language and service structure
      - It doesn’t matter which language or framework you prefer.
      - It doesn’t matter if you create a simple API service with no UI or design.
      - However, you must create two required APIs. (I don't care about the response value.)
@@ -198,9 +214,7 @@ Introducing the various activities our team has performed to achieve the current
 
 ![activity5](./images/common/activity5.png)
 
-### Argo Workflows Contributor / Participation in regular community meetings
-
-> Argo Workflows Official Contributor/Community Meeting Participation Introduction to Open Source Contribution
+### Join to Contributor / Community meetings
 
 ![activity6](./images/common/activity6.png)
 
@@ -214,7 +228,7 @@ Introducing the various activities our team has performed to achieve the current
 
 ### Conduct offline meeting activities at least once a week
 
-> **Regular meeting activities**
+> Regular meeting activities
 
 - We selected every Sunday as a regular offline meeting date and conducted regular meeting activities.
 - We conducted various communication activities such as exploring issues to be resolved through group activities, sharing our own experience in resolving issues, and discussing errors that occurred during the process.
@@ -253,7 +267,21 @@ Introducing the various activities our team has performed to achieve the current
 
 ## ☑️ Participant contribution details
 
-### 1. 강병선
+### 0. GeunCheol Yeom(Mentor)
+
+#### **🌵 Participation Review**
+
+I met ArgoWorkflows last year, and many things changed
+
+I participated as a mentor at this event, but I feel like I'm the one learning and getting more out of it.
+
+I would like to sincerely thank the mentees who participated in the event and did their best until the end, and I hope that we can continue to be colleagues in open source activities together.
+
+During the event, I was able to think about the culture of the open source ecosystem once again, and I was able to study various techniques for utilizing Git that I thought I knew in the CI environment.
+
+I feel more passionate about the ArgoWorkflows project, and I'm not sure what opportunities there will be in the future, but I'd like to contribute to more diverse areas.
+
+### 1. ByeongSun Gang
 
 #### **🌿 Personal Activity Report**
 
@@ -306,7 +334,11 @@ Introducing the various activities our team has performed to achieve the current
   - I will continue to be interested in and contribute to all open source projects that I use in my development.
   - I will apply Argo workflows to real projects and find ways to contribute more!
 
-### 2. 강시온
+#### **🌵 Personal Summary**
+
+<ContributeInfo contributers={['qudtjs0753']} />
+
+### 2. [SiOn Kang](https://www.linkedin.com/in/sion-kang-3146551bb/)
 
 #### **🌿 Personal Activity Report**
 
@@ -332,7 +364,11 @@ Introducing the various activities our team has performed to achieve the current
 I enjoyed last year's experience so much that I decided to participate again this year, but this year was a great experience again with a different feel from last year.
 Thanks to all the passionate team members and active projects, I was able to maintain interest in the project without losing tension, and I am very happy that I have a colleague with whom I can share not only the project but also related stories.
 
-### 3. 권영길
+#### **🌵 Personal Summary**
+
+<ContributeInfo contributers={['Yaminyam']} />
+
+### 3. YoungGil Kwon
 
 #### **🌿 Personal Activity Report**
 
@@ -474,7 +510,11 @@ Now that I'm writing this recap, I'm very proud of my contributions and I'm grat
 In the future, I will think about how I can apply the argo-workflow project to my work and actively contribute to the issues that arise. I would also like to contribute to new projects if there are other good projects.
 Thank you.
 
-### 4. 김수빈
+#### **🌵 Personal Summary**
+
+<ContributeInfo contributers={['zel0rd']} />
+
+### 4. [SuBin Kim](https://www.linkedin.com/in/sudosubin)
 
 #### **🌿 Personal Activity Report**
 
@@ -489,7 +529,11 @@ abcd
 
 abcd
 
-### 5. 김학준
+#### **🌵 Personal Summary**
+
+<ContributeInfo contributers={['sudosubin']} />
+
+### 5. HakJun Kim
 
 #### **🌿 Personal Activity Report**
 
@@ -548,7 +592,11 @@ it was nice to be able to eat really delicious lamb skewers during the mid-day c
 Through this year's contribution activities, I was able to clearly understand the open source ecosystem. The only thing I regret is that it was scary in the beginning? It's about being active passively and my cute little coding skills that I couldn't help but be passive about.
 Because the period of contribution activities was truly valuable, I would like to make up for my shortcomings and participate next year as well.
 
-### 6. 박진수
+#### **🌵 Personal Summary**
+
+<ContributeInfo contributers={['junkmm']} />
+
+### 6. [JinSu Park](https://www.linkedin.com/in/jinsu-park-dev/)
 
 #### **🌿 Personal Activity Report**
 
@@ -649,7 +697,11 @@ Before I started contributing to open source, I'm sure I would have been relucta
 
 I would like to thank the organizers and mentors for all their hard work over the years. Thank you.
 
-### 7. 서청운
+#### **🌵 Personal Summary**
+
+<ContributeInfo contributers={['umi0410']} />
+
+### 7. ChungWun Seo
 
 #### **🌿 Personal Activity Report**
 
@@ -664,7 +716,11 @@ abcd
 
 abcd
 
-### 8. 송혜민
+#### **🌵 Personal Summary**
+
+<ContributeInfo contributers={['newdeal123']} />
+
+### 8. [HaeMin Song](www.linkedin.com/in/haemin-song-771626120)
 
 #### **🌿 Personal Activity Report**
 
@@ -799,7 +855,11 @@ We simply crafted a Python server using Flask, and through the Dockerfile, we se
   - Especially now that I have learned how to approach and start with an open source I am interested in, I believe it will be a bit smoother as long as I have the passion.
   - I will actively promote the fun of contributing to open source to others and confidently recommend it.
 
-### 9. 안다혜
+#### **🌵 Personal Summary**
+
+<ContributeInfo contributers={['shmruin']} />
+
+### 9. [DaHae Ahn](https://www.linkedin.com/in/dahye-ahn-223244234/)
 
 #### **🌿 Personal Activity Report**
 
@@ -842,7 +902,11 @@ And if I get the chance, I would like to participate in the 2024 Open Source Con
 
 Thank you for providing a great opportunity and venue.
 
-### 10. 안지완
+#### **🌵 Personal Summary**
+
+<ContributeInfo contributers={['da-head0']} />
+
+### 10. JiWan Ahn
 
 #### **🌿 Personal Activity Report**
 
@@ -857,7 +921,11 @@ abcd
 
 abcd
 
-### 11. 유윤우
+#### **🌵 Personal Summary**
+
+<ContributeInfo contributers={['synoti21']} />
+
+### 11. [YoonWoo You](https://www.linkedin.com/in/yunwoo-yu-65095b263/)
 
 #### **🌿 Personal Activity Report**
 
@@ -941,7 +1009,11 @@ However, I will not give up and try to contribute more to argoWorkflow by doing 
 
 Thank you for making such a good activity and thank you to the mentors and mentees for helping me grow step by step even though I'm a beginner 👍
 
-### 12. 이병곤
+#### **🌵 Personal Summary**
+
+<ContributeInfo contributers={['yunwoo-yu']} />
+
+### 12. ByeongGon Lee
 
 #### **🌿 Personal Activity Report**
 
@@ -997,7 +1069,11 @@ It was great to be motivated not only to contribute to open source but also to l
 It wasn't easy to participate while I was busy at work, but my long-term goal is not only to contribute to Argo Workflows in this year's contribution, but also in future contributions for the next few years.
 My future plans are to build not only Argo Workflows, but also other Argo Projects and apply them to my personal toy project, as well as to study more about K8s.
 
-### 13. 이의주
+#### **🌵 Personal Summary**
+
+<ContributeInfo contributers={['binkoni']} />
+
+### 13. [EuiJu Lee](https://www.linkedin.com/in/euijoolee3233)
 
 #### **🌿 Personal Activity Report**
 
@@ -1288,7 +1364,11 @@ Earned 8월 4, 2023 EDT
   - As a toy project, we plan to complete data ETL work using Argo Workflow, which is currently in progress.
   - If I get a job, I hope to create many insights by introducing many of Argo Workflow's functions into my field.
 
-### 14. 전의정
+#### **🌵 Personal Summary**
+
+<ContributeInfo contributers={['Leeeuijooo']} />
+
+### 14. [EuiJung Geon](https://www.linkedin.com/in/jeon01/)
 
 #### **🌿 Personal Activity Report**
 
@@ -1476,7 +1556,11 @@ Earned 8월 4, 2023 EDT
 
 Even after the open source contribution ends, the mentor plans to continue meeting regularly, and I have a goal of contributing at least one issue per month to the Argo Workflows repo this semester.
 
-### 15. 정성락
+#### **🌵 Personal Summary**
+
+<ContributeInfo contributers={['juijeong8324']} />
+
+### 15. SungRock Jung
 
 #### **🌿 Personal Activity Report**
 
@@ -1576,7 +1660,11 @@ Even after the open source contribution ends, the mentor plans to continue meeti
       - I'm going to study how to organize and speak about the knowledge I want to convey.
       - I'm going to talk to a lot of people, share my thoughts, and try not to get caught up in otherness.
 
-### 16. 채문영
+#### **🌵 Personal Summary**
+
+<ContributeInfo contributers={['Jack-R-lantern']} />
+
+### 16. MoonYoung Chae
 
 #### **🌿 Personal Activity Report**
 
@@ -1591,7 +1679,11 @@ abcd
 
 abcd
 
-### 17. 최수녕
+#### **🌵 Personal Summary**
+
+<ContributeInfo contributers={['moonyoungCHAE']} />
+
+### 17. [SooNyeong Choi](https://www.linkedin.com/in/sunyeongchoi/)
 
 #### **🌿 Personal Activity Report**
 
@@ -1817,3 +1909,7 @@ Submitting numerous PRs and communicating with maintainers was also a lot of fun
 Thanks to this experience, I gained the confidence to contribute not only to ArgoWorkflows but also to other projects.
 
 I have no intention of stopping my contributions after this period ends. I plan to continue contributing to ArgoWorkflows while looking for opportunities to contribute to Kubernetes and Argo CD projects used by my company.
+
+#### **🌵 Personal Summary**
+
+<ContributeInfo contributers={['sunyeongchoi']} />

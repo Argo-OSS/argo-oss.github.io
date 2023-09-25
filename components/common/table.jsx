@@ -66,7 +66,7 @@ const Table = ({
   theme = 'light',
 }) => {
   return (
-    <section className="flex flex-col justify-center antialiased text-gray-600 py-2">
+    <section id="contribute-info" className="flex flex-col justify-center antialiased text-gray-600 py-2">
       <div className="h-full">
         <div className={'w-full mx-auto shadow-lg rounded-sm border ' + (theme === 'dark' ? 'bg-zinc-900 border-gray-800' : 'bg-white border-gray-200')}>
           <header className={'px-5 py-4 border-b ' + (theme === 'dark' ? 'border-gray-800' : 'border-gray-100')}>
