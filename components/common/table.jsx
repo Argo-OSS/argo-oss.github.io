@@ -4,7 +4,9 @@ const TableHead = ({ colums, className }) => {
       <tr>
         {colums.map((colum, index) => (
           <th key={index} className="p-2 whitespace-nowrap">
-            <div className="font-semibold text-left">{colum.columTitle}</div>
+            <div className="flex">
+              <div className="grow font-semibold text-left">{colum.columTitle}</div>
+            </div>
           </th>
         ))}
       </tr>

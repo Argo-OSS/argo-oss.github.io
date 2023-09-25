@@ -64,9 +64,7 @@ const gitIssueBuilder = async githubId => {
     repo: 'argo-workflows',
     creator: githubId,
     state: 'all',
-    headers: {
-      'X-GitHub-Api-Version': '2022-11-28',
-    },
+    headers: { 'X-GitHub-Api-Version': '2022-11-28' },
   });
 
   const issueObj = response.data;

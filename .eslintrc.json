@@ -79,7 +79,8 @@
     "react/prop-types": 0,
     "import/no-unresolved": 0,
     "import/extensions": 0,
-    "no-return-await": 0
+    "no-return-await": 0,
+    "react/display-name": 0
   },
 
   "overrides": [
