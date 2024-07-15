@@ -1,1 +1,8 @@
+# These owners will be the default owners for everything in
+# the repo. Unless a later match takes precedence,
+# @global-owner1 and @global-owner2 will be requested for
+# review when someone opens a pull request.
 * @GeunSam2
+
+# 2024 OSSCA CODEOWNERS
+/pages/2024/ @Jack-R-lantern @sunyeongchoi @shmruin
