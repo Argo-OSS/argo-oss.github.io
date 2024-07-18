@@ -20,6 +20,11 @@
 >>>>>>> 31e176c (122 member profile update (#123))
 =======
     "KangMyoungGu": "강명구",
+<<<<<<< HEAD
     "KwonMinHyeok": "권민혁"
 >>>>>>> b573212 (docs: add mentee page Kwon MinHyeok (#138))
+=======
+    "KwonMinHyeok": "권민혁",
+    "HyunWooKim": "김현우"
+>>>>>>> ace53a1 (docs: 김현우 자기소개 추가 (#141))
 }
