@@ -2,7 +2,6 @@
     "JungSungRock": "정성락",
     "ChoiSooNyeong": "최수녕",
     "SongHaeMin": "송혜민",
-    "HwangJuwon": "황주원",
     "KimCheolSu": "김철수",
     "KoHyunSu": "고현수",
     "KunhoLee": "이건호",
@@ -10,6 +9,7 @@
     "ChoiPilHwan": "최필환",
     "EugeneKim": "김유진",
     "KimGaYeon": "김가연",
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     "KangMyoungGu": "강명구",
@@ -28,3 +28,10 @@
     "HyunWooKim": "김현우"
 >>>>>>> ace53a1 (docs: 김현우 자기소개 추가 (#141))
 }
+=======
+    "HwangJuwon": "황주원",
+    "KangMyoungGu": "강명구",
+    "KwonMinHyeok": "권민혁",
+    "HyunWooKim": "김현우"
+}
+>>>>>>> c42f452 (docs: 누락된 정보 수정)
