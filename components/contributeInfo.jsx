@@ -57,17 +57,36 @@ const gitIssueTypeBuilder = (issueTypeInfo, cloasedAt) => {
   return issueType;
 };
 
-const gitIssueBuilder = async githubId => {
+const gitIssueBuilder = async (githubId, owner, repo) => {
   const octokit = new Octokit({});
   const response = await octokit.request('GET /repos/{owner}/{repo}/issues', {
-    owner: 'argoproj',
-    repo: 'argo-workflows',
+    owner,
+    repo,
     creator: githubId,
     state: 'all',
     headers: { 'X-GitHub-Api-Version': '2022-11-28' },
   });
 
   const issueObj = response.data;
+
+  if (issueObj.length === 0) {
+    return [
+      {
+        GitHub: {
+          data: gitProfileBuilder({ login: githubId, avatar_url: `https://github.com/${githubId}.png`, html_url: `https://github.com/${githubId}` }),
+          searchLabel: githubId,
+        },
+        Type: {
+          data: 'None',
+          searchLabel: 'None',
+        },
+        Summary: {
+          data: 'No contributions or issues',
+          searchLabel: null,
+        },
+      },
+    ];
+  }
 
   return issueObj.map(issue => ({
     GitHub: {
@@ -85,23 +104,29 @@ const gitIssueBuilder = async githubId => {
   }));
 };
 
-const contributeInfoBuilder = async contributers => {
-  const promise = contributers.map(async contributer => await gitIssueBuilder(contributer));
+const contributeInfoBuilder = async (contributers, owner, repo) => {
+  const promise = contributers.map(async contributer => await gitIssueBuilder(contributer, owner, repo));
   const contributeInfo = await Promise.all(promise);
   const flatInfo = contributeInfo.flat();
-  const sortedInfo = flatInfo.sort((a, b) => b.Type.searchLabel.localeCompare(a.Type.searchLabel)).sort((a, b) => a.GitHub.searchLabel.localeCompare(b.GitHub.searchLabel));
+  const sortedInfo = flatInfo
+    .sort((a, b) => {
+      if (a.Type.searchLabel === 'None' && b.Type.searchLabel !== 'None') return 1;
+      if (a.Type.searchLabel !== 'None' && b.Type.searchLabel === 'None') return -1;
+      return b.Type.searchLabel.localeCompare(a.Type.searchLabel);
+    })
+    .sort((a, b) => a.GitHub.searchLabel.localeCompare(b.GitHub.searchLabel));
   return sortedInfo;
 };
 
-const ContributeInfo = ({ contributers = [] }) => {
+const ContributeInfo = ({ contributers = [], owner = 'argoproj', repo = 'argo-workflows' }) => {
   const [issueList, setIssueList] = useState([]);
   const { current: contributersRef } = useRef(contributers);
 
   const { theme } = useTheme();
 
   useEffect(() => {
-    contributeInfoBuilder(contributersRef).then(data => setIssueList(data));
-  }, [contributersRef, contributeInfoBuilder, setIssueList, theme]);
+    contributeInfoBuilder(contributersRef, owner, repo).then(data => setIssueList(data));
+  }, [contributersRef, owner, repo, contributeInfoBuilder, setIssueList, theme]);
 
   const contributeSummary = (
     <div className="grid grid-cols-3 gap-5 mt-2 text-center text-gray-600 text-sm">
