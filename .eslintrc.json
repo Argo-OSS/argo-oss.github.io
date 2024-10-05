@@ -80,8 +80,7 @@
     "import/no-unresolved": 0,
     "import/extensions": 0,
     "no-return-await": 0,
-    "react/display-name": 0,
-    "react/no-unescaped-entities": 0
+    "react/display-name": 0
   },
 
   "overrides": [
