@@ -57,38 +57,12 @@ const gitIssueTypeBuilder = (issueTypeInfo, cloasedAt) => {
   return issueType;
 };
 
-const gitIssueBuilder = async (githubId, owner, repo) => {
-  const octokit = new Octokit({});
-  const response = await octokit.request('GET /repos/{owner}/{repo}/issues', {
-    owner,
-    repo,
-    creator: githubId,
-    state: 'all',
-    headers: { 'X-GitHub-Api-Version': '2022-11-28' },
-  });
-
-  const issueObj = response.data;
-
-  if (issueObj.length === 0) {
-    return [
-      {
-        GitHub: {
-          data: gitProfileBuilder({ login: githubId, avatar_url: `https://github.com/${githubId}.png`, html_url: `https://github.com/${githubId}` }),
-          searchLabel: githubId,
-        },
-        Type: {
-          data: 'None',
-          searchLabel: 'None',
-        },
-        Summary: {
-          data: 'No contributions or issues',
-          searchLabel: null,
-        },
-      },
-    ];
+const parseIssues = issues => {
+  if (issues.length === 0) {
+    return [];
   }
 
-  return issueObj.map(issue => ({
+  return issues.map(issue => ({
     GitHub: {
       data: gitProfileBuilder(issue.user),
       searchLabel: issue.user.login,
@@ -104,8 +78,6 @@ const gitIssueBuilder = async (githubId, owner, repo) => {
   }));
 };
 
-<<<<<<< Updated upstream
-=======
 const gitIssueBuilder = async (githubId, owner, repo) => {
   const token = process.env.OCTOKIT_TOKEN;
   console.log(token);
@@ -123,7 +95,7 @@ const gitIssueBuilder = async (githubId, owner, repo) => {
     return parseIssues(response.data);
   } catch (error) {
     // 인증된 요청 실패 시 비인증 요청 시도
-    console.error("Auth request is failed. Do non-auth reaquest instead.")
+    console.error('Auth request is failed. Do non-auth reaquest instead.');
     try {
       const response = await octokitNoAuth.request('GET /repos/{owner}/{repo}/issues', {
         owner,
@@ -139,7 +111,6 @@ const gitIssueBuilder = async (githubId, owner, repo) => {
   }
 };
 
->>>>>>> Stashed changes
 const contributeInfoBuilder = async (contributers, owner, repo) => {
   const promise = contributers.map(async contributer => await gitIssueBuilder(contributer, owner, repo));
   const contributeInfo = await Promise.all(promise);
