@@ -1,7 +1,33 @@
 import { useEffect, useState, useRef } from 'react';
 import { Octokit } from 'octokit';
+import { initializeApp } from "firebase/app";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useTheme } from 'nextra-theme-docs';
 import Table from './common/table';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCMC07HfFRIFUVMA7eULAsmTvoC7Frpna8",
+  authDomain: "my-oss-pr.firebaseapp.com",
+  projectId: "my-oss-pr",
+  storageBucket: "my-oss-pr.appspot.com",
+  messagingSenderId: "6268125850",
+  appId: "1:6268125850:web:d84b95103cbd1e81a21523",
+  measurementId: "G-RLP5Y94VKY"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function fetchToken() {
+  const docRef = doc(db, "oss", "info");
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    return docSnap.data().token;
+  } else {
+    console.error("No token found in Firestore");
+    return null;
+  }
+}
 
 const gitProfileBuilder = userInfo => (
   <div className="flex items-center">
@@ -79,8 +105,7 @@ const parseIssues = issues => {
 };
 
 const gitIssueBuilder = async (githubId, owner, repo) => {
-  const token = process.env.OCTOKIT_TOKEN;
-  console.log(token);
+  const token = await fetchToken();
   const octokitAuth = new Octokit({ auth: token });
   const octokitNoAuth = new Octokit();
 
