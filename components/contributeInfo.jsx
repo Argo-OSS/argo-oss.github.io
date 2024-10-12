@@ -79,7 +79,8 @@ const parseIssues = issues => {
 };
 
 const gitIssueBuilder = async (githubId, owner, repo) => {
-  const token = process.env.OCTOKIT_TOKEN || '';
+  const token = process.env.OCTOKIT_TOKEN;
+  console.log(token);
   const octokitAuth = new Octokit({ auth: token });
   const octokitNoAuth = new Octokit();
 
@@ -94,6 +95,7 @@ const gitIssueBuilder = async (githubId, owner, repo) => {
     return parseIssues(response.data);
   } catch (error) {
     // 인증된 요청 실패 시 비인증 요청 시도
+    console.error('Auth request is failed. Do non-auth reaquest instead.');
     try {
       const response = await octokitNoAuth.request('GET /repos/{owner}/{repo}/issues', {
         owner,
