@@ -1,7 +1,32 @@
 import { useEffect, useState, useRef } from 'react';
 import { Octokit } from 'octokit';
+import { initializeApp } from 'firebase/app';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { useTheme } from 'nextra-theme-docs';
 import Table from './common/table';
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyCMC07HfFRIFUVMA7eULAsmTvoC7Frpna8',
+  authDomain: 'my-oss-pr.firebaseapp.com',
+  projectId: 'my-oss-pr',
+  storageBucket: 'my-oss-pr.appspot.com',
+  messagingSenderId: '6268125850',
+  appId: '1:6268125850:web:d84b95103cbd1e81a21523',
+  measurementId: 'G-RLP5Y94VKY',
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function fetchToken() {
+  const docRef = doc(db, 'oss', 'info');
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    return docSnap.data().token;
+  }
+  console.error('No token found in Firestore');
+  return null;
+}
 
 const gitProfileBuilder = userInfo => (
   <div className="flex items-center">
@@ -57,38 +82,12 @@ const gitIssueTypeBuilder = (issueTypeInfo, cloasedAt) => {
   return issueType;
 };
 
-const gitIssueBuilder = async (githubId, owner, repo) => {
-  const octokit = new Octokit({});
-  const response = await octokit.request('GET /repos/{owner}/{repo}/issues', {
-    owner,
-    repo,
-    creator: githubId,
-    state: 'all',
-    headers: { 'X-GitHub-Api-Version': '2022-11-28' },
-  });
-
-  const issueObj = response.data;
-
-  if (issueObj.length === 0) {
-    return [
-      {
-        GitHub: {
-          data: gitProfileBuilder({ login: githubId, avatar_url: `https://github.com/${githubId}.png`, html_url: `https://github.com/${githubId}` }),
-          searchLabel: githubId,
-        },
-        Type: {
-          data: 'None',
-          searchLabel: 'None',
-        },
-        Summary: {
-          data: 'No contributions or issues',
-          searchLabel: null,
-        },
-      },
-    ];
+const parseIssues = issues => {
+  if (issues.length === 0) {
+    return [];
   }
 
-  return issueObj.map(issue => ({
+  return issues.map(issue => ({
     GitHub: {
       data: gitProfileBuilder(issue.user),
       searchLabel: issue.user.login,
@@ -102,6 +101,38 @@ const gitIssueBuilder = async (githubId, owner, repo) => {
       searchLabel: null,
     },
   }));
+};
+
+const gitIssueBuilder = async (githubId, owner, repo) => {
+  const token = await fetchToken();
+  const octokitAuth = new Octokit({ auth: token });
+  const octokitNoAuth = new Octokit();
+
+  try {
+    const response = await octokitAuth.request('GET /repos/{owner}/{repo}/issues', {
+      owner,
+      repo,
+      creator: githubId,
+      state: 'all',
+      headers: { 'X-GitHub-Api-Version': '2022-11-28' },
+    });
+    return parseIssues(response.data);
+  } catch (error) {
+    // 인증된 요청 실패 시 비인증 요청 시도
+    console.error('Auth request is failed. Do non-auth reaquest instead.');
+    try {
+      const response = await octokitNoAuth.request('GET /repos/{owner}/{repo}/issues', {
+        owner,
+        repo,
+        creator: githubId,
+        state: 'all',
+        headers: { 'X-GitHub-Api-Version': '2022-11-28' },
+      });
+      return parseIssues(response.data);
+    } catch (unauthError) {
+      return [];
+    }
+  }
 };
 
 const contributeInfoBuilder = async (contributers, owner, repo) => {
@@ -128,19 +159,23 @@ const ContributeInfo = ({ contributers = [], owner = 'argoproj', repo = 'argo-wo
     contributeInfoBuilder(contributersRef, owner, repo).then(data => setIssueList(data));
   }, [contributersRef, owner, repo, contributeInfoBuilder, setIssueList, theme]);
 
+  const prCnt = issueList.filter(issue => issue.Type.searchLabel === 'PR').length;
+  const issueCnt = issueList.filter(issue => issue.Type.searchLabel === 'ISSUE').length;
+  const totalCnt = prCnt + issueCnt;
+
   const contributeSummary = (
     <div className="grid grid-cols-3 gap-5 mt-2 text-center text-gray-600 text-sm">
       <div className="grid grid-cols-3">
         <div className="col-span-2 bg-orange-200 p-3 rounded-l-md font-semibold">TOTAL COUNT</div>
-        <div className="bg-gray-100 p-3 rounded-r-md font-semibold text-orange-400">{issueList.length}</div>
+        <div className="bg-gray-100 p-3 rounded-r-md font-semibold text-orange-400">{totalCnt}</div>
       </div>
       <div className="grid grid-cols-3">
         <div className="col-span-2 bg-blue-100 p-3 rounded-l-md font-medium">PR COUNT</div>
-        <div className="bg-gray-100 p-3 rounded-r-md font-medium text-blue-600">{issueList.filter(issue => issue.Type.searchLabel === 'PR').length}</div>
+        <div className="bg-gray-100 p-3 rounded-r-md font-medium text-blue-600">{prCnt}</div>
       </div>
       <div className="grid grid-cols-3">
         <div className="col-span-2 bg-gray-200 p-3 rounded-l-md font-medium">ISSUE COUNT</div>
-        <div className="bg-gray-100 p-3 rounded-r-md font-medium">{issueList.filter(issue => issue.Type.searchLabel === 'ISSUE').length}</div>
+        <div className="bg-gray-100 p-3 rounded-r-md font-medium">{issueCnt}</div>
       </div>
     </div>
   );
